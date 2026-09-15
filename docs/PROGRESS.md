@@ -1,0 +1,193 @@
+# Project progress and agent handoff
+
+Updated September 15, 2026. Start here, then read `docs/spec-v0.4.md` and
+the code for the assigned task. This file records project work only. Do not
+add personal notes, credentials, or deployed host details.
+
+## Current position
+
+Phase 1 is in progress. Task 01, local repository preparation, is complete.
+Task 02, aligning the spec and factory rules, is next. No UI redesign,
+authentication, dispatcher, or real-engine factory lap has been completed.
+The bundled memory provider has been removed from code, API fields, UI, and
+documentation. The Memory page is now a generic unconfigured view. The owner
+has authorized publishing The Forge as a private `Cyph3r48/forge` repository.
+
+The Forge should both produce software and manage the agents that build it.
+Keep Next.js, React, and TypeScript. Paperclip owns company/work records;
+Hermes owns execution. Memory integration is planned with a user-selected
+provider; no memory client, credentials, or endpoints are bundled.
+The current app mostly displays engine data and can file tasks. Written
+pipeline rules are requirements, not implemented enforcement.
+
+## Owner decisions
+
+- Work phase by phase. Finish each task with evidence and a clear handoff.
+- Local work does not depend on GitHub. Branch from local main if origin is
+  absent. The owner has now authorized creating a GitHub repository and
+  publishing reviewed source. Deployment and PR merging still need authorization.
+- Commit source and essential documentation only. Keep the factory law,
+  role definitions, required skills, licenses, and build/check instructions.
+  Exclude personal documents, all environment files, credentials, private
+  connection settings, build output, and historical personal material.
+- Keep memory provider-neutral. Do not bundle a private provider or establish
+  personal engine connections during local development.
+- UI should be colorful and straightforward, with a couple of Three.js
+  assets and subtle effects. Keep normal HTML controls, responsive layouts,
+  keyboard access, and reduced motion. No separate 2D mode or factory simulation.
+- Skills are the factory's operating instructions. Runtime gates must verify
+  their required outcomes; prompts alone cannot establish a passing gate.
+
+## Completed work
+
+| Work | Result |
+|---|---|
+| Spec and implementation review | Reviewed v0.4, app routes/clients, roles, pipeline, doctor, and the separate Wave 4 branch |
+| Baseline runtime evidence | Captured local synthetic-engine probes and desktop/mobile screenshots; no production engines contacted |
+| Requested skills | Installed all seven from michaelshimeles/skills at revision `513f8a24aae6383b00356fa285144b1bc3730dc1`; the existing 21 vendored files match |
+| Local source cleanup | Commit `1b5f9cc` on `agent/repo-hygiene-0914`; removed `.env.example`, extended ignore rules, and documented offline startup |
+| Unconfigured client fix | Added shared Paperclip guards and `evals/unconfigured-clients.mjs`; requests went from five before the fix to zero afterward |
+| Memory provider removal | Removed the provider client, configuration names, health badges, and provider-specific documentation; the generic route makes no external requests |
+| Clean distributable baseline | Root commit `283a5e9` in a separate local source copy; 133 audited files, no original history and no remote |
+
+The seven installed skills are before-and-after, code-structure,
+evidence-driven-testing, greploop, greploop-apps, new-feature, and unslop.
+The repository contains 19 vendored skill folders in total. Installation
+into remote factory agents and verification of their effective instructions
+are still pending.
+
+## Resume procedure
+
+1. Read `AGENTS.md` and this file. Check `git status --short --branch` and
+   `git worktree list` before changing anything.
+2. Use a new task worktree from the latest local main. If this is a standalone
+   source copy with no main branch, use its current clean source branch as
+   the base. Never modify another agent's worktree or uncommitted work.
+3. Finish the authorized clean-source publication if still pending, then start
+   Task 02 below. The bundled memory client has been removed; the memory route
+   returns an unconfigured response without making external requests.
+4. Use isolated fixtures for engine behavior. Do not connect live services or
+   raise the autonomy dial. Engine access is not required for documentation
+   alignment or local authentication work.
+5. Record changed files, checks, failures, decisions, and the next task here.
+   Keep raw evidence in ignored artifacts and secrets outside the repository.
+
+In the original workspace, the detailed review and screenshots are in
+`.artifacts/project-review-2026-09-14/`. They are optional local evidence,
+not required to resume from a clean clone. The separate clean source copy is
+`.artifacts/forge-source-0914/`. Do not push the original repository history:
+it contains old personal transcripts and host details. Refresh the clean
+copy from reviewed source before any authorized publication; its baseline
+commit alone is not a promise that it contains later changes.
+
+The existing `agent/wave4-flash` branch adds only a company definition and
+first-lap runbook. It was read, not merged or changed. Do not mistake that
+runbook for an executed lap. GitHub lookup did not establish an accessible
+Forge repository. Publishing a new source-only repository is authorized and
+pending. Do not publish either previous source snapshot's history: create a
+new root commit from the reviewed current files. No deployment is authorized.
+
+## Task 02: next action
+
+Align the governing documents into one explicit acceptance table before
+writing the dispatcher. These proposals are not yet approved policy changes:
+
+- Tester proves the result before entering Review; Reviewer judges that proof.
+- Seats submit outcomes; one transition action owns state changes.
+- Dial 1 accepts work manually; automatic triage starts only at dial 4.
+- Reviewer reads and judges the diff; Builder makes fixes; nobody approves
+  a diff they changed. Resolve the current law's contradictory Reviewer wording.
+- Remain at dial 1. Define a separate owner-approved policy for any later
+  automatic merge; deployment continues to require human approval.
+- Permit offline viewing without a memory provider. Specify write-back failure behavior
+  for a governed lap without connecting a live memory service during development.
+- Define how the owner amends protected rules without letting ordinary
+  factory agents change the rules that judge their own work.
+
+Update `docs/spec-v0.4.md`, `FACTORY-LAW.md`, `factory/pipeline.md`, and only
+the affected role charters once those choices are resolved. Keep the existing
+four seats and seven stages. Mark implemented and planned behavior explicitly.
+Task 02 passes when stage ownership, gate timing, autonomy, role independence,
+memory behavior, and acceptance checks agree across those documents.
+
+## Phase checklist
+
+### Phase 1: foundations
+
+- [x] 01. Prepare isolated local commits and a source copy without private history.
+- [ ] 02. Align spec, rules, role boundaries, and acceptance checks.
+- [ ] 03. Add shared Forge authentication and safe memory access.
+- [ ] 04. Verify engine contracts; fix labels, priority, assignment, and failure reporting using versioned fixtures. Live verification needs separately authorized access.
+- [ ] 05. Make law/skill bundle installation repeatable and verify effective versions. Remote installation needs separately authorized access.
+
+### Phase 2: execution and accounting
+
+- [ ] 06. Implement guarded transitions and a deterministic manual dispatcher, including repeat/restart safety and stall escalation.
+- [ ] 07. Correlate jobs, agents, and Hermes runs by stable IDs; preserve the frozen runtime response contract.
+- [ ] 08. Record transition memory and per-run tokens/cost with explicit retry and missing-data behavior.
+
+### Phase 3: gates and operational checks
+
+- [ ] 09. Enforce evidence, checks, current-commit review, reviewer independence, and owner deployment approval.
+- [ ] 10. Extend doctor/CI to prove gates reject invalid cases, including empty tests and protected-file changes.
+
+### Phase 4: UI and UX
+
+- [ ] 11. Fix mobile layout, form errors, labels, focus, loading, and stale-data states.
+- [ ] 12. Add job details, the stage board, and evidence-backed approval interactions.
+- [ ] 13. Add agent creation, configuration, skill assignment, evaluation, activation, and retirement.
+- [ ] 14. Add color, at most two Three.js assets, and subtle effects; verify desktop/mobile rendering, reduced motion, and asset failure without a separate 2D mode.
+
+### Phase 5: prove the factory
+
+- [ ] 15. Complete a real lap at dial 1, from issue to owner-approved deployment, retaining the evidence, memory, and cost records.
+- [ ] 16. Add polling only after the manual lap. Raise autonomy only on owner approval and the required evidence.
+
+Do not start a later phase merely to make the app appear more complete.
+There is no scheduled dispatcher or approved unattended operation yet.
+
+## Known failures still open
+
+- Anonymous API reads and task creation succeed; Forge has no auth boundary.
+- Pipeline labels are mistaken for issue status; gates are inferred rather
+  than read from actual approvals. Task creation guesses the upstream shape
+  and omits native priority and Foreman assignment.
+- Live/Runtime omit Hermes runs; a failed run without a finish timestamp can
+  appear working. Runtime joins by display name can conflate agents.
+- Memory integration, transition write-back, and per-run accounting are absent.
+- Failed task submission leaves Filing... disabled with no visible error.
+- The Work page measured 641px wide in a 390px viewport.
+- Doctor checks document structure only. No executable dispatcher or gates
+  enforce the factory definitions, and no completed lap has been demonstrated.
+
+## Commands and evidence
+
+Validated with Node.js 24.21.0. From `forge/`:
+
+```bash
+npm ci
+npm run build
+./node_modules/.bin/tsc --noEmit --incremental false
+npm run dev -- --hostname 127.0.0.1
+```
+
+From the repository root after installing dependencies:
+
+```bash
+python3 evals/doctor.py
+node evals/unconfigured-clients.mjs
+git diff --check
+```
+
+The cleanup build passed. Doctor reported five passes. The unconfigured
+client check passed with zero requests. The earlier review visited all seven
+pages with synthetic data and reproduced the failures listed above. No live
+integration, Greptile verdict, or deployment is proven by those checks.
+
+The provider-removal build and client check also passed. Browser checks
+confirmed the generic memory response and removal of the provider from Status,
+Live, and Connections. Desktop/mobile before-and-after captures are retained
+locally in `.artifacts/memory-removal-0915/`, outside published source.
+
+For a docs-only handoff, check links, consistency, doctor, and the diff.
+Do not repeat the full build unless application code or build inputs change.

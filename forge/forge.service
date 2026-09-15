@@ -1,0 +1,17 @@
+[Unit]
+Description=The Forge — Software Factory control plane
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/forge
+Environment=FORGE_BIND_HOST=0.0.0.0
+Environment=FORGE_PORT=3400
+EnvironmentFile=/opt/forge/.env
+ExecStart=/opt/forge/node_modules/.bin/next start -H ${FORGE_BIND_HOST} -p ${FORGE_PORT}
+Restart=always
+RestartSec=5
+User=root
+
+[Install]
+WantedBy=multi-user.target
