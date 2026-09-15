@@ -10,8 +10,8 @@ Phase 1 is in progress. Task 01, local repository preparation, is complete.
 Task 02, aligning the spec and factory rules, is next. No UI redesign,
 authentication, dispatcher, or real-engine factory lap has been completed.
 The bundled memory provider has been removed from code, API fields, UI, and
-documentation. The Memory page is now a generic unconfigured view. The owner
-has authorized publishing The Forge as a private `Cyph3r48/forge` repository.
+documentation. The Memory page is now a generic unconfigured view. The Forge is published at https://github.com/Cyph3r48/forge as a private
+repository. Its initial source commit is `4c95cdf` and has no parent history.
 
 The Forge should both produce software and manage the agents that build it.
 Keep Next.js, React, and TypeScript. Paperclip owns company/work records;
@@ -47,7 +47,8 @@ pipeline rules are requirements, not implemented enforcement.
 | Requested skills | Installed all seven from michaelshimeles/skills at revision `513f8a24aae6383b00356fa285144b1bc3730dc1`; the existing 21 vendored files match |
 | Local source cleanup | Commit `1b5f9cc` on `agent/repo-hygiene-0914`; removed `.env.example`, extended ignore rules, and documented offline startup |
 | Unconfigured client fix | Added shared Paperclip guards and `evals/unconfigured-clients.mjs`; requests went from five before the fix to zero afterward |
-| Memory provider removal | Removed the provider client, configuration names, health badges, and provider-specific documentation; the generic route makes no external requests |
+| Memory provider removal | Commit `47f63c9` removed the provider client, configuration names, health badges, and provider-specific documentation; the generic route makes no external requests |
+| Private GitHub repository | Published `Cyph3r48/forge`, default branch main, from root commit `4c95cdf`; verified private visibility and no parent history |
 | Clean distributable baseline | Root commit `283a5e9` in a separate local source copy; 133 audited files, no original history and no remote |
 
 The seven installed skills are before-and-after, code-structure,
@@ -63,9 +64,9 @@ are still pending.
 2. Use a new task worktree from the latest local main. If this is a standalone
    source copy with no main branch, use its current clean source branch as
    the base. Never modify another agent's worktree or uncommitted work.
-3. Finish the authorized clean-source publication if still pending, then start
-   Task 02 below. The bundled memory client has been removed; the memory route
-   returns an unconfigured response without making external requests.
+3. Start Task 02 below. For published changes, branch from the clean GitHub
+   repository's origin/main. The bundled memory client has been removed;
+   the memory route returns an unconfigured response without external requests.
 4. Use isolated fixtures for engine behavior. Do not connect live services or
    raise the autonomy dial. Engine access is not required for documentation
    alignment or local authentication work.
@@ -74,18 +75,20 @@ are still pending.
 
 In the original workspace, the detailed review and screenshots are in
 `.artifacts/project-review-2026-09-14/`. They are optional local evidence,
-not required to resume from a clean clone. The separate clean source copy is
-`.artifacts/forge-source-0914/`. Do not push the original repository history:
-it contains old personal transcripts and host details. Refresh the clean
-copy from reviewed source before any authorized publication; its baseline
-commit alone is not a promise that it contains later changes.
+not required to resume from a clean clone. The publishing checkout is
+`.artifacts/forge-publish-0915/`, connected to the private GitHub repository.
+The older `.artifacts/forge-source-0914/` is superseded and must not be pushed.
+Do not push the original repository history: it contains old personal material.
+Use a fresh branch in the publishing checkout or a fresh GitHub clone for
+future PRs; transfer only reviewed changes from the original workspace.
 
 The existing `agent/wave4-flash` branch adds only a company definition and
 first-lap runbook. It was read, not merged or changed. Do not mistake that
 runbook for an executed lap. GitHub lookup did not establish an accessible
-Forge repository. Publishing a new source-only repository is authorized and
-pending. Do not publish either previous source snapshot's history: create a
-new root commit from the reviewed current files. No deployment is authorized.
+Forge repository before initialization. The private repository has now been
+created and its initial source pushed. No PR review or deployment was performed.
+Future work should use normal branches and PRs on that clean history. Do not
+replace or force-push the published history. No deployment is authorized.
 
 ## Task 02: next action
 

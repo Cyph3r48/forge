@@ -11,9 +11,10 @@ Owner instructions for this project take precedence over the generic workflow
 below and conflicting vendored skill instructions:
 
 - The owner has authorized creating a GitHub repository and publishing the
-  reviewed source. Publish a fresh source-only history, never the original
-  history or earlier snapshots. Do not merge a PR or deploy without authorization.
-  The approved destination is `Cyph3r48/forge`, private initially.
+  reviewed source. The private `Cyph3r48/forge` repository is now initialized.
+  Branch from its clean origin/main for future published changes. Never push
+  the original workspace's history or earlier snapshots. Do not merge a PR
+  or deploy without authorization.
 - A missing origin is not a blocker. Create a fresh worktree from local `main`
   when origin is absent. Check local worktrees for overlapping work; check
   open PRs only when an accessible remote exists. Commit on the task branch.
