@@ -7,7 +7,8 @@ add personal notes, credentials, or deployed host details.
 ## Current position
 
 Phase 1 is in progress. Task 01, local repository preparation, is complete.
-Task 02, aligning the spec and factory rules, is next. No UI redesign,
+Task 02a's document-analysis pilot is complete after review. Task 02b, owner
+decisions before aligning the spec and factory rules, is next. No UI redesign,
 authentication, dispatcher, or real-engine factory lap has been completed.
 The bundled memory provider has been removed from code, API fields, UI, and
 documentation. The Memory page is now a generic unconfigured view. The Forge is published at https://github.com/Cyph3r48/forge as a private
@@ -49,6 +50,7 @@ pipeline rules are requirements, not implemented enforcement.
 | Unconfigured client fix | Added shared Paperclip guards and `evals/unconfigured-clients.mjs`; requests went from five before the fix to zero afterward |
 | Memory provider removal | Commit `47f63c9` removed the provider client, configuration names, health badges, and provider-specific documentation; the generic route makes no external requests |
 | Private GitHub repository | Published `Cyph3r48/forge`, default branch main, from root commit `4c95cdf`; verified private visibility and no parent history |
+| Phase task packs and Luna pilot | Tasks 02-16 split into bounded assignments; 02a accepted after one correction round, then a separate high-reasoning handoff review. See [PILOT-02A.md](PILOT-02A.md); coding ability and quota savings remain unproven |
 | Clean distributable baseline | Root commit `283a5e9` in a separate local source copy; 133 audited files, no original history and no remote |
 
 The seven installed skills are before-and-after, code-structure,
@@ -61,17 +63,24 @@ are still pending.
 
 1. Read `AGENTS.md` and this file. Check `git status --short --branch` and
    `git worktree list` before changing anything.
-2. Use a new task worktree from the latest local main. If this is a standalone
-   source copy with no main branch, use its current clean source branch as
-   the base. Never modify another agent's worktree or uncommitted work.
-3. Start Task 02 below. For published changes, branch from the clean GitHub
-   repository's origin/main. The bundled memory client has been removed;
-   the memory route returns an unconfigured response without external requests.
+2. For published work, create a unique task/agent worktree from the clean
+   GitHub repository's latest `origin/main`. With no remote, local work can
+   branch from local `main`; that does not make private history publishable.
+   Never modify another agent's worktree or uncommitted work.
+3. Read [WORK-PACKS.md](WORK-PACKS.md) for the per-phase assignments and exact
+   worktree procedure. Task 02a has a reviewed reading pilot; continue with
+   owner decisions in 02b, not application implementation. See
+   [PILOT-02A.md](PILOT-02A.md) for the result and remaining questions.
 4. Use isolated fixtures for engine behavior. Do not connect live services or
    raise the autonomy dial. Engine access is not required for documentation
    alignment or local authentication work.
 5. Record changed files, checks, failures, decisions, and the next task here.
    Keep raw evidence in ignored artifacts and secrets outside the repository.
+
+Worker assignments are one bounded subtask at a time. The coordinating lead
+updates this ledger after independent review; workers return their evidence
+and handoff without competing edits here. Phase 2 and later remain blocked.
+The phase task packs do not approve the unresolved Task 02 policy proposals.
 
 In the original workspace, the detailed review and screenshots are in
 `.artifacts/project-review-2026-09-14/`. They are optional local evidence,
@@ -91,6 +100,9 @@ Future work should use normal branches and PRs on that clean history. Do not
 replace or force-push the published history. No deployment is authorized.
 
 ## Task 02: next action
+
+Task 02a is complete. Continue with owner decisions in 02b from
+[PILOT-02A.md](PILOT-02A.md), then assign the approved edits in 02c.
 
 Align the governing documents into one explicit acceptance table before
 writing the dispatcher. These proposals are not yet approved policy changes:
@@ -194,3 +206,10 @@ locally in `.artifacts/memory-removal-0915/`, outside published source.
 
 For a docs-only handoff, check links, consistency, doctor, and the diff.
 Do not repeat the full build unless application code or build inputs change.
+
+The resumed task-pack handoff passed doctor with five passes, local Markdown
+link checks, and `git diff --check`. Both Luna worker checkouts remained clean.
+Before: no bounded phase assignments in source and an interrupted pilot handoff.
+After: per-phase assignments, a reviewed pilot record, and 02b identified as next.
+No application code, governing policy, live integration, merge, or deployment
+changed. Greptile acceptance is pending and must not be inferred from these checks.
