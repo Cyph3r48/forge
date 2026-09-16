@@ -1,13 +1,14 @@
-# Task 02b acceptance proposal
+# Task 02 acceptance rules
 
-Status: draft for owner and lead review. This document is a proposal, not
-approved policy and not implemented runtime enforcement. It does not amend
-`FACTORY-LAW.md`, the spec, the pipeline, or any role charter.
+Status: owner-approved target policy. The owner approved these rules and the
+Task 02 alignment edits on September 15, 2026. Runtime enforcement is planned,
+not implemented. The checks below specify required behavior for later tasks;
+they are not claims that those tests or gates currently exist.
 
-The proposal keeps four seats, Foreman, Builder, Tester, and Reviewer, and
+The factory keeps four seats, Foreman, Builder, Tester, and Reviewer, and
 seven stages: Intake, Architect, Context, Build, Cleanup, Review, and Ship.
 The Foreman orchestrates. Seats submit outcomes. One shared transition action
-is the sole state writer. The first governed run stays at dial 1. Humans
+is the sole state writer. The first governed run stays at dial 1. Owners
 accept intake manually. Automatic triage starts only at dial 4 after separate
 owner approval. No dial raises itself and no unattended scheduler runs.
 
@@ -29,11 +30,8 @@ owner approval. No dial raises itself and no unattended scheduler runs.
   transition identity. No logical stage advancement or next-seat dispatch
   occurs until transition memory is confirmed. Seats cannot write state
   directly, and a failed confirmation stays visible as pending.
-- Offline viewing remains available without a memory provider. A governed
-  advancement blocks when its transition memory cannot be confirmed. The
-  action retains a pending transition identity for a safe retry and dispatches
-  no next seat until confirmation exists.
-- This proposal does not solve atomicity, ordering, locking, idempotency, or
+- Offline viewing remains available without a memory provider.
+- These rules do not solve atomicity, ordering, locking, idempotency, or
   restart recovery. Task 06 must define those mechanics and the durable
   pending transition record before implementation claims them.
 - A retry repeats the same outcome against the same commit and transition
@@ -52,7 +50,10 @@ owner approval. No dial raises itself and no unattended scheduler runs.
   exact files and intent, independent review, and owner approval. Ordinary
   agents cannot change the rules used to evaluate their own work.
 
-## Conflicts this proposal addresses
+## Source conflicts resolved by these rules
+
+These historical references are pinned to base commit
+`4ceffdfb77d4a558f5b686493921994f5b866748`, before the alignment edits.
 
 - `factory/pipeline.md:7,16-17` assigns transition movement and Review/Ship
   exits inconsistently with `factory/roles/foreman.md:8-9,17`.
@@ -70,7 +71,9 @@ owner approval. No dial raises itself and no unattended scheduler runs.
 - Protected-rule amendment handling remains open at `FACTORY-LAW.md:34` and
   `docs/PROGRESS.md:107`.
 
-Owner approval of these proposed rules is still required. Intake identity and
-record transport, memory confirmation details, and Task 06 persistence and
-recovery are later implementation choices, not policy blockers in this draft.
-No new API or dependency is proposed.
+The owner authorized this alignment in `FACTORY-LAW.md`, `docs/spec-v0.4.md`,
+`factory/pipeline.md`, and all four role charters, plus reconciliation of
+PROGRESS and WORK-PACKS with PR #1. This authorizes no merge, deployment,
+engine connection, or change to AGENTS or MISSION. Independent PR review and
+owner merge approval remain required. Intake record transport, memory
+confirmation details, and Task 06 persistence/recovery are later design work.

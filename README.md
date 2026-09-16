@@ -46,8 +46,8 @@ The Forge is engine-agnostic glue: it expects a running [Paperclip](https://gith
 1. Definition: law, pipeline, seat charters, skills, evals (this repo's `factory/`, `skills/`, `evals/`).
 2. The app: engine stubs, then real clients, then zones (`forge/`).
 3. The company: create the Paperclip company, install the law, create the four seats, run the first lap by hand at dial 1.
-4. Raise the dial deliberately: 1 → 2 after one green lap → 3 after a week of clean merges.
+4. Remain at dial 1. Any increase or automatic merge requires a separate owner-approved policy and evidence; deployment always requires approval.
 
 ## Working in this repo
 
-One worktree and one branch per task. Never build on main. Nothing is done until the reviewer says so. Run `python3 evals/doctor.py` — the factory checks itself.
+One worktree and one branch per task. Never build on main. Read [the takeover guide](docs/ORCHESTRATOR-HANDOFF.md) and [progress](docs/PROGRESS.md) before assigning work. Run `python3 evals/doctor.py` for structural checks; it does not prove runtime enforcement.

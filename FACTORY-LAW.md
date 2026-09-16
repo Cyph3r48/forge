@@ -7,7 +7,7 @@ is the source of truth for the aligned target. The enforcement described below
 is planned; the progress file records what is implemented.
 
 This document defines the target rule set for every Software Factory coding
-agent. Paperclip installation and Hermes heartbeat serving are planned, not
+agent. Installation and per-heartbeat instruction delivery are planned, not
 current runtime behavior. The canonical skills live in this repo at `skills/`
 (see `skills/INDEX.md` for sources, licenses, and seat assignments) and are
 intended for installation into each agent's skill directory. Ponytail governs

@@ -1,5 +1,8 @@
 # Luna pilot: Task 02a
 
+Historical trial record. The owner subsequently approved Task 02's
+[acceptance rules](TASK-02-ACCEPTANCE.md); current work is in [PROGRESS.md](PROGRESS.md).
+
 September 15, 2026. Model `gpt-5.6-luna`, medium reasoning, fresh task context.
 Base `4ceffdfb77d4a558f5b686493921994f5b866748` from clean `origin/main`.
 Worker branch `agent/pilot-luna-02a-0915`; lead branch

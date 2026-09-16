@@ -9,7 +9,7 @@
 | greploop | github.com/michaelshimeles/skills | MIT | Iterate a PR/MR/CL until Greptile review reports 5/5 confidence with zero unresolved comments. | Reviewer |
 | greploop-apps | github.com/michaelshimeles/skills | MIT | Same loop as greploop but triggers reviews via @greptile-apps for PRs too large for the plain mention. | Reviewer |
 | new-feature | github.com/michaelshimeles/skills | upstream repo license | Start every task in an isolated Git worktree branched from origin/main so agents work in parallel without conflicts. | Builder |
-| piv-fix-review-findings | github.com/coleam00/skills | upstream repo license | Triage review findings, fix chosen ones one at a time with tests, defer/log the rest, validate, commit and push. | Reviewer |
+| piv-fix-review-findings | github.com/coleam00/skills | upstream repo license | Triage review findings, fix chosen ones one at a time with tests, defer/log the rest, validate, commit and push. | Builder |
 | piv-review-pr | github.com/coleam00/skills | upstream repo license | Full PR review: fetch, run validation, review the diff with fresh eyes, categorize findings by severity, post results. | Reviewer |
 | piv-slice-epic | github.com/coleam00/skills | upstream repo license | Slice an epic into PIV-sized tickets with a dependency graph and create them in the tracker. | Foreman |
 | piv-validate | github.com/coleam00/skills | upstream repo license | Run the project's full validation suite (tests, type checks, lint) and report overall health. | Tester |

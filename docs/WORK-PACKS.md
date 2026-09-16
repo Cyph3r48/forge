@@ -1,7 +1,8 @@
 # Phase task packs
 
 Read [PROGRESS.md](PROGRESS.md) first. These packs break its numbered tasks
-into assignments; they do not replace the spec or approve unresolved policy.
+into assignments; they do not replace the spec. The owner-approved Task 02
+policy is recorded in [TASK-02-ACCEPTANCE.md](TASK-02-ACCEPTANCE.md).
 Only Phase 1 is open. Later packs are a backlog, not permission to start.
 
 ## Assignment rules
@@ -30,6 +31,31 @@ Only Phase 1 is open. Later packs are a backlog, not permission to start.
   A successful pilot earns similar work, not authority over security or policy.
 - Only the coordinating lead updates the shared progress ledger after review.
   Workers return their handoff in the PR or response, preventing ledger conflicts.
+
+## Worker eligibility and next queue
+
+These assignments apply to any smaller, faster replacement model. A model name
+does not establish competence. The observed Luna trials cover document reading,
+drafting, and alignment with lead corrections; coding remains untested.
+
+| Assignment | Eligibility and limit |
+|---|---|
+| 03a inventory | Ready for a fresh worker trial: list the six route files and seven exported methods, callers, upstream reads/writes, and existing errors. Read-only; lead verifies every row. No auth design. |
+| 03b boundary | Lead only: credential transport, shared auth guard, origin/CSRF rules, secret handling, and error policy. |
+| 03b route wiring | Blocked until the boundary passes independent security review and the worker passes a coding trial. One route per ticket, supplied example and negative cases, lead reviews every call order. |
+| 03c checks | Worker may run approved synthetic cases and report raw results. Independent Tester/Reviewer owns acceptance; worker does not certify its own changes. |
+| 04 fixtures/mappings | Blocked until Task 03 and verified engine contracts. One fixture or normalization function per ticket; lead supplies exact expected output. |
+| 05 bundle manifest | Blocked until its dependencies and approved seat assignments. Small deterministic local task; no remote installation. |
+| Tasks 06-16 | Backlog only. Lead splits eligible mechanical work after the preceding phase passes. Never assign a whole dispatcher, gate system, security boundary, or UI redesign to an unproven worker. |
+
+For each new model, first run a read-only trial against known source evidence.
+Then use one isolated, reversible coding exercise with a known failure and an
+independent check before permitting production code. The exercise grants no
+permission to skip project phases or write security logic. Record correction
+count and review effort, not just a self-reported pass. If either exceeds the
+benefit, keep that model on reading/fixtures or have the lead do the task.
+Two failed correction attempts end the assignment. Do not spend repeated runs
+trying to teach an unsuitable model during delivery.
 
 ## Worktree procedure
 
@@ -106,11 +132,12 @@ Task 01 is complete. Do not redo repository cleanup or reinstall existing skills
 - [x] 02a, worker pilot: read the spec, law, pipeline, and four role charters.
   Return a conflict table with exact file/line pairs and owner questions.
   Distinguish contradictions from missing decisions. Change no files. The
-  [pilot response](PILOT-02A.md) passed after one correction round; 02b is next.
-- [ ] 02b, lead + owner: resolve transition ownership, Cleanup semantics,
+  [pilot response](PILOT-02A.md) passed after one correction round.
+- [x] 02b, lead + owner: resolve transition ownership, Cleanup semantics,
   Tester timing, Reviewer independence, manual intake, merge/deploy authority,
-  memory failure behavior, and the protected-rule amendment process.
-- [ ] 02c, worker after approval: apply the recorded decisions only to
+  memory failure behavior, and the protected-rule amendment process. The owner
+  approved [the acceptance rules](TASK-02-ACCEPTANCE.md) and the alignment edits.
+- [x] 02c, worker after approval: apply the recorded decisions only to
   `docs/spec-v0.4.md`, `FACTORY-LAW.md`, `factory/pipeline.md`, and named role
   charters. Protected-rule edits require explicit owner authorization first.
 - Pass: a single acceptance table names the actor, prerequisite, output,
@@ -124,8 +151,8 @@ CSRF/origin policy, safe errors, and unconfigured behavior before coding.
 
 - [ ] 03a, lead: enumerate all `forge/src/app/api/factory/*/route.ts` methods
   and approve authenticated/unauthenticated request examples for each.
-- [ ] 03b, worker with lead review: implement the approved shared guard and
-  route wiring. Lead specifies its exact new path. No per-route auth copies,
+- [ ] 03b, lead: implement and obtain independent review of the shared guard.
+  A qualified worker may then wire one route per approved ticket. No per-route auth copies,
   browser-exposed engine credentials, or committed environment files.
 - [ ] 03c, independent tester: invalid/missing auth fails before any upstream
   request; valid auth preserves route contracts. Check browser refresh and
