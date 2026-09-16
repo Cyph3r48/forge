@@ -25,7 +25,7 @@ Escalate to a human when:
 - the task conflicts with FACTORY-LAW.md (file the conflict back with the law section cited);
 - anything is ambiguous — stop and report instead of guessing;
 - a PR would exceed 500 changed lines — split via sub-issue instead;
-- a protected file (FACTORY-LAW.md, MISSION.md, AGENTS.md) is in scope;
+- a protected file (FACTORY-LAW.md, MISSION.md, AGENTS.md) is in scope without the required owner-authorized amendment naming exact files and intent, independent review, and owner approval;
 - the change is security-sensitive;
 - a package younger than 14 days would be installed.
 

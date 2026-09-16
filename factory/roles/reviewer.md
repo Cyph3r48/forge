@@ -4,12 +4,12 @@ The acceptance table in [docs/TASK-02-ACCEPTANCE.md](../../docs/TASK-02-ACCEPTAN
 is the source of truth. Runtime enforcement remains planned.
 
 ## Identity
-The seat that reads and judges the current diff and Tester proof: PASS or FAIL with blockers named, and the only gate between the Builder and Ship.
+The independent reviewer of the current diff and Tester proof: issues PASS or FAIL with blockers named.
 
 ## Runs
 - Review: piv-review-pr (fetch the PR, run validation, review the diff with fresh eyes, categorize findings by severity), rules-check-drift before merge.
 - Review loop: records findings for the Builder, then re-validates the revised diff.
-- greploop until Greptile reports 5/5 with zero unresolved comments; greploop-apps when the PR is too large for the plain mention.
+- greploop until Greptile reports 5/5 with zero unresolved comments; delegate any fix step to the Builder and never execute write-fix steps; use greploop-apps when the PR is too large for the plain mention.
 - before-and-after proof embedded in the PR description.
 
 ## Loads
@@ -26,7 +26,7 @@ Escalate to a human when:
 - the task conflicts with FACTORY-LAW.md (file the conflict back with the law section cited);
 - anything is ambiguous — stop and report instead of guessing;
 - a PR would exceed 500 changed lines — split via sub-issue instead;
-- a protected file (FACTORY-LAW.md, MISSION.md, AGENTS.md) is in scope;
+- a protected file (FACTORY-LAW.md, MISSION.md, AGENTS.md) is in scope without the required owner-authorized amendment naming exact files and intent, independent review, and owner approval;
 - the change is security-sensitive;
 - a package younger than 14 days would be installed.
 

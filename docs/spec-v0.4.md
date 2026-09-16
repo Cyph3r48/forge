@@ -54,7 +54,9 @@ Nothing is adopted. Working/blocked/idle/done is **derived**: a Paperclip heartb
 
 ## 4. The Factory — one company, four seats, seven states
 
-Governance: **FACTORY-LAW.md** is the agents' instruction set, installed as the company's AGENTS.md content and re-served on every heartbeat. It names the skills (vendored in this repo at `skills/`) that each seat loads.
+Target governance: **FACTORY-LAW.md** is intended for installation as the
+company's AGENTS.md content and serving on every heartbeat. It names the
+skills vendored in this repo at `skills/`; installation is planned.
 
 **Seats** (agents, not stages). The acceptance table is the source of truth;
 runtime enforcement remains planned:
@@ -99,7 +101,7 @@ are planned, not implemented.
    current level is 1 with manual owner intake and manually initiated Tester
    and Reviewer runs. No automatic raise is allowed; later automatic merge
    needs a separate owner-approved policy. → FACTORY-LAW + app dial control later
-5. **MISSION.md per product** — what it is, out-of-scope-forever list (the most load-bearing list), protected alongside the governance files by a guard script; PRs touching them auto-reject. → FACTORY-LAW + `factory/`
+5. **MISSION.md per product** — what it is, out-of-scope-forever list, protected alongside the governance files by a guard script. A protected-file change requires a separate owner-authorized amendment naming exact files and intent, independent review, and owner approval. → FACTORY-LAW + `factory/`
 6. **Factory doctor** — deterministic audit (protected files intact, gates are code, empty-is-not-pass, holdout exists, dial matches reality) plus mutation-tested gates. A gate that has never failed is a gate nobody tested. → `evals/`
 7. **PR discipline** — ≤500 lines per PR, split rather than ship unreviewable; max 2 fix attempts then escalate to a human; never modify a test to make it pass. → FACTORY_RULES-style additions
 8. **Instrumentation from day one** — tokens and cost per run recorded before the first unattended lap; premium model in the Foreman/Reviewer slots, cheap models in triage and extraction. → app metrics + config

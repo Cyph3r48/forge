@@ -38,7 +38,7 @@ Tester and Reviewer runs are manually initiated; no unattended scheduler runs.
 
 Fixed priority, in order, finish in-flight before starting new:
 
-1. Fix a unit in `factory:needs-fix` (review feedback loop)
+1. Resume a Build unit returned for review fixes
 2. Advance a unit waiting in `factory:review`
 3. Build the next highest-priority unit in `factory:context`
 4. Triage untriaged issues in `factory:intake` (dial ≥ 4 only; below that, intake is human)

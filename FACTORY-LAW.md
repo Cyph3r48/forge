@@ -6,7 +6,12 @@ The acceptance table in [docs/TASK-02-ACCEPTANCE.md](docs/TASK-02-ACCEPTANCE.md)
 is the source of truth for the aligned target. The enforcement described below
 is planned; the progress file records what is implemented.
 
-This is the rule set every Software Factory coding agent runs under. It is installed as the agents' instructions (AGENTS.md content) in Paperclip, and it binds every Hermes-style session agent the factory spawns. The canonical skills live in this repo at `skills/` (see `skills/INDEX.md` for sources, licenses, and seat assignments); they are installed into each agent's skill directory from there and load on demand. Ponytail governs every response; unslop governs every line written for a human.
+This document defines the target rule set for every Software Factory coding
+agent. Paperclip installation and Hermes heartbeat serving are planned, not
+current runtime behavior. The canonical skills live in this repo at `skills/`
+(see `skills/INDEX.md` for sources, licenses, and seat assignments) and are
+intended for installation into each agent's skill directory. Ponytail governs
+every response; unslop governs every line written for a human.
 
 ## Non-negotiables
 
@@ -21,9 +26,9 @@ This is the rule set every Software Factory coding agent runs under. It is insta
 
 ## Role additions (on top of the law)
 
-- **Foreman** — runs Design+Plan, coordinates the shared transition action as sole state writer, and submits its own outcomes. It splits into PR-sized units (piv-slice-epic), attaches source/SDK references or sufficient authoritative documentation (source-code-context, no guessed APIs), assigns units, and executes Ship after separate human merge and deployment approvals. Loads: build-dark-factory (playbook), piv-slice-epic, worktree-create, worktree-merge.
+- **Foreman** — runs Design+Plan, coordinates the shared transition action as sole state writer, and submits its own outcomes. It splits into PR-sized units (piv-slice-epic), attaches source/SDK references or sufficient authoritative documentation (source-code-context, no guessed APIs), assigns units, and executes Ship after separate human merge and deployment approvals. On a greenfield product, ticket one is the walking skeleton: start command, health check, tests, and an http/cli/library surface the checks can drive. Loads: build-dark-factory (playbook), piv-slice-epic, worktree-create, worktree-merge.
 - **Builder** — runs Build and the distinct Builder-owned Cleanup stage: a minimal unit in its own worktree per new-feature, with code-structure and ponytail applied. Cleanup may record no cleanup needed with existing successful checks. Builder fixes review findings, with at most two attempts. Loads: new-feature, code-structure, source-code-context, piv-fix-review-findings, prime-codebase.
-- **Tester** — independently validates the final diff during Cleanup exit, proves behavior with evidence-driven-testing, and completes nonempty successful checks before Review entry. It reports findings and never fixes them. Loads: evidence-driven-testing, piv-validate, prime-codebase.
+- **Tester** — independently validates the final diff during Cleanup exit, proves behavior with evidence-driven-testing, and completes nonempty successful checks before Review entry. It reports findings and never fixes them. It never sees the implementation plan; its verdict is the outcome against the issue, with holdout scenarios outside the Builder's view. Loads: evidence-driven-testing, piv-validate, prime-codebase.
 - **Reviewer** — runs Review: reads and judges the current diff and Tester proof, then issues PASS or FAIL with blockers named. It never fixes or approves a diff it authored or changed. Greptile must report 5/5 with zero unresolved; after two Builder fix attempts, the issue escalates. Loads: piv-review-pr, rules-check-drift, greploop, before-and-after.
 - **Every seat** — unslop on human-facing text; system-execution-report writes the memory lane at run close; system-evolution-review is the periodic process audit. PR caps: at most 500 changed lines, split rather than ship unreviewable; never modify a test to make it pass.
 

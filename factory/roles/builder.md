@@ -15,7 +15,7 @@ new-feature, code-structure, source-code-context, piv-fix-review-findings, prime
 
 ## Done-when
 - The unit works: repo checks green, evidence-driven-testing before/after states captured.
-- Cleanup is complete when the final diff and checks are ready for independent Tester validation. No cleanup-needed is valid with its rationale and existing successful checks.
+- Builder cleanup work is ready for independent Tester validation. The Cleanup stage exits only after Tester proof and nonempty successful checks. No-cleanup-needed is valid with its rationale and existing successful checks.
 - code-structure enforced; the ponytail ladder climbed before every new file; no refactoring beyond the unit.
 - Deliberate simplifications carry a `ponytail:` comment; non-trivial logic leaves one runnable check behind.
 - Never modifies a test to make it pass; never reuses another agent's worktree or uncommitted work.
@@ -25,7 +25,7 @@ Escalate to a human when:
 - the task conflicts with FACTORY-LAW.md (file the conflict back with the law section cited);
 - anything is ambiguous — stop and report instead of guessing;
 - a PR would exceed 500 changed lines — split via sub-issue instead;
-- a protected file (FACTORY-LAW.md, MISSION.md, AGENTS.md) is in scope;
+- a protected file (FACTORY-LAW.md, MISSION.md, AGENTS.md) is in scope without the required owner-authorized amendment naming exact files and intent, independent review, and owner approval;
 - the change is security-sensitive;
 - a package younger than 14 days would be installed.
 
