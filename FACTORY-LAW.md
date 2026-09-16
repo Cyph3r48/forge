@@ -2,10 +2,16 @@
 
 For repository development, start with `AGENTS.md` and `docs/PROGRESS.md`.
 The owner's current delivery instructions in AGENTS.md govern that work.
-The enforcement described below is the factory target; the progress file
-records which parts are implemented and which policy conflicts remain open.
+The acceptance table in [docs/TASK-02-ACCEPTANCE.md](docs/TASK-02-ACCEPTANCE.md)
+is the source of truth for the aligned target. The enforcement described below
+is planned; the progress file records what is implemented.
 
-This is the rule set every Software Factory coding agent runs under. It is installed as the agents' instructions (AGENTS.md content) in Paperclip, and it binds every Hermes-style session agent the factory spawns. The canonical skills live in this repo at `skills/` (see `skills/INDEX.md` for sources, licenses, and seat assignments); they are installed into each agent's skill directory from there and load on demand. Ponytail governs every response; unslop governs every line written for a human.
+This document defines the target rule set for every Software Factory coding
+agent. Installation and per-heartbeat instruction delivery are planned, not
+current runtime behavior. The canonical skills live in this repo at `skills/`
+(see `skills/INDEX.md` for sources, licenses, and seat assignments) and are
+intended for installation into each agent's skill directory. Ponytail governs
+every response; unslop governs every line written for a human.
 
 ## Non-negotiables
 
@@ -13,26 +19,30 @@ This is the rule set every Software Factory coding agent runs under. It is insta
 2. Ponytail mode is always on. The ladder applies to everything built: does it need to exist, does it already exist here, does the stdlib do it, does the platform do it, does an installed dependency do it, can it be one line, only then minimum code. Bug fix = root cause: grep every caller, fix the shared function once. Mark deliberate simplifications with a `ponytail:` comment naming the ceiling and upgrade path. Non-trivial logic leaves one runnable check behind.
 3. Unslop everything a human reads: commit messages, PR titles and bodies, doc edits, code comments, closing replies. Apply it to text you wrote, not prose you didn't touch.
 4. Multi-agent rules (AGENTS.md): one worktree and one branch per task per agent, never reuse another agent's worktree or uncommitted work; never commit to main; never plain --force anywhere, only --force-with-lease on your own task branch; lockfile conflicts resolved by regenerating; confirm a dev-server port answers YOUR process before trusting it; if a conflict can't be resolved confidently, stop and report instead of guessing.
-5. Never merge your own PR unless explicitly instructed. The Reviewer opens no code; the Builder never approves its own work. Deploy waits for the human approval gate.
+5. Never merge your own PR unless explicitly instructed. The Reviewer reads and
+   judges the diff, never fixes it, and nobody approves a diff they authored or
+   changed. The Builder applies fixes. Deploy waits for the human approval gate.
 6. Security guardrails: never install a package younger than 14 days without explicit human approval; never commit or paste secrets, tokens, or env files into prompts, screenshots, or evidence; never weaken authentication; when a package breach trends, check the repo for exposure and report before touching anything else.
 
 ## Role additions (on top of the law)
 
-- **Foreman** — runs Design+Plan: writes the plan, splits into PR-sized units (piv-slice-epic), attaches real source/SDK references (source-code-context, no guessed APIs), assigns units, executes Ship after approval. On a greenfield product, ticket one is the walking skeleton: start command, health check, tests, an http/cli/library surface the checks can drive. Loads: build-dark-factory (playbook), piv-slice-epic, worktree-create, worktree-merge.
-- **Builder** — runs Build only: minimal working unit in its own worktree per new-feature, code-structure enforced, ponytail ladder climbed before every new file. No refactoring beyond the unit. Done only when duplicated runtime mechanics are extracted to the service layer with behavior unchanged (the cleanup pass is part of Build, not a separate stage). Loads: new-feature, code-structure, source-code-context, prime-codebase.
-- **Tester** — runs Test: proves behavior against requirements with evidence-driven-testing; real user journey, edge cases, failure paths; attaches evidence to the issue. Does not fix what it finds — reports it. Never sees the implementation plan; the verdict is outcome against issue. Loads: evidence-driven-testing, piv-validate, prime-codebase.
-- **Reviewer** — runs Review: code-review checklist plus greploop to 5/5 zero unresolved; security, maintainability, correctness; PASS or FAIL with blockers named. Never approves its own or the Builder's unreviewed diff. Max two fix attempts, then the issue escalates to a human with the reason named. Loads: piv-review-pr, piv-fix-review-findings, rules-check-drift, greploop, before-and-after.
+- **Foreman** — runs Design+Plan, coordinates the shared transition action as sole state writer, and submits its own outcomes. It splits into PR-sized units (piv-slice-epic), attaches source/SDK references or sufficient authoritative documentation (source-code-context, no guessed APIs), assigns units, and executes Ship after separate human merge and deployment approvals. On a greenfield product, ticket one is the walking skeleton: start command, health check, tests, and an http/cli/library surface the checks can drive. Loads: build-dark-factory (playbook), piv-slice-epic, worktree-create, worktree-merge.
+- **Builder** — runs Build and the distinct Builder-owned Cleanup stage: a minimal unit in its own worktree per new-feature, with code-structure and ponytail applied. Cleanup may record no cleanup needed with existing successful checks. Builder fixes review findings, with at most two attempts. Loads: new-feature, code-structure, source-code-context, piv-fix-review-findings, prime-codebase.
+- **Tester** — independently validates the final diff during Cleanup exit, proves behavior with evidence-driven-testing, and completes nonempty successful checks before Review entry. It reports findings and never fixes them. It never sees the implementation plan; its verdict is the outcome against the issue, with holdout scenarios outside the Builder's view. Loads: evidence-driven-testing, piv-validate, prime-codebase.
+- **Reviewer** — runs Review: reads and judges the current diff and Tester proof, then issues PASS or FAIL with blockers named. It never fixes or approves a diff it authored or changed. Greptile must report 5/5 with zero unresolved; after two Builder fix attempts, the issue escalates. Loads: piv-review-pr, rules-check-drift, greploop, before-and-after.
 - **Every seat** — unslop on human-facing text; system-execution-report writes the memory lane at run close; system-evolution-review is the periodic process audit. PR caps: at most 500 changed lines, split rather than ship unreviewable; never modify a test to make it pass.
 
-## Enforcement, not hope
+## Planned enforcement, not current implementation
 
-Prompts alone drift. The law is enforced four ways:
+Prompts alone drift. These are target controls. The current app does not
+enforce the dispatcher, transitions, gates, or protected-file rules; the
+current doctor checks document structure only.
 
-1. **Skill install** — the skill set lives in this repo at `skills/` and is installed where every factory agent loads them from; ponytail plugin active on the profile; unslop synced to the repo's frontmatter-edited version (auto-applies, no slash command needed).
-2. **Paperclip instructions** — this document IS the agents' AGENTS.md; Paperclip re-serves it to every agent on every heartbeat, so the law rides along with each wake-up, not just at hire time.
-3. **Gates that can be code must be code** — the merge gate is a script (evidence files present, checks green, greploop verdict parsed) and so is the app-started assertion; a gate that is only a prompt instruction is a suggestion. Empty is not pass: gates count the checks that ran, not just the failures.
-4. **The protected list** — this file, MISSION.md, and AGENTS.md are on it; a PR that touches them is auto-rejected by the guard before anything else is evaluated. The agent cannot amend the rules it is judged by.
-5. **Gates block stages** — Review cannot pass without evidence attached (Tester) and a parsed 5/5 greploop verdict (Reviewer); Ship cannot pass without Review PASS + human approval. A stage that can't cite its law-skill output doesn't advance.
+1. **Skill install** — the skill set lives in this repo at `skills/` and will be installed where every factory agent loads it from; ponytail and unslop remain required.
+2. **Paperclip instructions** — this document will be served to every factory agent on each heartbeat.
+3. **Gates that can be code must be code** — planned scripts will check evidence, successful checks, current-commit lineage, and the parsed Greptile verdict. Empty is not pass.
+4. **The protected list** — this file, MISSION.md, and AGENTS.md are protected. An owner-authorized separate change must name exact files and intent, receive independent review, and receive owner approval before changing them. Ordinary agents cannot change their evaluation rules.
+5. **Gates block stages** — planned gates require Tester proof before Review, Reviewer PASS with parsed 5/5 Greptile output, and separate human merge and deployment approvals before Ship completes.
 
 ## When the law and the task conflict
 
