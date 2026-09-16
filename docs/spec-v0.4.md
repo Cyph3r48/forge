@@ -1,6 +1,7 @@
 # The Forge — Spec v0.4
 
 Current implementation and the phase checklist live in [PROGRESS.md](PROGRESS.md).
+The aligned Task 02 target is in [TASK-02-ACCEPTANCE.md](TASK-02-ACCEPTANCE.md).
 The owner has narrowed the UI direction to a colorful conventional interface
 with a couple of Three.js assets and subtle effects, with no separate 2D mode.
 Work proceeds one phase at a time. This spec describes the target system;
@@ -55,14 +56,15 @@ Nothing is adopted. Working/blocked/idle/done is **derived**: a Paperclip heartb
 
 Governance: **FACTORY-LAW.md** is the agents' instruction set, installed as the company's AGENTS.md content and re-served on every heartbeat. It names the skills (vendored in this repo at `skills/`) that each seat loads.
 
-**Seats** (agents, not stages):
+**Seats** (agents, not stages). The acceptance table is the source of truth;
+runtime enforcement remains planned:
 
 | Seat | Runs | Loads |
 |---|---|---|
-| Foreman | intake → architect → context → ship states; splits units, assigns, executes ship after approval | build-dark-factory (playbook), piv-slice-epic, worktree-create, worktree-merge |
-| Builder | build + cleanup, one worktree per unit | new-feature, code-structure, source-code-context, prime-codebase |
-| Tester | prove, evidence attached, reports without fixing | evidence-driven-testing, piv-validate, prime-codebase |
-| Reviewer | review-fix loop, PASS/FAIL with blockers named, never approves the builder's unreviewed diff | piv-review-pr, piv-fix-review-findings, rules-check-drift, greploop, before-and-after |
+| Foreman | coordinates all seven states and the shared transition action; splits units, assigns, executes Ship after approval | build-dark-factory (playbook), piv-slice-epic, worktree-create, worktree-merge |
+| Builder | Build + distinct Cleanup, one worktree per unit; may record no cleanup needed | new-feature, code-structure, source-code-context, piv-fix-review-findings, prime-codebase |
+| Tester | independently validates final diff at Cleanup exit; proof and nonempty checks complete before Review | evidence-driven-testing, piv-validate, prime-codebase |
+| Reviewer | reads and judges current diff and proof; never fixes or approves a diff it authored or changed | piv-review-pr, rules-check-drift, greploop, before-and-after |
 
 All seats: unslop for human-facing text, ponytail ladder for everything built.
 
@@ -70,22 +72,33 @@ All seats: unslop for human-facing text, ponytail ladder for everything built.
 
 `intake → architect → context → build → cleanup → review → ship`
 
-one Paperclip label per state, moved by the Foreman; cleanup is the Builder's done-when (duplicated mechanics extracted, behavior unchanged), not a separate seat.
+one Paperclip label per state. Seats submit outcomes to the shared transition
+action, the sole state writer coordinated by the Foreman. Cleanup is a distinct
+Builder-owned stage and may record no cleanup needed.
 
-**Gates (enforced in code, not prompts):**
+**Gates (planned enforcement, not implemented in the current app):**
 
-- cleanup → review: evidence attached (Tester) + checks green
-- review → ship: greploop 5/5 verdict parsed by script, not asserted by prompt
-- ship: Reviewer PASS + human approval (the Paperclip gate) — nothing merges uninspected
+- Cleanup → Review: Tester independently validates the final diff; evidence and nonempty successful checks exist before Review entry.
+- Review → Ship: current-head evidence and Greptile 5/5 with zero unresolved are parsed by the planned gate.
+- Ship: Reviewer PASS plus separate human merge and deployment approvals; verified deployment completes Ship.
 
-**Memory write-back at every transition**, not just review: Architect logs which "small units" turned out not to be small; Builder logs pitfalls hit on this codebase; Reviewer calibrates. The write-back generators are skills: system-execution-report at run close, system-evolution-review as the periodic process audit.
+**Planned memory write-back at every transition**, not just review: offline
+viewing works without a provider, but governed advancement waits for confirmed
+memory with a pending transition identity and no next-seat dispatch. Atomicity
+and recovery are deferred to Task 06.
 
 ## 5. Dark-factory disciplines adopted (from coleam00, mapped)
+
+These are target requirements. The dispatcher, gates, and runtime enforcement
+are planned, not implemented.
 
 1. **Dumb dispatcher** — fixed priority (fix blocked PR → review waiting PR → build next accepted unit → triage), finish in-flight before new work, stall reaping for stranded states. Never an LLM dispatcher; it invents work. → `factory/pipeline.md`
 2. **Two gates must be code** — the merge script and an app-started assertion. Every other "gate" is a suggestion. → FACTORY-LAW enforcement
 3. **Independence line** — the Tester and Reviewer see the issue and the outcome, never the implementation plan; holdout scenarios live where the Builder can't read them. → seat charters
-4. **Autonomy dial 0–5** per company, encoded in the dispatcher; level 3 (auto-merge on all-green) is the target, reached only after proven laps; raise it as a deliberate act. → FACTORY-LAW + app dial control later
+4. **Autonomy dial 0–5** per company, encoded in the planned dispatcher. The
+   current level is 1 with manual owner intake and manually initiated Tester
+   and Reviewer runs. No automatic raise is allowed; later automatic merge
+   needs a separate owner-approved policy. → FACTORY-LAW + app dial control later
 5. **MISSION.md per product** — what it is, out-of-scope-forever list (the most load-bearing list), protected alongside the governance files by a guard script; PRs touching them auto-reject. → FACTORY-LAW + `factory/`
 6. **Factory doctor** — deterministic audit (protected files intact, gates are code, empty-is-not-pass, holdout exists, dial matches reality) plus mutation-tested gates. A gate that has never failed is a gate nobody tested. → `evals/`
 7. **PR discipline** — ≤500 lines per PR, split rather than ship unreviewable; max 2 fix attempts then escalate to a human; never modify a test to make it pass. → FACTORY_RULES-style additions
@@ -118,4 +131,5 @@ Not adopted: Archon (Paperclip is our workflow engine), GitHub-labels-as-state (
 1. **Name** — The Forge (the app) runs the Factory (the Paperclip company). Any existing "Agent Factory" feature in a host OS keeps its name.
 2. **Host** — wherever your engines run; the app binds `FORGE_BIND_HOST:FORGE_PORT` (default `0.0.0.0:3400`) from its `.env`, so binding to a private interface is a config line, not a code change.
 3. **First pipeline job** — the Forge's own remaining roadmap: the factory eats its own output from its first lap.
-4. **Dial** — level 1 for the hand lap, level 2 after one green lap, level 3 (auto-merge, human ship) after a week of clean merges. Encoded in `factory/pipeline.md`.
+4. **Dial** — level 1 for the hand lap. Any later automatic merge requires a
+   separate owner-approved policy and evidence. Encoded in `factory/pipeline.md`.

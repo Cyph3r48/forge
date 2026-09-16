@@ -1,28 +1,40 @@
 # Factory Pipeline
 
-The Software Factory company's state machine, dispatcher, gates, and dial. One Paperclip company; four seats (charters in `factory/roles/`); seven states as issue labels. Governed by FACTORY-LAW.md.
+The Software Factory company's planned state machine, dispatcher, gates, and
+dial. One Paperclip company; four seats and seven states as issue labels.
+The acceptance table in [docs/TASK-02-ACCEPTANCE.md](../docs/TASK-02-ACCEPTANCE.md)
+is the source of truth. This document does not claim runtime enforcement.
 
 ## States
 
-One Paperclip label per state, moved by the seat that owns the exit. Every transition writes the issue's memory lane (what happened, what surprised the seat, what the next seat should know).
+One Paperclip label represents each state. Seats submit outcomes to one shared
+transition action, the sole state writer, coordinated by the Foreman. No
+logical advancement or next-seat dispatch occurs before transition memory is
+confirmed. A failed confirmation remains visible as pending.
 
 | State | Label | Seat that works it | Exit gate | Failure path |
 |---|---|---|---|---|
-| Intake | `factory:intake` | Foreman | issue is actionable and in MISSION scope | rejected with reason, or `factory:needs-human` |
+| Intake | `factory:intake` | Owner, coordinated by Foreman | owner accepts an actionable issue in MISSION scope; triage assignment is not required | rejected with reason or held at Intake |
 | Architect | `factory:architect` | Foreman | split into PR-sized units (≤500 lines each), reusable code identified | units can't be made small → needs-human |
-| Context | `factory:context` | Foreman | real source/SDK references attached per unit (source-code-context) | reference unreachable → note and proceed with docs, never guess APIs silently |
-| Build | `factory:build` | Builder (parallel per unit, one worktree each) | minimal working unit, checks green | blocked >2h or ambiguity → `factory:needs-human` |
-| Cleanup | `factory:cleanup` | Builder | duplicated mechanics extracted, behavior unchanged | — |
-| Review | `factory:review` | Tester then Reviewer | evidence attached + parsed 5/5 greploop verdict + PASS | ≤2 fix attempts, then needs-human with reason |
-| Ship | `factory:ship` | Foreman | merged; summary of what changed, what was tested, what needs human judgment, sent to the owner | deploy blocked → needs-human |
+| Context | `factory:context` | Foreman | source/SDK reference, or recorded authoritative documentation sufficient to verify the contract, attached per unit | unresolved contract → `factory:needs-human` |
+| Build | `factory:build` | Builder (parallel per unit, one worktree each) | minimal working unit, nonempty checks green | blocked over 2h or ambiguity → `factory:needs-human` |
+| Cleanup | `factory:cleanup` | Builder, then Tester validates | final diff and checks, or documented no-cleanup-needed with existing successful checks; Tester validates independently | finding → Build; ambiguity → `factory:needs-human` |
+| Review | `factory:review` | Reviewer | Tester proof and nonempty successful checks predate entry, bind to current head, and Reviewer records PASS plus Greptile 5/5 with zero unresolved | Builder fixes findings, max 2 attempts, then `factory:needs-human` |
+| Ship | `factory:ship` | Foreman coordinates | separate human merge and deployment approvals, verified deployment, and executable rollback instructions | blocked or broken lineage → `factory:needs-human` |
 
 `factory:needs-human` is the only escalation state. Everything lands there with a reason attached; nothing rots silently.
 
-**Ship ends at deployed code, not a merged PR** — a factory whose merges never reach a user is a PR generator. Deployment strategy per product: blue-green (two instances, update standby, flip) when real users are served; for single-host internal tools, a systemd/Docker restart after the human approval is the proportionate version. The Ship summary names what was deployed, where, and how to roll it back.
+Ship completes only after verified deployment. A merge or squash may produce a
+new SHA, so the Ship record links reviewed head → verified merge result →
+deployed revision and rejects changed or unreviewed content. Rollback
+instructions must be executable; no production rollback is required just to
+pass that check.
 
-## Dispatcher
+## Dispatcher (planned, not implemented)
 
-Dumb on purpose: a script on a timer that reads Paperclip labels and dispatches at most one thing per seat per tick. **No LLM ever decides what runs** — a model asked "what work is pending?" invents work.
+The planned dispatcher reads Paperclip labels and dispatches at most one thing
+per seat per tick. No LLM decides what runs. At dial 1, intake is manual and
+Tester and Reviewer runs are manually initiated; no unattended scheduler runs.
 
 Fixed priority, in order, finish in-flight before starting new:
 
@@ -35,19 +47,20 @@ Stall reaping every tick: any unit in a working state with no activity for 4 hou
 
 Parallelism: independent units build concurrently, one worktree and one branch per unit per Builder, max 2 concurrent builds to start (`factory/config`, raise deliberately). Scope check before every build: open PRs' changed files skimmed; on overlap, stop and route to the Foreman.
 
-## Gates
+## Gates (planned, not implemented)
 
-Gates that can be code are code. A gate that is only a prompt instruction is a suggestion.
+Gates that can be code will be code. The current app does not enforce these
+gates. A gate that is only a prompt instruction is a suggestion.
 
-| Gate | Enforced by | Kind |
+| Gate | Planned enforcement by | Kind |
 |---|---|---|
 | Unit is ≤500 changed lines | gate script on the PR | code |
-| Evidence attached before review exits | gate script (evidence files present on the issue) | code |
+| Tester evidence and nonempty checks before Review entry | planned gate script (evidence files present on the issue) | code |
 | Review verdict = 5/5, zero unresolved | gate script parses the greploop output | code |
 | App started (for product repos) | harness assertion `APP_STARTED` | code |
 | Checks green (typecheck, tests) | CI / validate entrypoint | code |
-| Merge | gate script after all above | code |
-| Ship (deploy) | **human approval in Paperclip — never automated** | human |
+| Merge | planned gate script after all above and separate human merge approval | code + human |
+| Ship (deploy) | **separate human deployment approval — never automated** | human |
 | Mission scope, law conflict, security judgment | the seats, per FACTORY-LAW | prompt, checked by the Reviewer |
 
 Empty is not pass: gates count the checks that ran, not just the failures.
@@ -59,15 +72,16 @@ Per company, one number, set by humans only (the Foreman never raises it). The d
 | Level | What runs unattended |
 |---|---|
 | 0 | nothing; run each state by hand |
-| 1 | intake → units built → PRs open; human reviews and merges everything |
+| 1 | owner accepts intake manually; work, Tester, and Reviewer runs are manually initiated; humans approve merge and deployment |
 | 2 | + Tester and Reviewer run and post verdicts; human still merges |
 | 3 | + merge is automatic when every code gate is green; **ship stays human** |
 | 4 | + Foreman triages its own issues against MISSION; a scheduled regression files its own bugs |
 | 5 | + the Foreman writes its own issues from MISSION |
 
-**Target is 3.** Start the first hand lap at 1, raise to 2 after one green lap, to 3 after a week of clean merges. Each raise is a deliberate human act, recorded in the memory company lane with the evidence that earned it.
+Current operating level is 1. No automatic dial progression is allowed. Any
+later automatic merge requires a separate owner-approved policy and evidence.
 
-## memory write-back points
+## Memory write-back points (planned)
 
 | Point | What is written | Generator |
 |---|---|---|
@@ -77,6 +91,11 @@ Per company, one number, set by humans only (the Foreman never raises it). The d
 | Builder close | pitfalls hit on this codebase, primed for next time | system-execution-report |
 | Reviewer close | verdict, false positives found, calibration notes | system-execution-report |
 | Periodic (weekly) | process bugs, not code bugs: what the pipeline itself got wrong | system-evolution-review |
+
+Offline viewing remains available without a memory provider. Governed stage
+advancement waits for confirmed transition memory, with a pending identity and
+no next-seat dispatch while pending. Atomicity and recovery are deferred to
+Task 06.
 
 ## PR discipline (all seats)
 
