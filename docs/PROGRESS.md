@@ -7,7 +7,8 @@ add personal notes, credentials, or deployed host details.
 ## Current position
 
 Phase 1 is in progress. Task 01, local repository preparation, is complete.
-Tasks 02 and 03 are complete locally, with external PR review still pending.
+Tasks 02 and 03 are complete locally. Task 03 is open as PR #3, with external
+PR review still pending.
 Task 04's engine-contract research is next. No UI redesign, dispatcher, or
 real-engine factory lap has been completed.
 The bundled memory provider has been removed from code, API fields, UI, and

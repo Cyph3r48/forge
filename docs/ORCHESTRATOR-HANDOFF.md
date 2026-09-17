@@ -14,11 +14,12 @@ because of usage limits; do not start another task in that session.
    `.artifacts/forge-publish-0915/` in the original workspace.
 3. The current lead checkout is `.worktrees/task03-auth-lead-0916/`, branch
    `agent/task03-auth-lead-0916`. It contains Task 03 on top of the Task 02
-   branch. Fetch and inspect open PRs, base branches, exact heads, and local
-   status before choosing a new base.
+   branch; the reviewed implementation commit is `14079bd`. Fetch and inspect
+   open PRs, base branches, exact heads, and local status before choosing a new base.
 4. PR #1 is https://github.com/Cyph3r48/forge/pull/1 and Task 02 is PR #2.
-   Task 03 is stacked on PR #2. Do not merge any PR without owner authorization
-   or lose pending changes by blindly restarting on main.
+   Task 03 is https://github.com/Cyph3r48/forge/pull/3, stacked on PR #2. Do not
+   merge any PR without owner authorization or lose pending changes by blindly
+   restarting on main.
 5. Start each new task/agent in its own clean worktree from origin/main. If
    required changes are still in an open PR, arrange the dependent branch
    explicitly with the owner. Never reuse another agent's uncommitted work.
