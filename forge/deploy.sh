@@ -20,4 +20,4 @@ scp forge/forge.service "$SSH_HOST:/etc/systemd/system/forge.service" >/dev/null
 ssh "$SSH_HOST" "systemctl daemon-reload && systemctl restart forge && systemctl is-active forge"
 
 echo "==> verify"
-ssh "$SSH_HOST" "sleep 3; curl -s -o /dev/null -w 'UI: %{http_code}\n' http://localhost:3400/ ; curl -s http://localhost:3400/api/factory/status | head -c 300; echo"
+ssh "$SSH_HOST" "set -a; . '$REMOTE_DIR/.env'; set +a; sleep 3; curl -s -o /dev/null -w 'UI: %{http_code}\n' http://localhost:3400/; curl -s -H \"Authorization: Bearer \$FORGE_AUTH_TOKEN\" http://localhost:3400/api/factory/status | head -c 300; echo"

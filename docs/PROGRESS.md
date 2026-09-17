@@ -1,16 +1,15 @@
 # Project progress and agent handoff
 
-Updated September 16, 2026. Start here, then read `docs/spec-v0.4.md` and
+Updated September 17, 2026. Start here, then read `docs/spec-v0.4.md` and
 the code for the assigned task. This file records project work only. Do not
 add personal notes, credentials, or deployed host details.
 
 ## Current position
 
 Phase 1 is in progress. Task 01, local repository preparation, is complete.
-Task 02's policy decisions and document alignment are complete locally, with
-PR review still pending. Task 03a's authentication inventory/design is next.
-The owner requested a session handoff before that task. No UI redesign,
-authentication, dispatcher, or real-engine factory lap has been completed.
+Tasks 02 and 03 are complete locally, with external PR review still pending.
+Task 04's engine-contract research is next. No UI redesign, dispatcher, or
+real-engine factory lap has been completed.
 The bundled memory provider has been removed from code, API fields, UI, and
 documentation. The Memory page is now a generic unconfigured view. The Forge is published at https://github.com/Cyph3r48/forge as a private
 repository. Its initial source commit is `4c95cdf` and has no parent history.
@@ -56,6 +55,7 @@ pipeline rules are requirements, not implemented enforcement.
 | Private GitHub repository | Published `Cyph3r48/forge`, default branch main, from root commit `4c95cdf`; verified private visibility and no parent history |
 | Phase task packs and Luna pilot | Tasks 02-16 split into bounded assignments; 02a accepted after one correction round, then a separate high-reasoning handoff review. See [PILOT-02A.md](PILOT-02A.md); coding ability and quota savings remain unproven |
 | Task 02 alignment | Owner-approved acceptance table; law, spec, pipeline, four charters, and skill seat mapping aligned. Luna implemented the seven governing-file edits; lead reviewed and corrected remaining wording. Structural and consistency checks pass; runtime gates and Greptile acceptance remain unproven |
+| Task 03 authentication | Shared Next.js proxy protects all seven factory methods with one bearer token; browser session storage supports refresh, cross-origin writes fail before routes, missing server auth fails closed, and unconfigured memory stays provider-neutral. Synthetic runtime checks, separate Tester, and independent security review passed with zero actionable findings |
 | Clean distributable baseline | Root commit `283a5e9` in a separate local source copy; 133 audited files, no original history and no remote |
 
 The seven installed skills are before-and-after, code-structure,
@@ -74,8 +74,8 @@ are still pending.
    Never modify another agent's worktree or uncommitted work.
 3. Read [WORK-PACKS.md](WORK-PACKS.md) for the per-phase assignments and exact
    worktree procedure. Read [ORCHESTRATOR-HANDOFF.md](ORCHESTRATOR-HANDOFF.md)
-   for the Sol/GLM-compatible takeover and worker limits. Continue with Task 03a
-   in the next session after checking pending PRs and the approved Task 02 rules.
+   for the Sol/GLM-compatible takeover and worker limits. Continue with Task 04a
+   after checking the pending stacked PRs and Task 03 evidence.
    [PILOT-02A.md](PILOT-02A.md) records the earlier reading trial.
 4. Use isolated fixtures for engine behavior. Do not connect live services or
    raise the autonomy dial. Engine access is not required for documentation
@@ -105,16 +105,13 @@ created and its initial source pushed. No PR review or deployment was performed.
 Future work should use normal branches and PRs on that clean history. Do not
 replace or force-push the published history. No deployment is authorized.
 
-## Task 03: next session
+## Task 04: next action
 
-Task 02's pilot, owner decisions, and local document alignment are complete. The canonical
-[acceptance table](TASK-02-ACCEPTANCE.md) defines ownership, evidence timing,
-manual autonomy, review independence, memory failure behavior, and amendments.
-Task 02c applies those rules to the law, spec, pipeline, and role charters.
-Four seats and seven stages remain; enforcement is still planned. The lead
-reviewed the final diff and consistency checks passed. External PR review is
-pending; no merge or deployment occurred. Next is Task 03a inventory and lead
-authentication design, not unreviewed worker security code.
+Pin authoritative Paperclip and Hermes versions and request/response contracts
+before changing mappings. Use versioned synthetic fixtures for malformed data,
+empty data, non-JSON errors, and one-engine failure. Then split labels, priority,
+assignment, pipeline-state mapping, and runtime failure reporting into separate
+reviewable tickets. Do not contact personal engines or guess an upstream API.
 
 ## Phase checklist
 
@@ -122,7 +119,7 @@ authentication design, not unreviewed worker security code.
 
 - [x] 01. Prepare isolated local commits and a source copy without private history.
 - [x] 02. Align spec, rules, role boundaries, and acceptance checks locally; PR review pending.
-- [ ] 03. Add shared Forge authentication and safe memory access.
+- [x] 03. Add shared Forge authentication and safe memory access.
 - [ ] 04. Verify engine contracts; fix labels, priority, assignment, and failure reporting using versioned fixtures. Live verification needs separately authorized access.
 - [ ] 05. Make law/skill bundle installation repeatable and verify effective versions. Remote installation needs separately authorized access.
 
@@ -154,7 +151,6 @@ There is no scheduled dispatcher or approved unattended operation yet.
 
 ## Known failures still open
 
-- Anonymous API reads and task creation succeed; Forge has no auth boundary.
 - Pipeline labels are mistaken for issue status; gates are inferred rather
   than read from actual approvals. Task creation guesses the upstream shape
   and omits native priority and Foreman assignment.
@@ -182,6 +178,7 @@ From the repository root after installing dependencies:
 ```bash
 python3 evals/doctor.py
 node evals/unconfigured-clients.mjs
+node evals/auth-boundary.mjs
 git diff --check
 ```
 
@@ -194,6 +191,15 @@ The provider-removal build and client check also passed. Browser checks
 confirmed the generic memory response and removal of the provider from Status,
 Live, and Connections. Desktop/mobile before-and-after captures are retained
 locally in `.artifacts/memory-removal-0915/`, outside published source.
+
+Task 03 changed anonymous access from `200` on the generic memory route to a
+token prompt and `401` before route execution. `evals/auth-boundary.mjs` passed
+all seven methods, browser refresh and 401 cleanup, missing server auth,
+cross-origin writes, valid contracts, and zero unauthorized upstream calls.
+The separate Tester passed every nonvisual outcome. The lead inspected the
+settled before/after PNGs in `.artifacts/task03-auth-0916/`; the public upload
+host was unavailable, so the images remain local. Independent security review
+ended with zero actionable findings. No live engine, merge, or deployment ran.
 
 For a docs-only handoff, check links, consistency, doctor, and the diff.
 Do not repeat the full build unless application code or build inputs change.
