@@ -11,10 +11,15 @@ npm ci
 npm run dev -- --hostname 127.0.0.1
 ```
 
-Open `http://localhost:3400`. No environment file, credentials, or running
-engines are needed to start the app. With configuration unset, engine clients
-make no requests. The views show empty or unconfigured states. Filing tasks
+Set `FORGE_AUTH_TOKEN` in your shell, then open `http://localhost:3400` and
+enter that token. The browser keeps it in session storage for the current tab.
+No running engines are needed. With engine configuration unset, engine clients
+make no requests and the views show empty or unconfigured states. Filing tasks
 requires a configured Paperclip company.
+
+Use HTTPS outside localhost. The token is readable by same-origin JavaScript,
+so do not add third-party scripts or unsafe HTML. A reverse proxy must preserve
+the original `Host` and public protocol so Forge can reject cross-origin writes.
 
 ## Build and check
 
@@ -30,12 +35,14 @@ From the repository root after installing the app dependencies:
 ```bash
 python3 evals/doctor.py
 node evals/unconfigured-clients.mjs
+node evals/auth-boundary.mjs
 ```
 
 The doctor checks repository documents and skill structure. The client check
-verifies that unconfigured engines receive no requests. These checks do not
-prove a complete factory lap or production readiness. Forge authentication
-is not implemented yet; keep the app on localhost during development.
+verifies that unconfigured engines receive no requests. The auth check starts
+isolated local fixture servers and covers every `/api/factory` method before
+its route runs. These checks do not prove a complete factory lap or production
+readiness.
 
 ## Optional engine configuration
 
@@ -45,6 +52,7 @@ credentials. A local `forge/.env.local` is ignored by Git.
 
 | Variable | Purpose |
 |---|---|
+| `FORGE_AUTH_TOKEN` | Required bearer token for every Forge API request |
 | `PAPERCLIP_API` | Paperclip API base; defaults to localhost port 3100 with path `/api` |
 | `PAPERCLIP_TOKEN`, `PAPERCLIP_COMPANY` | Both are required before Paperclip requests are enabled |
 | `HERMES_API_URL` | Enables the Hermes client when set |
