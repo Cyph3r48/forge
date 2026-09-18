@@ -6,9 +6,10 @@
 | build-dark-factory | github.com/coleam00/skills | upstream repo license | Build a dark factory around a PRD: a repo that takes issues in and ships validated code with nobody at the keyboard. | Foreman |
 | code-structure | github.com/michaelshimeles/skills | upstream repo license | Split features into orchestrating actions and a reusable service layer so operational logic isn't duplicated. | Builder |
 | evidence-driven-testing | github.com/michaelshimeles/skills | upstream repo license | Record visual/measured proof while testing, then post the evidence and results summary to the PR and tracker issue. | Tester |
-| greploop | github.com/michaelshimeles/skills | MIT | Iterate a PR/MR/CL until Greptile review reports 5/5 confidence with zero unresolved comments. | Reviewer |
-| greploop-apps | github.com/michaelshimeles/skills | MIT | Same loop as greploop but triggers reviews via @greptile-apps for PRs too large for the plain mention. | Reviewer |
+| greploop | github.com/michaelshimeles/skills | MIT | Legacy Greptile workflow retained for provenance; no factory seat loads it. | None |
+| greploop-apps | github.com/michaelshimeles/skills | MIT | Legacy large-PR Greptile workflow retained for provenance; no factory seat loads it. | None |
 | new-feature | github.com/michaelshimeles/skills | upstream repo license | Start every task in an isolated Git worktree branched from origin/main so agents work in parallel without conflicts. | Builder |
+| open-code-review-delegate | local integration for github.com/alibaba/open-code-review v1.10.0 (`a66240084b382ed97a47590bdec13a6a34df0743`) | local instructions; OCR is Apache-2.0 | Use OCR for deterministic file selection and rules while an independent local agent reviews every file without a separate LLM endpoint. | Reviewer |
 | piv-fix-review-findings | github.com/coleam00/skills | upstream repo license | Triage review findings, fix chosen ones one at a time with tests, defer/log the rest, validate, commit and push. | Builder |
 | piv-review-pr | github.com/coleam00/skills | upstream repo license | Full PR review: fetch, run validation, review the diff with fresh eyes, categorize findings by severity, post results. | Reviewer |
 | piv-slice-epic | github.com/coleam00/skills | upstream repo license | Slice an epic into PIV-sized tickets with a dependency graph and create them in the tracker. | Foreman |

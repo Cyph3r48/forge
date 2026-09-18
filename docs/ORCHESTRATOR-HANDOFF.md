@@ -12,10 +12,11 @@ because of usage limits; do not start another task in that session.
 2. The distributable repository is private `Cyph3r48/forge`. Never publish the
    original workspace history. Its clean publishing checkout is
    `.artifacts/forge-publish-0915/` in the original workspace.
-3. The current lead checkout is `.worktrees/task03-auth-lead-0916/`, branch
-   `agent/task03-auth-lead-0916`. It contains Task 03 on top of the Task 02
-   branch; the reviewed implementation commit is `14079bd`. Fetch and inspect
-   open PRs, base branches, exact heads, and local status before choosing a new base.
+3. The current lead checkout is `.worktrees/open-code-review-0918/`, branch
+   `agent/open-code-review-0918`. It contains the OpenCodeReview migration on
+   top of Task 03; the reviewed implementation commit is `191af96`. Fetch and
+   inspect open PRs, base branches, exact heads, and local status before choosing
+   a new base.
 4. PR #1 is https://github.com/Cyph3r48/forge/pull/1 and Task 02 is PR #2.
    Task 03 is https://github.com/Cyph3r48/forge/pull/3, stacked on PR #2. Do not
    merge any PR without owner authorization or lose pending changes by blindly
@@ -29,6 +30,17 @@ token transport, origin checks for writes, and a synthetic runtime check. A
 separate Tester passed every nonvisual outcome, and independent security review
 ended with zero actionable findings. The lead inspected local before/after PNGs;
 0x0.st had disabled uploads, so they were not attached through that host.
+
+Greptile was never installed. The owner chose local OpenCodeReview delegation
+instead and authorized the protected workflow edits on a branch stacked over PR
+#3. The host has verified `ocr` v1.10.0 in `~/.local/bin`, and Codex has the
+pinned upstream `open-code-review-delegate` skill for future sessions. The
+repository contains its shorter factory-specific delegation skill. No OCR LLM
+endpoint or GitHub Action is set.
+An independent read-only Herdr Reviewer inspected all 14 files changed by
+`191af96`, including OCR-excluded Markdown, and reported 100% coverage, zero
+skipped files, zero unresolved findings, and PASS. Its local report is
+`/tmp/open-code-review-0918-review.md` and is not part of distributable source.
 
 ## Authority and responsibilities
 
@@ -44,6 +56,9 @@ ended with zero actionable findings. The lead inspected local before/after PNGs;
 - The owner approved Task 02's rules and specific law/spec/pipeline/charter edits,
   plus progress/task-pack reconciliation. This is not future blanket permission
   to amend protected rules. No merge, deployment, live engines, or dial raise is authorized.
+- The owner separately approved replacing Greptile with OpenCodeReview delegation
+  and stacking that change on PR #3. Further protected-rule changes still require
+  explicit owner authorization.
 - Keep four seats, seven stages, dial 1, provider-neutral memory, Next.js/React/
   TypeScript, normal HTML controls, and the limited Three.js scope. No later phase yet.
 

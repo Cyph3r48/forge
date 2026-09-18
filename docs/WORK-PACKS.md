@@ -121,7 +121,8 @@ doctor only checks document structure; its success does not prove runtime gates.
 Docs-only tasks need doctor, diff checks, and verified references, not a build.
 UI tasks also need real browser actions and desktop/mobile evidence. Use
 `before-and-after` for visible changes; do not upload private evidence publicly.
-Follow AGENTS.md for PR and Greptile review. Missing review is pending, never 5/5.
+Follow AGENTS.md for PR and independent OpenCodeReview delegation. Missing or
+incomplete review is pending, never PASS.
 
 ## Phase 1: foundations
 
