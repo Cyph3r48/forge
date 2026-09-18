@@ -4,7 +4,7 @@ A collection of [agent skills](https://code.claude.com/docs/en/skills) for Claud
 
 ## Available skills
 
-### [before-and-after](before-and-after/SKILL.md)
+### [before-and-after](../skills/before-and-after/SKILL.md)
 
 Captures before/after screenshots of web pages or elements and outputs a PR-ready markdown comparison table. It drives the `@vercel/before-and-after` CLI.
 
@@ -16,7 +16,7 @@ Use it when:
 
 > Vendored from [vercel-labs/before-and-after](https://github.com/vercel-labs/before-and-after) (PolyForm Shield 1.0.0, license included in the folder). Install the CLI with `npm i -g @vercel/before-and-after agent-browser`.
 
-### [code-structure](code-structure/SKILL.md)
+### [code-structure](../skills/code-structure/SKILL.md)
 
 Service layer architecture guidance. Enforces a two-layer separation where **actions** orchestrate domain rules (the "why/when") and a **service layer** centralizes reusable operational mechanics (the "how").
 
@@ -29,7 +29,7 @@ Use it when:
 
 Includes a migration checklist for extracting shared logic safely and a table of anti-patterns to avoid (god services, leaky services, over-abstraction).
 
-### [evidence-driven-testing](evidence-driven-testing/SKILL.md)
+### [evidence-driven-testing](../skills/evidence-driven-testing/SKILL.md)
 
 Records visual proof while testing UI behavior. The agent drives the app live via computer use (or [cua-driver](https://github.com/trycua/cua) when the harness has no computer-use tools) while the bundled recorder captures the session, then posts the video and a results summary to the PR and tracker issue. The recorder (`scripts/evidence.py`, Python 3 + FFmpeg) runs on Linux, macOS, and Windows and has `doctor`, `start`, `annotate`, and `stop` commands. It timestamps each annotation as the agent tests, burns them into `evidence.mp4` on stop, and summarizes them in a generated `report.md` and `manifest.json`. Headless environments swap the recorder for scripted screenshots and Playwright captures; non-UI changes still get evidence (measured numbers, output pairs, transcript excerpts).
 
@@ -37,23 +37,20 @@ Use it whenever a change needs verifiable evidence that it works, instead of pro
 
 > The recorder needs `ffmpeg`/`ffprobe` built with `libx264` and the `ass` filter, plus a screen-capture source: X11 (`DISPLAY`) or wlroots Wayland (`wf-recorder`; GNOME/KDE are not supported) on Linux, Screen Recording permission on macOS, any standard ffmpeg on Windows. `python3 scripts/evidence.py doctor` reports both. The raw capture is MPEG-TS, so a crashed or hard-killed recorder still yields usable evidence. The headless path needs only a running app and a scriptable browser (Playwright via npx). Posting evidence requires the `gh` CLI (or equivalent). `tests/test_evidence.py` smoke-tests the recorder end to end with a synthetic video source (`python3 -m pytest tests/ -q`).
 
-### [greploop](greploop/SKILL.md)
+### [open-code-review-delegate](../skills/open-code-review-delegate/SKILL.md)
 
-Iteratively fixes a PR (GitHub), MR (GitLab), or shelved changelist (Perforce) until Greptile gives a perfect review: 5/5 confidence with zero unresolved comments. Triggers the review, fixes actionable comments, resolves threads, pushes, and repeats, up to `--max-iterations` cycles (default 10).
+Uses OpenCodeReview for deterministic diff selection and rule resolution while
+the local host agent performs the review. Delegation mode does not configure or
+call a separate OCR LLM endpoint. The factory override keeps the Reviewer
+read-only and requires 100% review coverage, zero skipped files, and zero
+unresolved findings.
 
-Use it to get a PR to a clean Greptile review before merge.
+> Local factory integration for [alibaba/open-code-review](https://github.com/alibaba/open-code-review/tree/v1.10.0) v1.10.0 at commit `a66240084b382ed97a47590bdec13a6a34df0743`. The external OCR CLI is Apache-2.0.
 
-> Vendored from [greptileai/skills](https://github.com/greptileai/skills) (MIT, license included in the folder). Requires Greptile installed on the repo and an authenticated `gh`/`glab`/`p4` CLI.
+The former `greploop` and `greploop-apps` folders remain only for provenance.
+No factory seat loads them.
 
-### [greploop-apps](greploop-apps/SKILL.md)
-
-The same loop as greploop, but it triggers reviews by tagging `@greptile-apps`, which bypasses Greptile's file-count limit on huge PRs that the plain `@greptile` mention refuses to review. When no check run appears, it falls back to polling Greptile's edited summary comment.
-
-Use it when greploop's trigger gets "Too many files changed for review".
-
-> Local variant derived from greptileai's greploop (MIT, license included in the folder); no separate upstream.
-
-### [new-feature](new-feature/SKILL.md)
+### [new-feature](../skills/new-feature/SKILL.md)
 
 Starts every new task in an isolated Git worktree branched from `origin/main` so multiple agents can work on the same repo in parallel without conflicts. It covers unique task naming, a scope check against open PRs, fresh dependency installs, and cleanup after merge.
 
@@ -65,7 +62,7 @@ Use it when:
 
 Includes harness deltas for Claude Code and Cursor, which manage worktrees themselves.
 
-### [unslop](unslop/SKILL.md)
+### [unslop](../skills/unslop/SKILL.md)
 
 Edits prose to remove AI tells and put a human voice back in. It names 31 patterns to catch (puffery, filler, hedging, chatbot phrases, em dashes, colons as connectors, bold and emoji overuse, abstract metaphor nouns, passive voice) and a short checklist for adding opinion and rhythm, applied as a four-step loop: scan, rewrite, add soul, self-audit.
 
@@ -78,7 +75,7 @@ Use it when:
 
 ## Workflow
 
-[`AGENTS.md`](AGENTS.md) ties the skills together into a four-beat workflow: isolate (`new-feature`) → build (`code-structure`) → prove (`evidence-driven-testing`) → ship (`before-and-after` + `greploop`), with `unslop` applied to everything written for humans along the way. Drop it into a repo alongside the skills and fill in the repo-specific callouts (checks, invariants, environment).
+[`AGENTS.md`](../AGENTS.md) ties the skills together into a four-beat workflow: isolate (`new-feature`) → build (`code-structure`) → prove (`evidence-driven-testing`) → ship (`before-and-after` + `open-code-review-delegate`), with `unslop` applied to everything written for humans along the way. Drop it into a repo alongside the skills and fill in the repo-specific callouts (checks, invariants, environment).
 
 ## Installation
 

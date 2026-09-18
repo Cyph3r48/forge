@@ -66,7 +66,7 @@ runtime enforcement remains planned:
 | Foreman | coordinates all seven states and the shared transition action; splits units, assigns, executes Ship after approval | build-dark-factory (playbook), piv-slice-epic, worktree-create, worktree-merge |
 | Builder | Build + distinct Cleanup, one worktree per unit; may record no cleanup needed | new-feature, code-structure, source-code-context, piv-fix-review-findings, prime-codebase |
 | Tester | independently validates final diff at Cleanup exit; proof and nonempty checks complete before Review | evidence-driven-testing, piv-validate, prime-codebase |
-| Reviewer | reads and judges current diff and proof; never fixes or approves a diff it authored or changed | piv-review-pr, rules-check-drift, greploop, before-and-after |
+| Reviewer | reads and judges current diff and proof; never fixes or approves a diff it authored or changed | piv-review-pr, rules-check-drift, open-code-review-delegate, before-and-after |
 
 All seats: unslop for human-facing text, ponytail ladder for everything built.
 
@@ -81,7 +81,7 @@ Builder-owned stage and may record no cleanup needed.
 **Gates (planned enforcement, not implemented in the current app):**
 
 - Cleanup → Review: Tester independently validates the final diff; evidence and nonempty successful checks exist before Review entry.
-- Review → Ship: current-head evidence and Greptile 5/5 with zero unresolved are parsed by the planned gate.
+- Review → Ship: current-head evidence, 100% OpenCodeReview coverage, zero skipped files, and zero unresolved findings are parsed by the planned gate.
 - Ship: Reviewer PASS plus separate human merge and deployment approvals; verified deployment completes Ship.
 
 **Planned memory write-back at every transition**, not just review: offline
@@ -115,7 +115,7 @@ Not adopted: Archon (Paperclip is our workflow engine), GitHub-labels-as-state (
 1. App v1 answers `GET /api/factory/status` with live data from both engines and renders all six zones.
 2. A task filed from the Work zone lands as a Paperclip issue with the pipeline labels and is picked up by the right seat.
 3. Every state transition writes a memory entry; the Memory zone shows it.
-4. Review cannot pass without evidence attached and a parsed 5/5 greploop verdict; Ship cannot pass without Review PASS + human approval.
+4. Review cannot pass without evidence attached, 100% OpenCodeReview coverage, zero skipped files, and zero unresolved findings; Ship cannot pass without Review PASS + human approval.
 5. A Hermes-style agent run through one full lap (intake to ship) with its derived state visible in Live the whole way.
 6. The dispatcher, run by hand, completes one lap in the fixed priority order with stalls surfaced as needs-human.
 7. Token/cost per run is recorded from the first lap.

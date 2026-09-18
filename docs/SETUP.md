@@ -73,6 +73,21 @@ The intended company, roles, stages, and skills are described in
 Engine setup is separate from starting this app. Follow those definitions
 when configuring a company and installing its agent instructions.
 
+## Local independent review
+
+Install the official OpenCodeReview v1.10.0 release binary and verify it against
+that release's `sha256sum.txt`. Git 2.41 or newer is required. Confirm the pin:
+
+```bash
+ocr version
+```
+
+Factory Reviewers load `skills/open-code-review-delegate/SKILL.md` and use only
+`ocr delegate` commands. Delegation mode makes no OCR-managed model request.
+Do not configure an OCR model provider or use `ocr review` for factory reviews.
+The Reviewer inspects every path in both the reviewable and excluded lists;
+OpenCodeReview exclusions do not remove files from the factory review gate.
+
 ## Deployment files
 
 `forge/forge.service` and `forge/deploy.sh` are generic templates for an owner

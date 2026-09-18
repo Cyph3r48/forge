@@ -19,7 +19,8 @@ below and conflicting vendored skill instructions:
   when origin is absent. Check local worktrees for overlapping work; check
   open PRs only when an accessible remote exists. Commit on the task branch.
 - With no publishing authorization, finish with local commits, check results,
-  and an updated handoff. PR and Greptile steps apply when publishing is enabled.
+  and an updated handoff. PR and independent review steps apply when publishing
+  is enabled.
 - Keep app code, required skills, factory rules, tests, and essential docs.
   Exclude personal documents, environment files, credentials, host-specific
   settings, build output, and private history from distributable source.
@@ -48,12 +49,14 @@ callouts; it also governs work in this repo itself.
    plus runtime evidence. Capture the **before** state while reproducing the
    issue — prior to fixing it, when it is cheapest — and the **after** once
    the change works.
-4. **Ship — `/before-and-after`, then `/greploop`.** Open the PR with
+4. **Ship — `/before-and-after`, then `/open-code-review-delegate`.** Open the PR with
    before/after proof embedded in the description (screenshot or video
    whenever the change has a visible surface; measured numbers or output
-   pairs when it doesn't). Run `/greploop` — or `/greploop-apps` when the PR
-   exceeds Greptile's file-count limit — until Greptile reports **5/5 with
-   zero unresolved comments**. Finish by presenting the PR URL.
+   pairs when it doesn't). Have an independent Reviewer run OpenCodeReview in
+   delegation mode. The Builder fixes findings and the Reviewer repeats the
+   review until every changed file in OCR's reviewable and excluded lists is
+   reviewed, none is skipped, and no finding remains unresolved. Finish by
+   presenting the PR URL.
 
 Ship-beat notes:
 
@@ -103,8 +106,9 @@ wrote or changed, not to prose you didn't touch.
 6. Open the PR. The body must explain what changed, how it was tested (every
    claim backed by evidence), before/after proof, and any risks or follow-up
    work. Run the title and body through `/unslop` before posting.
-7. Run `/greploop` (or `/greploop-apps`) until **5/5 with zero unresolved
-   comments**.
+7. Run `/open-code-review-delegate` with an independent Reviewer. Require 100%
+   review coverage, zero skipped files, and zero unresolved findings on the
+   current head.
 8. End by presenting the PR URL.
 
 Do not merge the PR unless explicitly instructed. Keep the worktree until
@@ -123,6 +127,5 @@ infrastructure (stubs, fixtures), and anything that can't be tested locally.
 |---|---|
 | `new-feature`, `code-structure`, `evidence-driven-testing` | this repo |
 | `before-and-after` | this repo, vendored from [vercel-labs/before-and-after](https://github.com/vercel-labs/before-and-after) (or `npx skills add vercel-labs/before-and-after`) |
-| `greploop` | this repo, vendored from [greptileai/skills](https://github.com/greptileai/skills) |
-| `greploop-apps` | this repo (local variant of greploop for huge PRs; no separate upstream) |
+| `open-code-review-delegate` | this repo; local factory integration for [alibaba/open-code-review](https://github.com/alibaba/open-code-review/tree/v1.10.0) v1.10.0 |
 | `unslop` | this repo, vendored from [cursor/plugins (pstack)](https://github.com/cursor/plugins/tree/main/pstack/skills/unslop); frontmatter edited so agents apply it unprompted (`disable-model-invocation` dropped, description scoped to text the agent writes or edits for people), body untouched |
