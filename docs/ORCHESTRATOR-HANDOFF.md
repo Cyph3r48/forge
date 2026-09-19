@@ -39,9 +39,11 @@ instead and authorized the protected workflow edits on a branch stacked over PR
 pinned upstream `open-code-review-delegate` skill for future sessions. The
 repository contains its shorter factory-specific delegation skill. No OCR LLM
 endpoint or GitHub Action is set.
-An independent read-only Herdr Reviewer inspected all 14 files through final
-migration head `447f9ec`, including OCR-excluded Markdown, and reported 100%
-coverage, zero skipped files, zero unresolved findings, and PASS. Its local report is
+An independent read-only Herdr Reviewer inspected all 14 files through migration
+head `447f9ec`, including OCR-excluded Markdown, and reported 100% coverage,
+zero skipped files, and zero findings. That reviewer-only result did not include
+separate Tester proof, so the final gate must bind fresh Tester proof and Review
+to the latest head. The local reviewer report is
 `/tmp/open-code-review-0918-review.md` and is not part of distributable source.
 
 ## Authority and responsibilities
