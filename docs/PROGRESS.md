@@ -1,14 +1,15 @@
 # Project progress and agent handoff
 
-Updated September 15, 2026. Start here, then read `docs/spec-v0.4.md` and
+Updated September 16, 2026. Start here, then read `docs/spec-v0.4.md` and
 the code for the assigned task. This file records project work only. Do not
 add personal notes, credentials, or deployed host details.
 
 ## Current position
 
 Phase 1 is in progress. Task 01, local repository preparation, is complete.
-Task 02a's document-analysis pilot is complete after review. Task 02b, owner
-decisions before aligning the spec and factory rules, is next. No UI redesign,
+Task 02's policy decisions and document alignment are complete locally, with
+PR review still pending. Task 03a's authentication inventory/design is next.
+The owner requested a session handoff before that task. No UI redesign,
 authentication, dispatcher, or real-engine factory lap has been completed.
 The bundled memory provider has been removed from code, API fields, UI, and
 documentation. The Memory page is now a generic unconfigured view. The Forge is published at https://github.com/Cyph3r48/forge as a private
@@ -38,6 +39,9 @@ pipeline rules are requirements, not implemented enforcement.
   keyboard access, and reduced motion. No separate 2D mode or factory simulation.
 - Skills are the factory's operating instructions. Runtime gates must verify
   their required outcomes; prompts alone cannot establish a passing gate.
+- The owner approved [Task 02's rules](TASK-02-ACCEPTANCE.md) and edits to the
+  law, spec, pipeline, and four role charters, plus reconciliation with PR #1.
+  This is policy approval, not proof of runtime enforcement or merge permission.
 
 ## Completed work
 
@@ -51,6 +55,7 @@ pipeline rules are requirements, not implemented enforcement.
 | Memory provider removal | Commit `47f63c9` removed the provider client, configuration names, health badges, and provider-specific documentation; the generic route makes no external requests |
 | Private GitHub repository | Published `Cyph3r48/forge`, default branch main, from root commit `4c95cdf`; verified private visibility and no parent history |
 | Phase task packs and Luna pilot | Tasks 02-16 split into bounded assignments; 02a accepted after one correction round, then a separate high-reasoning handoff review. See [PILOT-02A.md](PILOT-02A.md); coding ability and quota savings remain unproven |
+| Task 02 alignment | Owner-approved acceptance table; law, spec, pipeline, four charters, and skill seat mapping aligned. Luna implemented the seven governing-file edits; lead reviewed and corrected remaining wording. Structural and consistency checks pass; runtime gates and Greptile acceptance remain unproven |
 | Clean distributable baseline | Root commit `283a5e9` in a separate local source copy; 133 audited files, no original history and no remote |
 
 The seven installed skills are before-and-after, code-structure,
@@ -68,9 +73,10 @@ are still pending.
    branch from local `main`; that does not make private history publishable.
    Never modify another agent's worktree or uncommitted work.
 3. Read [WORK-PACKS.md](WORK-PACKS.md) for the per-phase assignments and exact
-   worktree procedure. Task 02a has a reviewed reading pilot; continue with
-   owner decisions in 02b, not application implementation. See
-   [PILOT-02A.md](PILOT-02A.md) for the result and remaining questions.
+   worktree procedure. Read [ORCHESTRATOR-HANDOFF.md](ORCHESTRATOR-HANDOFF.md)
+   for the Sol/GLM-compatible takeover and worker limits. Continue with Task 03a
+   in the next session after checking pending PRs and the approved Task 02 rules.
+   [PILOT-02A.md](PILOT-02A.md) records the earlier reading trial.
 4. Use isolated fixtures for engine behavior. Do not connect live services or
    raise the autonomy dial. Engine access is not required for documentation
    alignment or local authentication work.
@@ -80,7 +86,7 @@ are still pending.
 Worker assignments are one bounded subtask at a time. The coordinating lead
 updates this ledger after independent review; workers return their evidence
 and handoff without competing edits here. Phase 2 and later remain blocked.
-The phase task packs do not approve the unresolved Task 02 policy proposals.
+The phase task packs do not grant authority beyond the owner's recorded choices.
 
 In the original workspace, the detailed review and screenshots are in
 `.artifacts/project-review-2026-09-14/`. They are optional local evidence,
@@ -99,38 +105,23 @@ created and its initial source pushed. No PR review or deployment was performed.
 Future work should use normal branches and PRs on that clean history. Do not
 replace or force-push the published history. No deployment is authorized.
 
-## Task 02: next action
+## Task 03: next session
 
-Task 02a is complete. Continue with owner decisions in 02b from
-[PILOT-02A.md](PILOT-02A.md), then assign the approved edits in 02c.
-
-Align the governing documents into one explicit acceptance table before
-writing the dispatcher. These proposals are not yet approved policy changes:
-
-- Tester proves the result before entering Review; Reviewer judges that proof.
-- Seats submit outcomes; one transition action owns state changes.
-- Dial 1 accepts work manually; automatic triage starts only at dial 4.
-- Reviewer reads and judges the diff; Builder makes fixes; nobody approves
-  a diff they changed. Resolve the current law's contradictory Reviewer wording.
-- Remain at dial 1. Define a separate owner-approved policy for any later
-  automatic merge; deployment continues to require human approval.
-- Permit offline viewing without a memory provider. Specify write-back failure behavior
-  for a governed lap without connecting a live memory service during development.
-- Define how the owner amends protected rules without letting ordinary
-  factory agents change the rules that judge their own work.
-
-Update `docs/spec-v0.4.md`, `FACTORY-LAW.md`, `factory/pipeline.md`, and only
-the affected role charters once those choices are resolved. Keep the existing
-four seats and seven stages. Mark implemented and planned behavior explicitly.
-Task 02 passes when stage ownership, gate timing, autonomy, role independence,
-memory behavior, and acceptance checks agree across those documents.
+Task 02's pilot, owner decisions, and local document alignment are complete. The canonical
+[acceptance table](TASK-02-ACCEPTANCE.md) defines ownership, evidence timing,
+manual autonomy, review independence, memory failure behavior, and amendments.
+Task 02c applies those rules to the law, spec, pipeline, and role charters.
+Four seats and seven stages remain; enforcement is still planned. The lead
+reviewed the final diff and consistency checks passed. External PR review is
+pending; no merge or deployment occurred. Next is Task 03a inventory and lead
+authentication design, not unreviewed worker security code.
 
 ## Phase checklist
 
 ### Phase 1: foundations
 
 - [x] 01. Prepare isolated local commits and a source copy without private history.
-- [ ] 02. Align spec, rules, role boundaries, and acceptance checks.
+- [x] 02. Align spec, rules, role boundaries, and acceptance checks locally; PR review pending.
 - [ ] 03. Add shared Forge authentication and safe memory access.
 - [ ] 04. Verify engine contracts; fix labels, priority, assignment, and failure reporting using versioned fixtures. Live verification needs separately authorized access.
 - [ ] 05. Make law/skill bundle installation repeatable and verify effective versions. Remote installation needs separately authorized access.
@@ -207,7 +198,7 @@ locally in `.artifacts/memory-removal-0915/`, outside published source.
 For a docs-only handoff, check links, consistency, doctor, and the diff.
 Do not repeat the full build unless application code or build inputs change.
 
-The resumed task-pack handoff passed doctor with five passes, local Markdown
+The earlier Task 02a handoff passed doctor with five passes, local Markdown
 link checks, and `git diff --check`. Both Luna worker checkouts remained clean.
 Before: no bounded phase assignments in source and an interrupted pilot handoff.
 After: per-phase assignments, a reviewed pilot record, and 02b identified as next.
