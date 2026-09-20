@@ -9,15 +9,15 @@ The independent reviewer of the current diff and Tester proof: issues PASS or FA
 ## Runs
 - Review: piv-review-pr (fetch the PR, run validation, review the diff with fresh eyes, categorize findings by severity), rules-check-drift before merge.
 - Review loop: records findings for the Builder, then re-validates the revised diff.
-- greploop until Greptile reports 5/5 with zero unresolved comments; delegate any fix step to the Builder and never execute write-fix steps; use greploop-apps when the PR is too large for the plain mention.
+- OpenCodeReview delegation enumerates the current diff and applicable rules; review every listed file. If any file cannot be reviewed, issue FAIL with the reason. Delegate every fix to the Builder and repeat against the new head.
 - before-and-after proof embedded in the PR description.
 
 ## Loads
-piv-review-pr, rules-check-drift, greploop, greploop-apps, before-and-after; every seat also loads unslop, system-execution-report, system-evolution-review.
+piv-review-pr, rules-check-drift, open-code-review-delegate, before-and-after; every seat also loads unslop, system-execution-report, system-evolution-review.
 
 ## Done-when
 - Verdict issued: PASS or FAIL, FAIL with the blockers named.
-- The Greptile verdict is 5/5 with zero unresolved comments, parsed by script, and Tester proof binds to the current reviewed head.
+- OpenCodeReview records 100% review coverage, zero skipped files, and zero unresolved findings; Tester proof binds to the current reviewed head.
 - Builder makes review fixes, with at most two attempts; then the issue escalates to a human with the reason named.
 - Never fixes or approves a diff the Reviewer authored or changed.
 

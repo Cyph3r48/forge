@@ -1,14 +1,15 @@
 # Project progress and agent handoff
 
-Updated September 17, 2026. Start here, then read `docs/spec-v0.4.md` and
+Updated September 18, 2026. Start here, then read `docs/spec-v0.4.md` and
 the code for the assigned task. This file records project work only. Do not
 add personal notes, credentials, or deployed host details.
 
 ## Current position
 
 Phase 1 is in progress. Task 01, local repository preparation, is complete.
-Tasks 02 and 03 are complete locally. Task 03 is open as PR #3, with external
-PR review still pending.
+Tasks 02 and 03 are complete locally. Task 03 is open as PR #3. OpenCodeReview
+delegation now replaces the unavailable Greptile service for independent review
+in stacked PR #4: https://github.com/Cyph3r48/forge/pull/4.
 Task 04's engine-contract research is next. No UI redesign, dispatcher, or
 real-engine factory lap has been completed.
 The bundled memory provider has been removed from code, API fields, UI, and
@@ -42,6 +43,9 @@ pipeline rules are requirements, not implemented enforcement.
 - The owner approved [Task 02's rules](TASK-02-ACCEPTANCE.md) and edits to the
   law, spec, pipeline, and four role charters, plus reconciliation with PR #1.
   This is policy approval, not proof of runtime enforcement or merge permission.
+- The owner approved replacing Greptile with local OpenCodeReview delegation and
+  stacking that protected-rule amendment on PR #3. Reviews use the local host
+  agent; no separate OCR LLM endpoint or GitHub Action is configured.
 
 ## Completed work
 
@@ -55,13 +59,16 @@ pipeline rules are requirements, not implemented enforcement.
 | Memory provider removal | Commit `47f63c9` removed the provider client, configuration names, health badges, and provider-specific documentation; the generic route makes no external requests |
 | Private GitHub repository | Published `Cyph3r48/forge`, default branch main, from root commit `4c95cdf`; verified private visibility and no parent history |
 | Phase task packs and Luna pilot | Tasks 02-16 split into bounded assignments; 02a accepted after one correction round, then a separate high-reasoning handoff review. See [PILOT-02A.md](PILOT-02A.md); coding ability and quota savings remain unproven |
-| Task 02 alignment | Owner-approved acceptance table; law, spec, pipeline, four charters, and skill seat mapping aligned. Luna implemented the seven governing-file edits; lead reviewed and corrected remaining wording. Structural and consistency checks pass; runtime gates and Greptile acceptance remain unproven |
+| Task 02 alignment | Owner-approved acceptance table; law, spec, pipeline, four charters, and skill seat mapping aligned. Luna implemented the seven governing-file edits; lead reviewed and corrected remaining wording. Structural and consistency checks pass; runtime gates remain unproven |
 | Task 03 authentication | Shared Next.js proxy protects all seven factory methods with one bearer token; browser session storage supports refresh, cross-origin writes fail before routes, missing server auth fails closed, and unconfigured memory stays provider-neutral. Synthetic runtime checks, separate Tester, and independent security review passed with zero actionable findings |
+| Local review provider | Commits `191af96` and `447f9ec` deactivated both Greptile skills and assigned OpenCodeReview delegation v1.10.0, pinned by tag and commit. The verified local CLI enumerated the exact range without an OCR model configuration. An independent Reviewer inspected `447f9ec`, covering all 14 changed files with zero skipped files and zero findings. The final gate still requires separate Tester proof and review bound to the latest head. PR #4 is open, unmerged, and stacked on PR #3 |
 | Clean distributable baseline | Root commit `283a5e9` in a separate local source copy; 133 audited files, no original history and no remote |
 
-The seven installed skills are before-and-after, code-structure,
-evidence-driven-testing, greploop, greploop-apps, new-feature, and unslop.
-The repository contains 19 vendored skill folders in total. Installation
+The six delivery skills are before-and-after, code-structure,
+evidence-driven-testing, new-feature, open-code-review-delegate, and unslop.
+The repository contains 20 vendored skill folders in total. The two legacy
+Greptile folders remain unassigned so their bulk deletion can be reviewed
+separately without breaking the 500-line PR cap. Installation
 into remote factory agents and verification of their effective instructions
 are still pending.
 
@@ -76,7 +83,7 @@ are still pending.
 3. Read [WORK-PACKS.md](WORK-PACKS.md) for the per-phase assignments and exact
    worktree procedure. Read [ORCHESTRATOR-HANDOFF.md](ORCHESTRATOR-HANDOFF.md)
    for the Sol/GLM-compatible takeover and worker limits. Continue with Task 04a
-   after checking the pending stacked PRs and Task 03 evidence.
+   after checking pending PRs #1 through #4 and Task 03 evidence.
    [PILOT-02A.md](PILOT-02A.md) records the earlier reading trial.
 4. Use isolated fixtures for engine behavior. Do not connect live services or
    raise the autonomy dial. Engine access is not required for documentation
@@ -186,7 +193,7 @@ git diff --check
 The cleanup build passed. Doctor reported five passes. The unconfigured
 client check passed with zero requests. The earlier review visited all seven
 pages with synthetic data and reproduced the failures listed above. No live
-integration, Greptile verdict, or deployment is proven by those checks.
+integration, independent PR verdict, or deployment is proven by those checks.
 
 The provider-removal build and client check also passed. Browser checks
 confirmed the generic memory response and removal of the provider from Status,
@@ -210,4 +217,5 @@ link checks, and `git diff --check`. Both Luna worker checkouts remained clean.
 Before: no bounded phase assignments in source and an interrupted pilot handoff.
 After: per-phase assignments, a reviewed pilot record, and 02b identified as next.
 No application code, governing policy, live integration, merge, or deployment
-changed. Greptile acceptance is pending and must not be inferred from these checks.
+changed. Independent review acceptance is pending and must not be inferred from
+these checks.

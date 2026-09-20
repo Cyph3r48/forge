@@ -19,7 +19,7 @@ confirmed. A failed confirmation remains visible as pending.
 | Context | `factory:context` | Foreman | source/SDK reference, or recorded authoritative documentation sufficient to verify the contract, attached per unit | unresolved contract → `factory:needs-human` |
 | Build | `factory:build` | Builder (parallel per unit, one worktree each) | minimal working unit, nonempty checks green | blocked over 2h or ambiguity → `factory:needs-human` |
 | Cleanup | `factory:cleanup` | Builder, then Tester validates | final diff and checks, or documented no-cleanup-needed with existing successful checks; Tester validates independently | finding → Build; ambiguity → `factory:needs-human` |
-| Review | `factory:review` | Reviewer | Tester proof and nonempty successful checks predate entry, bind to current head, and Reviewer records PASS plus Greptile 5/5 with zero unresolved | Builder fixes findings, max 2 attempts, then `factory:needs-human` |
+| Review | `factory:review` | Reviewer | Tester proof and nonempty successful checks predate entry, bind to current head, and Reviewer records PASS plus 100% OpenCodeReview coverage, zero skipped files, and zero unresolved findings | Builder fixes findings, max 2 attempts, then `factory:needs-human` |
 | Ship | `factory:ship` | Foreman coordinates | separate human merge and deployment approvals, verified deployment, and executable rollback instructions | blocked or broken lineage → `factory:needs-human` |
 
 `factory:needs-human` is the only escalation state. Everything lands there with a reason attached; nothing rots silently.
@@ -56,7 +56,7 @@ gates. A gate that is only a prompt instruction is a suggestion.
 |---|---|---|
 | Unit is ≤500 changed lines | gate script on the PR | code |
 | Tester evidence and nonempty checks before Review entry | planned gate script (evidence files present on the issue) | code |
-| Review verdict = 5/5, zero unresolved | gate script parses the greploop output | code |
+| Review coverage = 100%, zero skipped files, zero unresolved findings | gate script parses the OpenCodeReview delegation report | code |
 | App started (for product repos) | harness assertion `APP_STARTED` | code |
 | Checks green (typecheck, tests) | CI / validate entrypoint | code |
 | Merge | planned gate script after all above and separate human merge approval | code + human |
