@@ -46,9 +46,11 @@ Authoritative sources:
 - [Run submission and status](https://github.com/NousResearch/hermes-agent/blob/345cd2b057a452236de401d3534b8502a7465e8d/gateway/platforms/api_server_runs.py)
 
 Forge must check authenticated `GET /v1/capabilities` before using the Runs
-API. `POST /v1/runs` returns a run record, and `GET /v1/runs/:run_id` returns
-its current record. Hermes has no endpoint that lists every run. Forge must
-retain IDs for runs it submits before Task 07 can join those runs to agents.
+API. `POST /v1/runs` returns HTTP 202 with
+`{run_id, status: "started", replayed: false}`. This admission response is
+separate from the pollable record returned by `GET /v1/runs/:run_id`. Hermes
+has no endpoint that lists every run. Forge must retain IDs for runs it submits
+before Task 07 can join those runs to agents.
 
 Hermes run statuses are `queued`, `running`, `waiting_for_approval`,
 `stopping`, `completed`, `failed`, and `cancelled`. Persisted records can also

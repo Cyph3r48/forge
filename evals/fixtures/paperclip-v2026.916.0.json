@@ -47,6 +47,7 @@
   "heartbeatRuns": [
     { "id": "run-running", "agentId": "00000000-0000-4000-8000-000000000011", "status": "running", "startedAt": "2026-09-20T16:00:00Z", "finishedAt": null },
     { "id": "run-succeeded", "agentId": "00000000-0000-4000-8000-000000000011", "status": "succeeded", "startedAt": "2026-09-20T15:00:00Z", "finishedAt": "2026-09-20T15:05:00Z" },
+    { "id": "run-interrupted", "agentId": "00000000-0000-4000-8000-000000000011", "status": "interrupted", "startedAt": "2026-09-20T14:30:00Z", "finishedAt": null },
     { "id": "run-failed", "agentId": "00000000-0000-4000-8000-000000000011", "status": "failed", "startedAt": "2026-09-20T14:00:00Z", "finishedAt": null, "error": "fixture failure" },
     { "id": "run-cancelled", "agentId": "00000000-0000-4000-8000-000000000011", "status": "cancelled", "startedAt": "2026-09-20T13:00:00Z", "finishedAt": null },
     { "id": "run-timed-out", "agentId": "00000000-0000-4000-8000-000000000011", "status": "timed_out", "startedAt": "2026-09-20T12:00:00Z", "finishedAt": null }

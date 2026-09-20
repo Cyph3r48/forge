@@ -23,6 +23,11 @@
     "offset": 0,
     "has_more": false
   },
+  "runSubmission": {
+    "request": { "input": "Run the fixture task" },
+    "status": 202,
+    "response": { "run_id": "run-submitted", "status": "started", "replayed": false }
+  },
   "runs": [
     { "object": "hermes.run", "run_id": "run-queued", "status": "queued", "created_at": 1789919000, "updated_at": 1789919000 },
     { "object": "hermes.run", "run_id": "run-running", "status": "running", "created_at": 1789919000, "updated_at": 1789919010 },
