@@ -1,0 +1,77 @@
+{
+  "source": {
+    "release": "v2026.916.0",
+    "commit": "dffc2b3ca1b9e88fa21cb17493083e682dffd1ca"
+  },
+  "company": {
+    "id": "00000000-0000-4000-8000-000000000001",
+    "name": "Software Factory"
+  },
+  "agents": [
+    {
+      "id": "00000000-0000-4000-8000-000000000010",
+      "name": "Forge Foreman",
+      "role": "Foreman",
+      "status": "active"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000011",
+      "name": "Forge Builder",
+      "role": "Builder",
+      "status": "active"
+    }
+  ],
+  "labels": [
+    { "id": "00000000-0000-4000-8000-000000000101", "name": "factory:intake", "color": "#64748b" },
+    { "id": "00000000-0000-4000-8000-000000000102", "name": "factory:architect", "color": "#8b5cf6" },
+    { "id": "00000000-0000-4000-8000-000000000103", "name": "factory:context", "color": "#06b6d4" },
+    { "id": "00000000-0000-4000-8000-000000000104", "name": "factory:build", "color": "#3b82f6" },
+    { "id": "00000000-0000-4000-8000-000000000105", "name": "factory:cleanup", "color": "#f59e0b" },
+    { "id": "00000000-0000-4000-8000-000000000106", "name": "factory:review", "color": "#ec4899" },
+    { "id": "00000000-0000-4000-8000-000000000107", "name": "factory:ship", "color": "#22c55e" }
+  ],
+  "issues": [
+    {
+      "id": "00000000-0000-4000-8000-000000000201",
+      "identifier": "FORGE-1",
+      "title": "Fixture task",
+      "status": "todo",
+      "priority": "high",
+      "assigneeAgentId": "00000000-0000-4000-8000-000000000010",
+      "labelIds": ["00000000-0000-4000-8000-000000000101"],
+      "labels": [
+        { "id": "00000000-0000-4000-8000-000000000101", "name": "factory:intake", "color": "#64748b" }
+      ]
+    }
+  ],
+  "heartbeatRuns": [
+    { "id": "run-running", "agentId": "00000000-0000-4000-8000-000000000011", "status": "running", "startedAt": "2026-09-20T16:00:00Z", "finishedAt": null },
+    { "id": "run-succeeded", "agentId": "00000000-0000-4000-8000-000000000011", "status": "succeeded", "startedAt": "2026-09-20T15:00:00Z", "finishedAt": "2026-09-20T15:05:00Z" },
+    { "id": "run-interrupted", "agentId": "00000000-0000-4000-8000-000000000011", "status": "interrupted", "startedAt": "2026-09-20T14:30:00Z", "finishedAt": null },
+    { "id": "run-failed", "agentId": "00000000-0000-4000-8000-000000000011", "status": "failed", "startedAt": "2026-09-20T14:00:00Z", "finishedAt": null, "error": "fixture failure" },
+    { "id": "run-cancelled", "agentId": "00000000-0000-4000-8000-000000000011", "status": "cancelled", "startedAt": "2026-09-20T13:00:00Z", "finishedAt": null },
+    { "id": "run-timed-out", "agentId": "00000000-0000-4000-8000-000000000011", "status": "timed_out", "startedAt": "2026-09-20T12:00:00Z", "finishedAt": null }
+  ],
+  "approvals": [
+    { "id": "00000000-0000-4000-8000-000000000301", "issueId": "00000000-0000-4000-8000-000000000201", "status": "pending" }
+  ],
+  "createIssue": {
+    "input": { "title": "Fixture task", "description": "Contract check", "priority": "high" },
+    "request": {
+      "title": "Fixture task",
+      "description": "Contract check",
+      "status": "todo",
+      "priority": "high",
+      "assigneeAgentId": "00000000-0000-4000-8000-000000000010",
+      "labelIds": ["00000000-0000-4000-8000-000000000101"]
+    },
+    "normalized": {
+      "id": "00000000-0000-4000-8000-000000000201",
+      "identifier": "FORGE-1",
+      "title": "Fixture task",
+      "state": "factory:intake",
+      "assignee": "Forge Foreman",
+      "priority": "high"
+    }
+  }
+}

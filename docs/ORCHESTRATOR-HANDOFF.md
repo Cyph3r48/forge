@@ -12,17 +12,11 @@ because of usage limits; do not start another task in that session.
 2. The distributable repository is private `Cyph3r48/forge`. Never publish the
    original workspace history. Its clean publishing checkout is
    `.artifacts/forge-publish-0915/` in the original workspace.
-3. The current lead checkout is `.worktrees/open-code-review-0918/`, branch
-   `agent/open-code-review-0918`. It contains the OpenCodeReview migration on
-   top of Task 03; the independently reviewed migration head is `447f9ec`.
-   Fetch and inspect open PRs, base branches, exact heads, and local status
-   before choosing a new base.
-4. PR #1 is https://github.com/Cyph3r48/forge/pull/1 and Task 02 is PR #2.
-   Task 03 is https://github.com/Cyph3r48/forge/pull/3, stacked on PR #2. Do not
-   merge any PR without owner authorization or lose pending changes by blindly
-   restarting on main.
-   The OpenCodeReview migration is PR #4,
-   https://github.com/Cyph3r48/forge/pull/4, stacked on PR #3.
+3. The current lead checkout is `.worktrees/task04-contracts-0920/`, branch
+   `agent/task04-contracts-0920`, based on merged `main` at `29a5c39`.
+4. The owner authorized merging PRs #1 through #4. They landed on `main` in
+   dependency order on September 20 after GitHub reported each exact head clean
+   and mergeable. Do not merge later PRs or deploy without fresh authorization.
 5. Start each new task/agent in its own clean worktree from origin/main. If
    required changes are still in an open PR, arrange the dependent branch
    explicitly with the owner. Never reuse another agent's uncommitted work.
@@ -39,12 +33,9 @@ instead and authorized the protected workflow edits on a branch stacked over PR
 pinned upstream `open-code-review-delegate` skill for future sessions. The
 repository contains its shorter factory-specific delegation skill. No OCR LLM
 endpoint or GitHub Action is set.
-An independent read-only Herdr Reviewer inspected all 14 files through migration
-head `447f9ec`, including OCR-excluded Markdown, and reported 100% coverage,
-zero skipped files, and zero findings. That reviewer-only result did not include
-separate Tester proof, so the final gate must bind fresh Tester proof and Review
-to the latest head. The local reviewer report is
-`/tmp/open-code-review-0918-review.md` and is not part of distributable source.
+A separate Tester passed migration head `6827e3f`. An independent read-only
+Reviewer inspected all 14 files, including OCR-excluded Markdown, and reported
+100% coverage, zero skipped files, and zero findings. PR #4 is merged.
 
 ## Authority and responsibilities
 
@@ -66,16 +57,16 @@ to the latest head. The local reviewer report is
 - Keep four seats, seven stages, dial 1, provider-neutral memory, Next.js/React/
   TypeScript, normal HTML controls, and the limited Three.js scope. No later phase yet.
 
-## First task in the next session
+## Current task
 
-Start Task 04a only after confirming the stacked PR heads and Task 03 checks.
-Do not repeat the route inventory, auth review, or completed synthetic tests.
+Task 04a is complete locally in `.worktrees/task04-contracts-0920/`. Do not
+repeat the contract research, route inventory, auth review, or completed tests.
 
-- Pin authoritative Paperclip and Hermes versions and request/response sources.
-- Approve small versioned fixtures for malformed data, empty data, non-JSON
-  errors, and one engine failing. Do not use personal engines.
-- Split labels, native priority, Foreman assignment, pipeline-state mapping,
-  and runtime failure reporting into separate tickets after contracts are pinned.
+- Use [ENGINE-CONTRACTS.md](ENGINE-CONTRACTS.md) and the two versioned fixtures.
+- Run Task 04b next: fix labels, native priority, and Foreman assignment.
+- Keep 04c pipeline/approval mapping and 04d runtime/failure reporting separate.
+- Add malformed JSON, empty data, non-JSON error, and one-engine-down cases to
+  the runnable contract check. Do not use personal engines.
 - Preserve the frozen runtime response shape and the shared auth boundary.
 - Treat the inventory findings about hardcoded `source: "live"`, silent engine
   fallbacks, duplicate run reads, and the guessed create-issue body as Task 04
