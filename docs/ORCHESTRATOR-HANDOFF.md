@@ -13,8 +13,8 @@ because of usage limits; do not start another task in that session.
    original workspace history. Its clean publishing checkout is
    `.artifacts/forge-publish-0915/` in the original workspace.
 3. The current lead checkout is `.worktrees/task04b-task-create-0920/`, branch
-   `agent/task04b-task-create-0920`, at reviewed head `3a012a6`. It is stacked
-   on Task 04a PR #5.
+   `agent/task04b-task-create-0920`, stacked on Task 04a PR #5. Resume from the
+   branch's current clean head.
 4. The owner authorized merging PRs #1 through #4. They landed on `main` in
    dependency order on September 20 after GitHub reported each exact head clean
    and mergeable. Do not merge later PRs or deploy without fresh authorization.
@@ -72,8 +72,8 @@ task-creation fix, route inventory, auth review, or completed tests.
   the runnable contract check. Do not use personal engines.
 - Preserve the frozen runtime response shape and the shared auth boundary.
 - Treat the inventory findings about hardcoded `source: "live"`, silent engine
-  fallbacks, duplicate run reads, and the guessed create-issue body as Task 04
-  inputs. Do not fix them without authoritative contracts.
+  fallbacks, and duplicate run reads as Task 04 inputs. Do not fix them without
+  authoritative contracts.
 
 ## Assignment template
 

@@ -11,8 +11,8 @@ Tasks 02 and 03 are merged. PRs #1 through #4 landed on `main` in order on
 September 20. OpenCodeReview delegation replaces the unavailable Greptile
 service for independent review. Task 04a is open as PR #5. Task 04b task
 creation is complete locally in `.worktrees/task04b-task-create-0920/` on
-`agent/task04b-task-create-0920` at reviewed head `3a012a6`, stacked on Task
-04a. Task 04c is next. No UI redesign, dispatcher, or
+`agent/task04b-task-create-0920`, stacked on Task 04a. Resume from the branch's
+current clean head. Task 04c is next. No UI redesign, dispatcher, or
 real-engine factory lap has been completed.
 The bundled memory provider has been removed from code, API fields, UI, and
 documentation. The Memory page is now a generic unconfigured view. The Forge is published at https://github.com/Cyph3r48/forge as a private
@@ -88,8 +88,8 @@ are still pending.
 3. Read [WORK-PACKS.md](WORK-PACKS.md) for the per-phase assignments and exact
    worktree procedure. Read [ORCHESTRATOR-HANDOFF.md](ORCHESTRATOR-HANDOFF.md)
    for the Sol/GLM-compatible takeover and worker limits. Publish Task 04b,
-   then create a unique Task 04c worktree from reviewed head `3a012a6` while
-   PRs #5 and #6 remain a recorded dependent stack.
+   then create a unique Task 04c worktree from Task 04b's current reviewed PR
+   head while PRs #5 and #6 remain a recorded dependent stack.
    [PILOT-02A.md](PILOT-02A.md) records the earlier reading trial.
 4. Use isolated fixtures for engine behavior. Do not connect live services or
    raise the autonomy dial. Engine access is not required for documentation
@@ -164,9 +164,8 @@ There is no scheduled dispatcher or approved unattended operation yet.
 
 ## Known failures still open
 
-- Pipeline labels are mistaken for issue status; gates are inferred rather
-  than read from actual approvals. Task creation guesses the upstream shape
-  and omits native priority and Foreman assignment.
+- Pipeline labels are mistaken for issue status, and gates are inferred rather
+  than read from actual approvals.
 - Live/Runtime omit Hermes runs; a failed run without a finish timestamp can
   appear working. Runtime joins by display name can conflate agents.
 - Memory integration, transition write-back, and per-run accounting are absent.
