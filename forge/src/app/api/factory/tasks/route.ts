@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     ok: true,
     issue: {
       id: issue.id, identifier: issue.identifier ?? issue.id, title,
-      state: issue.status ?? "factory:intake", assignee: null, priority,
+      state: result.state, assignee: result.assignee, priority,
     },
   });
 }

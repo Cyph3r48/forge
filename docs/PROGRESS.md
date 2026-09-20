@@ -9,10 +9,10 @@ add personal notes, credentials, or deployed host details.
 Phase 1 is in progress. Task 01, local repository preparation, is complete.
 Tasks 02 and 03 are merged. PRs #1 through #4 landed on `main` in order on
 September 20. OpenCodeReview delegation replaces the unavailable Greptile
-service for independent review. Task 04a engine contracts and fixtures are
-complete locally in
-`.worktrees/task04-contracts-0920/` on `agent/task04-contracts-0920`, based on
-merged `main` at `29a5c39`. Task 04b is next. No UI redesign, dispatcher, or
+service for independent review. Task 04a is open as PR #5. Task 04b task
+creation is complete locally in `.worktrees/task04b-task-create-0920/` on
+`agent/task04b-task-create-0920`, stacked on Task 04a. Resume from the branch's
+current clean head. Task 04c is next. No UI redesign, dispatcher, or
 real-engine factory lap has been completed.
 The bundled memory provider has been removed from code, API fields, UI, and
 documentation. The Memory page is now a generic unconfigured view. The Forge is published at https://github.com/Cyph3r48/forge as a private
@@ -66,6 +66,7 @@ pipeline rules are requirements, not implemented enforcement.
 | Local review provider | OpenCodeReview delegation v1.10.0 replaced the two Greptile assignments. The local CLI enumerated the exact range without an OCR model configuration. A separate Tester passed final head `6827e3f`; an independent Reviewer covered all 14 changed files with zero skipped files and zero findings. PR #4 is merged |
 | Reviewed PR stack | PRs #1 through #4 were retargeted and merged into `main` in dependency order. GitHub reported each exact head clean and mergeable before merge; final `main` is `29a5c39` |
 | Task 04a engine contracts | Pinned Paperclip `v2026.916.0` at `dffc2b3ca1b9e88fa21cb17493083e682dffd1ca` and Hermes `v2026.9.14` at `345cd2b057a452236de401d3534b8502a7465e8d`. Versioned fixtures record the approved requests, envelopes, statuses, and normalized output. The fixture check passes; no live engine was contacted |
+| Task 04b task creation | Resolves exactly one Foreman and `factory:intake` label before posting native priority, assignment, status, and label IDs. Malformed dependencies and created issues fail closed. Separate Tester and Reviewer passed head `3a012a6` with four of four files covered and zero findings |
 | Clean distributable baseline | Root commit `283a5e9` in a separate local source copy; 133 audited files, no original history and no remote |
 
 The six delivery skills are before-and-after, code-structure,
@@ -86,9 +87,9 @@ are still pending.
    Never modify another agent's worktree or uncommitted work.
 3. Read [WORK-PACKS.md](WORK-PACKS.md) for the per-phase assignments and exact
    worktree procedure. Read [ORCHESTRATOR-HANDOFF.md](ORCHESTRATOR-HANDOFF.md)
-   for the Sol/GLM-compatible takeover and worker limits. Finish and publish
-   Task 04a, then create a unique Task 04b worktree from the latest `origin/main`.
-   PRs #1 through #4 are already merged.
+   for the Sol/GLM-compatible takeover and worker limits. Publish Task 04b,
+   then create a unique Task 04c worktree from Task 04b's current reviewed PR
+   head while PRs #5 and #6 remain a recorded dependent stack.
    [PILOT-02A.md](PILOT-02A.md) records the earlier reading trial.
 4. Use isolated fixtures for engine behavior. Do not connect live services or
    raise the autonomy dial. Engine access is not required for documentation
@@ -121,10 +122,9 @@ replace or force-push the published history. No deployment is authorized.
 ## Task 04: next action
 
 Use [ENGINE-CONTRACTS.md](ENGINE-CONTRACTS.md) and the versioned fixtures for
-the three remaining tickets. Task 04b fixes task labels, native priority, and
-Foreman assignment. Task 04c maps pipeline labels and approval records. Task
-04d fixes terminal run classification and partial engine failures. Keep the
-tickets separate and do not contact personal engines.
+the remaining tickets. Task 04c maps pipeline labels and linked approval
+records. Task 04d fixes terminal run classification and partial engine
+failures. Keep the tickets separate and do not contact personal engines.
 
 ## Phase checklist
 
@@ -164,9 +164,8 @@ There is no scheduled dispatcher or approved unattended operation yet.
 
 ## Known failures still open
 
-- Pipeline labels are mistaken for issue status; gates are inferred rather
-  than read from actual approvals. Task creation guesses the upstream shape
-  and omits native priority and Foreman assignment.
+- Pipeline labels are mistaken for issue status, and gates are inferred rather
+  than read from actual approvals.
 - Live/Runtime omit Hermes runs; a failed run without a finish timestamp can
   appear working. Runtime joins by display name can conflate agents.
 - Memory integration, transition write-back, and per-run accounting are absent.

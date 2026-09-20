@@ -168,7 +168,7 @@ Depends on 03. Start at `forge/src/lib/paperclip.ts`, `hermes.ts`, `runtime.ts`,
 
 - [x] 04a, lead: pin engine versions and attach authoritative request/response
   references. Approve minimal synthetic fixtures and expected normalized output.
-- [ ] 04b, worker: fix task labels, native priority, and Foreman assignment
+- [x] 04b, worker: fix task labels, native priority, and Foreman assignment
   against those fixtures. Keep task input validation at the server boundary.
 - [ ] 04c, worker, separate ticket: map pipeline labels independently of issue
   status; derive pending gates from actual approval records, not text guesses.
