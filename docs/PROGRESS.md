@@ -86,7 +86,7 @@ are still pending.
    Never modify another agent's worktree or uncommitted work.
 3. Read [WORK-PACKS.md](WORK-PACKS.md) for the per-phase assignments and exact
    worktree procedure. Read [ORCHESTRATOR-HANDOFF.md](ORCHESTRATOR-HANDOFF.md)
-   for the Sol/GLM-compatible takeover and worker limits. Continue Task 04a in
+   for the Sol/GLM-compatible takeover and worker limits. Continue Task 04b in
    `.worktrees/task04-contracts-0920/`; PRs #1 through #4 are already merged.
    [PILOT-02A.md](PILOT-02A.md) records the earlier reading trial.
 4. Use isolated fixtures for engine behavior. Do not connect live services or

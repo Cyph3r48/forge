@@ -19,6 +19,9 @@ const issue = paperclip.issues.find(({ id }) => id === paperclip.createIssue.nor
 const assignee = paperclip.agents.find(({ id }) => id === paperclip.createIssue.request.assigneeAgentId);
 const label = paperclip.labels.find(({ id }) => id === paperclip.createIssue.request.labelIds[0]);
 assert.ok(issue && assignee && label);
+assert.equal(issue.assigneeAgentId, paperclip.createIssue.request.assigneeAgentId);
+assert.ok(issue.labelIds.includes(label.id));
+assert.ok(issue.labels.some((resolved) => resolved.id === label.id && resolved.name === label.name));
 assert.deepEqual(paperclip.createIssue.normalized, {
   id: issue.id,
   identifier: issue.identifier,
@@ -31,6 +34,8 @@ assert.deepEqual(paperclip.createIssue.normalized, {
 assert.equal(hermes.source.commit, "345cd2b057a452236de401d3534b8502a7465e8d");
 assert.equal(hermes.sessions.object, "list");
 assert.ok(hermes.capabilities.features.run_submission);
+assert.equal(hermes.normalized.healthOk, hermes.health.status === "ok");
+assert.equal(hermes.normalized.sessionCount, hermes.sessions.data.length);
 assert.deepEqual(hermes.runSubmission, {
   request: { input: "Run the fixture task" },
   status: 202,
