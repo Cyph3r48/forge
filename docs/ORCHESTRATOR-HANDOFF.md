@@ -12,8 +12,9 @@ because of usage limits; do not start another task in that session.
 2. The distributable repository is private `Cyph3r48/forge`. Never publish the
    original workspace history. Its clean publishing checkout is
    `.artifacts/forge-publish-0915/` in the original workspace.
-3. The current lead checkout is `.worktrees/task04-contracts-0920/`, branch
-   `agent/task04-contracts-0920`, based on merged `main` at `29a5c39`.
+3. The current lead checkout is `.worktrees/task04b-task-create-0920/`, branch
+   `agent/task04b-task-create-0920`, at reviewed head `3a012a6`. It is stacked
+   on Task 04a PR #5.
 4. The owner authorized merging PRs #1 through #4. They landed on `main` in
    dependency order on September 20 after GitHub reported each exact head clean
    and mergeable. Do not merge later PRs or deploy without fresh authorization.
@@ -59,12 +60,14 @@ Reviewer inspected all 14 files, including OCR-excluded Markdown, and reported
 
 ## Current task
 
-Task 04a is complete locally in `.worktrees/task04-contracts-0920/`. Do not
-repeat the contract research, route inventory, auth review, or completed tests.
+Tasks 04a and 04b are complete locally. Do not repeat the contract research,
+task-creation fix, route inventory, auth review, or completed tests.
 
 - Use [ENGINE-CONTRACTS.md](ENGINE-CONTRACTS.md) and the two versioned fixtures.
-- Run Task 04b next: fix labels, native priority, and Foreman assignment.
-- Keep 04c pipeline/approval mapping and 04d runtime/failure reporting separate.
+- Publish Task 04b, then create a unique dependent worktree for Task 04c.
+- Map factory labels independently of native issue status and derive gates only
+  from linked pending approval records.
+- Keep 04d runtime/failure reporting separate.
 - Add malformed JSON, empty data, non-JSON error, and one-engine-down cases to
   the runnable contract check. Do not use personal engines.
 - Preserve the frozen runtime response shape and the shared auth boundary.
