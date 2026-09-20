@@ -80,5 +80,9 @@ button, input, textarea, select {
 button { cursor: pointer; }
 button:hover { border-color: var(--accent); }
 
+.auth-panel { max-width: 420px; margin: 15vh auto; padding: 20px; }
+.auth-panel label, .auth-panel input { display: block; width: 100%; margin-bottom: 12px; }
+.auth-signout { position: fixed; right: 16px; top: 16px; }
+
 .empty { color: var(--dim); padding: 16px 0; }
 .error { color: var(--bad); padding: 16px 0; }

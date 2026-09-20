@@ -1,6 +1,30 @@
 // Typed client for the Forge API contract (src/lib/api-contract.md).
 // Plain fetch to relative /api/factory/... paths, never cached — routes are force-dynamic.
 
+const TOKEN_KEY = "forge-auth-token";
+
+export const hasForgeToken = () => typeof window !== "undefined" && Boolean(sessionStorage.getItem(TOKEN_KEY));
+
+export function setForgeToken(token: string) {
+  sessionStorage.setItem(TOKEN_KEY, token.trim());
+}
+
+export function clearForgeToken() {
+  sessionStorage.removeItem(TOKEN_KEY);
+}
+
+async function factoryFetch(path: string, init: RequestInit = {}) {
+  const headers = new Headers(init.headers);
+  const token = typeof window === "undefined" ? "" : sessionStorage.getItem(TOKEN_KEY);
+  if (token) headers.set("Authorization", `Bearer ${token}`);
+  const response = await fetch(path, { ...init, headers, cache: "no-store" });
+  if (response.status === 401 && typeof window !== "undefined") {
+    clearForgeToken();
+    window.dispatchEvent(new Event("forge-auth-required"));
+  }
+  return response;
+}
+
 export interface Engine {
   ok: boolean;
   detail: string;
@@ -83,7 +107,7 @@ export type TaskInput = {
 };
 
 async function get<T>(path: string): Promise<T> {
-  const res = await fetch(path, { cache: "no-store" });
+  const res = await factoryFetch(path);
   if (!res.ok) throw new Error(`GET ${path} failed: ${res.status}`);
   return (await res.json()) as T;
 }
@@ -96,7 +120,7 @@ export const getMemory = () => get<MemoryResponse>("/api/factory/memory");
 export const getConnections = () => get<ConnectionsResponse>("/api/factory/connections");
 
 export async function createTask(input: TaskInput): Promise<{ ok: true; issue: Issue } | { ok: false; error: string }> {
-  const res = await fetch("/api/factory/tasks", {
+  const res = await factoryFetch("/api/factory/tasks", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(input),

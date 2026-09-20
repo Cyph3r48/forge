@@ -12,21 +12,23 @@ because of usage limits; do not start another task in that session.
 2. The distributable repository is private `Cyph3r48/forge`. Never publish the
    original workspace history. Its clean publishing checkout is
    `.artifacts/forge-publish-0915/` in the original workspace.
-3. The current lead checkout is `.worktrees/task02-lead-0915/`, branch
-   `agent/task02-lead-0915`. It includes PR #1's task packs and the Task 02
-   alignment. These changes may not be on main. Fetch and inspect open PRs,
-   base branches, exact heads, and local status before choosing a new base.
-4. PR #1 is https://github.com/Cyph3r48/forge/pull/1. The alignment PR is
-   stacked on its branch until that PR is merged. Do not merge either without
-   owner authorization. Do not lose pending changes by blindly restarting on main.
+3. The current lead checkout is `.worktrees/task03-auth-lead-0916/`, branch
+   `agent/task03-auth-lead-0916`. It contains Task 03 on top of the Task 02
+   branch; the reviewed implementation commit is `14079bd`. Fetch and inspect
+   open PRs, base branches, exact heads, and local status before choosing a new base.
+4. PR #1 is https://github.com/Cyph3r48/forge/pull/1 and Task 02 is PR #2.
+   Task 03 is https://github.com/Cyph3r48/forge/pull/3, stacked on PR #2. Do not
+   merge any PR without owner authorization or lose pending changes by blindly
+   restarting on main.
 5. Start each new task/agent in its own clean worktree from origin/main. If
    required changes are still in an open PR, arrange the dependent branch
    explicitly with the owner. Never reuse another agent's uncommitted work.
 
-Task 02 is document alignment, not a working dispatcher or gate system. The
-recorded checks prove structure and consistency only. Greptile gave no response
-on PR #1 during the earlier ten-minute wait. Missing review is pending, never
-5/5; investigate repository integration/access before repeating long waits.
+Task 03 adds one bearer-token boundary at `forge/src/proxy.ts`, per-tab browser
+token transport, origin checks for writes, and a synthetic runtime check. A
+separate Tester passed every nonvisual outcome, and independent security review
+ended with zero actionable findings. The lead inspected local before/after PNGs;
+0x0.st had disabled uploads, so they were not attached through that host.
 
 ## Authority and responsibilities
 
@@ -47,27 +49,18 @@ on PR #1 during the earlier ten-minute wait. Missing review is pending, never
 
 ## First task in the next session
 
-Start Task 03a only after confirming the Task 02 handoff and any pending review
-limitations. Do not repeat the full repository audit or the completed Luna trial.
-The lead must design authentication before authorizing security code.
+Start Task 04a only after confirming the stacked PR heads and Task 03 checks.
+Do not repeat the route inventory, auth review, or completed synthetic tests.
 
-- Inventory `forge/src/app/api/factory/{agents,connections,memory,runtime,status,tasks}/route.ts`.
-  Baseline is six GET methods and tasks POST, seven methods total. Verify this
-  against the actual checkout; inventory drift is a finding, not permission to guess.
-- Trace callers through `forge/src/lib/client.ts`, route handlers, and engine
-  clients. Include the generic unconfigured memory route. Current API access
-  lacks authentication; do not connect personal engines while reproducing it.
-- Decide shared auth placement, browser credential transport, missing server
-  configuration behavior, safe errors, and CSRF/origin rules. Keep engine secrets
-  server-side. Document request/response examples before assigning route edits.
-- Preserve offline viewing without a memory provider. That does not grant
-  anonymous access to protected APIs. No user-account system or new provider is requested.
-- Require unauthorized requests to fail before upstream work. Check missing,
-  invalid, and valid credentials; configured/unconfigured fixtures; cross-origin
-  mutation policy; browser refresh; redacted errors; and all seven methods.
-- Lead implements the shared boundary and obtains independent security review.
-  Use the worker eligibility table in WORK-PACKS before assigning mechanical wiring.
-  Authentication is not the first coding test for a replacement worker.
+- Pin authoritative Paperclip and Hermes versions and request/response sources.
+- Approve small versioned fixtures for malformed data, empty data, non-JSON
+  errors, and one engine failing. Do not use personal engines.
+- Split labels, native priority, Foreman assignment, pipeline-state mapping,
+  and runtime failure reporting into separate tickets after contracts are pinned.
+- Preserve the frozen runtime response shape and the shared auth boundary.
+- Treat the inventory findings about hardcoded `source: "live"`, silent engine
+  fallbacks, duplicate run reads, and the guessed create-issue body as Task 04
+  inputs. Do not fix them without authoritative contracts.
 
 ## Assignment template
 

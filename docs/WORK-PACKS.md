@@ -149,12 +149,12 @@ Task 01 is complete. Do not redo repository cleanup or reinstall existing skills
 Depends on 02. Lead designs the shared boundary, browser credential transport,
 CSRF/origin policy, safe errors, and unconfigured behavior before coding.
 
-- [ ] 03a, lead: enumerate all `forge/src/app/api/factory/*/route.ts` methods
+- [x] 03a, lead: enumerate all `forge/src/app/api/factory/*/route.ts` methods
   and approve authenticated/unauthenticated request examples for each.
-- [ ] 03b, lead: implement and obtain independent review of the shared guard.
+- [x] 03b, lead: implement and obtain independent review of the shared guard.
   A qualified worker may then wire one route per approved ticket. No per-route auth copies,
   browser-exposed engine credentials, or committed environment files.
-- [ ] 03c, independent tester: invalid/missing auth fails before any upstream
+- [x] 03c, independent tester: invalid/missing auth fails before any upstream
   request; valid auth preserves route contracts. Check browser refresh and
   mutations, cross-origin rejection as specified, and redacted errors.
 - Pass: every API method is covered, including memory; no configured provider

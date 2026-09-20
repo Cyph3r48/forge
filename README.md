@@ -33,11 +33,12 @@ npm ci
 npm run dev -- --hostname 127.0.0.1
 ```
 
-Open `http://localhost:3400`. No environment file is required. With engine
-configuration unset, the app shows empty or unconfigured views and makes no
-engine requests. Read [SETUP.md](docs/SETUP.md) for build commands and optional
-engine configuration. Personal notes, environment files, credentials, and
-host-specific connection settings do not belong in this repository.
+Set `FORGE_AUTH_TOKEN` in your shell and open `http://localhost:3400`. Enter
+the token when prompted. With engine configuration unset, the app shows empty
+or unconfigured views and makes no engine requests. Read
+[SETUP.md](docs/SETUP.md) for build commands and optional engine configuration.
+Personal notes, environment files, credentials, and host-specific connection
+settings do not belong in this repository.
 
 The Forge is engine-agnostic glue: it expects a running [Paperclip](https://github.com/paperclipai) (org layer) and a Hermes-style agent API (intelligence layer); memory integration is planned and no memory provider is bundled. Full setup — env vars, systemd deploy, first lap — is in [`docs/SETUP.md`](docs/SETUP.md).
 
