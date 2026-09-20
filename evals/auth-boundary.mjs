@@ -11,6 +11,7 @@ import { runInNewContext } from "node:vm";
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const forge = resolve(root, "forge");
 const token = "auth-boundary-test-token";
+const paperclip = JSON.parse(readFileSync(resolve(root, "evals/fixtures/paperclip-v2026.916.0.json"), "utf8"));
 
 const require = createRequire(new URL("../forge/package.json", import.meta.url));
 const ts = require("typescript");
@@ -103,8 +104,12 @@ const fixture = createServer((request, response) => {
   response.setHeader("Content-Type", "application/json");
   if (request.url === "/api/companies/test-company") {
     response.end('{"id":"test-company","name":"Fixture"}');
+  } else if (request.url === "/api/companies/test-company/agents") {
+    response.end(JSON.stringify(paperclip.agents));
+  } else if (request.url === "/api/companies/test-company/labels") {
+    response.end(JSON.stringify(paperclip.labels));
   } else if (request.method === "POST") {
-    response.end('{"id":"issue-1","status":"factory:intake"}');
+    response.end(JSON.stringify(paperclip.issues[0]));
   } else {
     response.end("[]");
   }
@@ -191,8 +196,18 @@ try {
     body: '{"title":"accepted","description":"","priority":"medium"}',
   });
   assert.equal(sameOrigin.status, 200);
-  assert.equal((await sameOrigin.json()).ok, true);
-  assert.equal(upstreamRequests, beforeCrossOrigin + 1);
+  assert.deepEqual(await sameOrigin.json(), {
+    ok: true,
+    issue: {
+      id: paperclip.issues[0].id,
+      identifier: paperclip.issues[0].identifier,
+      title: "accepted",
+      state: "factory:intake",
+      assignee: "Forge Foreman",
+      priority: "medium",
+    },
+  });
+  assert.equal(upstreamRequests, beforeCrossOrigin + 3);
 } catch (error) {
   console.error(configured.output());
   throw error;

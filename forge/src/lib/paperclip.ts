@@ -22,6 +22,9 @@ export interface PcIssue {
   id: string; title?: string; status?: string; identifier?: string;
   assigneeAgentId?: string | null; priority?: string;
 }
+export interface PcLabel {
+  id: string; name: string;
+}
 
 async function j<T>(path: string, fallback: T, timeoutMs = 6000): Promise<T> {
   if (!paperclipConfigured()) return fallback;
@@ -46,11 +49,20 @@ export function listRuns(limit = 40) {
 export function listIssues() {
   return j<PcIssue[]>(`/companies/${COMPANY}/issues`, []);
 }
+export function listLabels() {
+  return j<PcLabel[]>(`/companies/${COMPANY}/labels`, []);
+}
 
-// ponytail: createIssue body shape is the API's documented REST guess; verify against
-// the live Paperclip on first deploy and fix the field names there if it differs.
-export async function createIssue(input: { title: string; description: string; priority: string }): Promise<{ ok: true; issue: PcIssue } | { ok: false; error: string }> {
+export async function createIssue(input: { title: string; description: string; priority: string }): Promise<{ ok: true; issue: PcIssue; assignee: string; state: string } | { ok: false; error: string }> {
   if (!paperclipConfigured()) return { ok: false, error: "Paperclip not configured" };
+  const [agents, labels] = await Promise.all([listAgents(), listLabels()]);
+  const foremen = agents.filter((agent) => agent.role === "Foreman");
+  if (foremen.length !== 1) return { ok: false, error: `Expected exactly one Paperclip Foreman; found ${foremen.length}` };
+  const intakeLabels = labels.filter((label) => label.name === "factory:intake");
+  if (intakeLabels.length !== 1) return { ok: false, error: `Expected exactly one Paperclip factory:intake label; found ${intakeLabels.length}` };
+
+  const foreman = foremen[0];
+  const intake = intakeLabels[0];
   try {
     const r = await fetch(`${BASE}/companies/${COMPANY}/issues`, {
       method: "POST",
@@ -58,13 +70,16 @@ export async function createIssue(input: { title: string; description: string; p
       body: JSON.stringify({
         title: input.title,
         description: input.description,
-        labels: ["factory:intake", `priority:${input.priority}`],
+        status: "todo",
+        priority: input.priority,
+        assigneeAgentId: foreman.id,
+        labelIds: [intake.id],
       }),
       signal: AbortSignal.timeout(8000),
     });
     if (!r.ok) return { ok: false, error: `Paperclip rejected the issue (${r.status})` };
     const issue = (await r.json()) as PcIssue;
-    return { ok: true, issue: { ...issue, status: issue.status ?? "factory:intake" } };
+    return { ok: true, issue, assignee: foreman.name, state: intake.name };
   } catch (e) {
     return { ok: false, error: `Paperclip unreachable: ${e instanceof Error ? e.message : "unknown"}` };
   }
