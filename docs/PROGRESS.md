@@ -1,16 +1,17 @@
 # Project progress and agent handoff
 
-Updated September 18, 2026. Start here, then read `docs/spec-v0.4.md` and
+Updated September 20, 2026. Start here, then read `docs/spec-v0.4.md` and
 the code for the assigned task. This file records project work only. Do not
 add personal notes, credentials, or deployed host details.
 
 ## Current position
 
 Phase 1 is in progress. Task 01, local repository preparation, is complete.
-Tasks 02 and 03 are complete locally. Task 03 is open as PR #3. OpenCodeReview
-delegation now replaces the unavailable Greptile service for independent review
-in stacked PR #4: https://github.com/Cyph3r48/forge/pull/4.
-Task 04's engine-contract research is next. No UI redesign, dispatcher, or
+Tasks 02 and 03 are merged. PRs #1 through #4 landed on `main` in order on
+September 20. OpenCodeReview delegation replaces the unavailable Greptile
+service for independent review. Task 04a engine-contract work is active in
+`.worktrees/task04-contracts-0920/` on `agent/task04-contracts-0920`, based on
+merged `main` at `29a5c39`. No UI redesign, dispatcher, or
 real-engine factory lap has been completed.
 The bundled memory provider has been removed from code, API fields, UI, and
 documentation. The Memory page is now a generic unconfigured view. The Forge is published at https://github.com/Cyph3r48/forge as a private
@@ -61,7 +62,9 @@ pipeline rules are requirements, not implemented enforcement.
 | Phase task packs and Luna pilot | Tasks 02-16 split into bounded assignments; 02a accepted after one correction round, then a separate high-reasoning handoff review. See [PILOT-02A.md](PILOT-02A.md); coding ability and quota savings remain unproven |
 | Task 02 alignment | Owner-approved acceptance table; law, spec, pipeline, four charters, and skill seat mapping aligned. Luna implemented the seven governing-file edits; lead reviewed and corrected remaining wording. Structural and consistency checks pass; runtime gates remain unproven |
 | Task 03 authentication | Shared Next.js proxy protects all seven factory methods with one bearer token; browser session storage supports refresh, cross-origin writes fail before routes, missing server auth fails closed, and unconfigured memory stays provider-neutral. Synthetic runtime checks, separate Tester, and independent security review passed with zero actionable findings |
-| Local review provider | Commits `191af96` and `447f9ec` deactivated both Greptile skills and assigned OpenCodeReview delegation v1.10.0, pinned by tag and commit. The verified local CLI enumerated the exact range without an OCR model configuration. An independent Reviewer inspected `447f9ec`, covering all 14 changed files with zero skipped files and zero findings. The final gate still requires separate Tester proof and review bound to the latest head. PR #4 is open, unmerged, and stacked on PR #3 |
+| Local review provider | OpenCodeReview delegation v1.10.0 replaced the two Greptile assignments. The local CLI enumerated the exact range without an OCR model configuration. A separate Tester passed final head `6827e3f`; an independent Reviewer covered all 14 changed files with zero skipped files and zero findings. PR #4 is merged |
+| Reviewed PR stack | PRs #1 through #4 were retargeted and merged into `main` in dependency order. GitHub reported each exact head clean and mergeable before merge; final `main` is `29a5c39` |
+| Task 04a contract research | Paperclip `v2026.916.0` at `dffc2b3ca1b9e88fa21cb17493083e682dffd1ca` and Hermes `v2026.9.14` at `345cd2b057a452236de401d3534b8502a7465e8d` are the proposed immutable pins. No live engine was contacted. Fixture and normalized-output approval remains in progress |
 | Clean distributable baseline | Root commit `283a5e9` in a separate local source copy; 133 audited files, no original history and no remote |
 
 The six delivery skills are before-and-after, code-structure,
@@ -82,8 +85,8 @@ are still pending.
    Never modify another agent's worktree or uncommitted work.
 3. Read [WORK-PACKS.md](WORK-PACKS.md) for the per-phase assignments and exact
    worktree procedure. Read [ORCHESTRATOR-HANDOFF.md](ORCHESTRATOR-HANDOFF.md)
-   for the Sol/GLM-compatible takeover and worker limits. Continue with Task 04a
-   after checking pending PRs #1 through #4 and Task 03 evidence.
+   for the Sol/GLM-compatible takeover and worker limits. Continue Task 04a in
+   `.worktrees/task04-contracts-0920/`; PRs #1 through #4 are already merged.
    [PILOT-02A.md](PILOT-02A.md) records the earlier reading trial.
 4. Use isolated fixtures for engine behavior. Do not connect live services or
    raise the autonomy dial. Engine access is not required for documentation
@@ -126,7 +129,7 @@ reviewable tickets. Do not contact personal engines or guess an upstream API.
 ### Phase 1: foundations
 
 - [x] 01. Prepare isolated local commits and a source copy without private history.
-- [x] 02. Align spec, rules, role boundaries, and acceptance checks locally; PR review pending.
+- [x] 02. Align spec, rules, role boundaries, and acceptance checks; merged in PR #2.
 - [x] 03. Add shared Forge authentication and safe memory access.
 - [ ] 04. Verify engine contracts; fix labels, priority, assignment, and failure reporting using versioned fixtures. Live verification needs separately authorized access.
 - [ ] 05. Make law/skill bundle installation repeatable and verify effective versions. Remote installation needs separately authorized access.
