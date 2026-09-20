@@ -1,0 +1,42 @@
+{
+  "source": {
+    "release": "v2026.9.14",
+    "packageVersion": "0.21.3",
+    "commit": "345cd2b057a452236de401d3534b8502a7465e8d"
+  },
+  "health": { "status": "ok", "platform": "hermes-agent", "version": "0.21.3" },
+  "capabilities": {
+    "object": "hermes.api_server.capabilities",
+    "platform": "hermes-agent",
+    "features": { "run_submission": true },
+    "endpoints": {
+      "runs": { "method": "POST", "path": "/v1/runs" },
+      "run_status": { "method": "GET", "path": "/v1/runs/{run_id}" }
+    }
+  },
+  "skills": { "object": "list", "data": [{ "name": "delegate_task" }] },
+  "toolsets": { "object": "list", "platform": "api_server", "data": [{ "name": "terminal" }] },
+  "sessions": {
+    "object": "list",
+    "data": [{ "id": "session-fixture", "title": "Fixture session" }],
+    "limit": 20,
+    "offset": 0,
+    "has_more": false
+  },
+  "runs": [
+    { "object": "hermes.run", "run_id": "run-queued", "status": "queued", "created_at": 1789919000, "updated_at": 1789919000 },
+    { "object": "hermes.run", "run_id": "run-running", "status": "running", "created_at": 1789919000, "updated_at": 1789919010 },
+    { "object": "hermes.run", "run_id": "run-waiting", "status": "waiting_for_approval", "created_at": 1789919000, "updated_at": 1789919020 },
+    { "object": "hermes.run", "run_id": "run-stopping", "status": "stopping", "created_at": 1789919000, "updated_at": 1789919030 },
+    { "object": "hermes.run", "run_id": "run-completed", "status": "completed", "created_at": 1789919000, "updated_at": 1789919040, "output": "done", "usage": { "input_tokens": 10, "output_tokens": 4 } },
+    { "object": "hermes.run", "run_id": "run-failed", "status": "failed", "created_at": 1789919000, "updated_at": 1789919050, "error": "fixture failure" },
+    { "object": "hermes.run", "run_id": "run-cancelled", "status": "cancelled", "created_at": 1789919000, "updated_at": 1789919060 },
+    { "object": "hermes.run", "run_id": "run-interrupted", "status": "interrupted", "created_at": 1789919000, "updated_at": 1789919070 }
+  ],
+  "normalized": {
+    "healthOk": true,
+    "sessionCount": 1,
+    "activeRunIds": ["run-queued", "run-running", "run-waiting", "run-stopping"],
+    "terminalRunIds": ["run-completed", "run-failed", "run-cancelled", "run-interrupted"]
+  }
+}

@@ -59,17 +59,14 @@ Reviewer inspected all 14 files, including OCR-excluded Markdown, and reported
 
 ## Current task
 
-Continue Task 04a in `.worktrees/task04-contracts-0920/`. Do not repeat the
-route inventory, auth review, or completed synthetic tests.
+Task 04a is complete locally in `.worktrees/task04-contracts-0920/`. Do not
+repeat the contract research, route inventory, auth review, or completed tests.
 
-- Record Paperclip `v2026.916.0` at
-  `dffc2b3ca1b9e88fa21cb17493083e682dffd1ca` and Hermes `v2026.9.14` at
-  `345cd2b057a452236de401d3534b8502a7465e8d` with immutable contract sources.
-- Approve the minimal versioned fixtures and expected normalized output.
-- Approve small versioned fixtures for malformed data, empty data, non-JSON
-  errors, and one engine failing. Do not use personal engines.
-- Split labels, native priority, Foreman assignment, pipeline-state mapping,
-  and runtime failure reporting into separate tickets after contracts are pinned.
+- Use [ENGINE-CONTRACTS.md](ENGINE-CONTRACTS.md) and the two versioned fixtures.
+- Run Task 04b next: fix labels, native priority, and Foreman assignment.
+- Keep 04c pipeline/approval mapping and 04d runtime/failure reporting separate.
+- Add malformed JSON, empty data, non-JSON error, and one-engine-down cases to
+  the runnable contract check. Do not use personal engines.
 - Preserve the frozen runtime response shape and the shared auth boundary.
 - Treat the inventory findings about hardcoded `source: "live"`, silent engine
   fallbacks, duplicate run reads, and the guessed create-issue body as Task 04

@@ -166,7 +166,7 @@ CSRF/origin policy, safe errors, and unconfigured behavior before coding.
 Depends on 03. Start at `forge/src/lib/paperclip.ts`, `hermes.ts`, `runtime.ts`,
 `api-contract.md`, and their route callers. Do not guess an upstream API.
 
-- [ ] 04a, lead: pin engine versions and attach authoritative request/response
+- [x] 04a, lead: pin engine versions and attach authoritative request/response
   references. Approve minimal synthetic fixtures and expected normalized output.
 - [ ] 04b, worker: fix task labels, native priority, and Foreman assignment
   against those fixtures. Keep task input validation at the server boundary.

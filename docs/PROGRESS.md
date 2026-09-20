@@ -9,9 +9,10 @@ add personal notes, credentials, or deployed host details.
 Phase 1 is in progress. Task 01, local repository preparation, is complete.
 Tasks 02 and 03 are merged. PRs #1 through #4 landed on `main` in order on
 September 20. OpenCodeReview delegation replaces the unavailable Greptile
-service for independent review. Task 04a engine-contract work is active in
+service for independent review. Task 04a engine contracts and fixtures are
+complete locally in
 `.worktrees/task04-contracts-0920/` on `agent/task04-contracts-0920`, based on
-merged `main` at `29a5c39`. No UI redesign, dispatcher, or
+merged `main` at `29a5c39`. Task 04b is next. No UI redesign, dispatcher, or
 real-engine factory lap has been completed.
 The bundled memory provider has been removed from code, API fields, UI, and
 documentation. The Memory page is now a generic unconfigured view. The Forge is published at https://github.com/Cyph3r48/forge as a private
@@ -64,7 +65,7 @@ pipeline rules are requirements, not implemented enforcement.
 | Task 03 authentication | Shared Next.js proxy protects all seven factory methods with one bearer token; browser session storage supports refresh, cross-origin writes fail before routes, missing server auth fails closed, and unconfigured memory stays provider-neutral. Synthetic runtime checks, separate Tester, and independent security review passed with zero actionable findings |
 | Local review provider | OpenCodeReview delegation v1.10.0 replaced the two Greptile assignments. The local CLI enumerated the exact range without an OCR model configuration. A separate Tester passed final head `6827e3f`; an independent Reviewer covered all 14 changed files with zero skipped files and zero findings. PR #4 is merged |
 | Reviewed PR stack | PRs #1 through #4 were retargeted and merged into `main` in dependency order. GitHub reported each exact head clean and mergeable before merge; final `main` is `29a5c39` |
-| Task 04a contract research | Paperclip `v2026.916.0` at `dffc2b3ca1b9e88fa21cb17493083e682dffd1ca` and Hermes `v2026.9.14` at `345cd2b057a452236de401d3534b8502a7465e8d` are the proposed immutable pins. No live engine was contacted. Fixture and normalized-output approval remains in progress |
+| Task 04a engine contracts | Pinned Paperclip `v2026.916.0` at `dffc2b3ca1b9e88fa21cb17493083e682dffd1ca` and Hermes `v2026.9.14` at `345cd2b057a452236de401d3534b8502a7465e8d`. Versioned fixtures record the approved requests, envelopes, statuses, and normalized output. The fixture check passes; no live engine was contacted |
 | Clean distributable baseline | Root commit `283a5e9` in a separate local source copy; 133 audited files, no original history and no remote |
 
 The six delivery skills are before-and-after, code-structure,
@@ -118,11 +119,11 @@ replace or force-push the published history. No deployment is authorized.
 
 ## Task 04: next action
 
-Pin authoritative Paperclip and Hermes versions and request/response contracts
-before changing mappings. Use versioned synthetic fixtures for malformed data,
-empty data, non-JSON errors, and one-engine failure. Then split labels, priority,
-assignment, pipeline-state mapping, and runtime failure reporting into separate
-reviewable tickets. Do not contact personal engines or guess an upstream API.
+Use [ENGINE-CONTRACTS.md](ENGINE-CONTRACTS.md) and the versioned fixtures for
+the three remaining tickets. Task 04b fixes task labels, native priority, and
+Foreman assignment. Task 04c maps pipeline labels and approval records. Task
+04d fixes terminal run classification and partial engine failures. Keep the
+tickets separate and do not contact personal engines.
 
 ## Phase checklist
 
