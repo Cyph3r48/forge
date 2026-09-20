@@ -193,7 +193,7 @@ try {
       "X-Forwarded-Host": "attacker.example",
       "X-Forwarded-Proto": "https",
     },
-    body: '{"title":"accepted","description":"","priority":"medium"}',
+    body: '{"title":"accepted","description":"","priority":"high"}',
   });
   assert.equal(sameOrigin.status, 200);
   assert.deepEqual(await sameOrigin.json(), {
@@ -204,7 +204,7 @@ try {
       title: "accepted",
       state: "factory:intake",
       assignee: "Forge Foreman",
-      priority: "medium",
+      priority: "high",
     },
   });
   assert.equal(upstreamRequests, beforeCrossOrigin + 3);
