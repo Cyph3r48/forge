@@ -67,7 +67,7 @@ pipeline rules are requirements, not implemented enforcement.
 | Reviewed PR stack | PRs #1 through #4 were retargeted and merged into `main` in dependency order. GitHub reported each exact head clean and mergeable before merge; final `main` is `29a5c39` |
 | Task 04a engine contracts | Pinned Paperclip `v2026.916.0` at `dffc2b3ca1b9e88fa21cb17493083e682dffd1ca` and Hermes `v2026.9.14` at `345cd2b057a452236de401d3534b8502a7465e8d`. Versioned fixtures record the approved requests, envelopes, statuses, and normalized output. The fixture check passes; no live engine was contacted |
 | Task 04b task creation | Resolves exactly one Foreman and `factory:intake` label before posting native priority, assignment, status, and label IDs. Malformed dependencies and created issues fail closed. Separate Tester and Reviewer passed head `3a012a6` with four of four files covered and zero findings |
-| Task 04c pipeline state and gates | Maps stages from one resolved factory label instead of native issue status. Gates come only from valid pending Paperclip approvals and their linked issues. Malformed approval, link, and label data fail closed. Luna completed two correction rounds; the lead reviewed all five changed files and reran every affected check at `fa4d303` with zero remaining findings |
+| Task 04c pipeline state and gates | Maps stages from one resolved factory label instead of native issue status. Gates come only from valid pending Paperclip approvals and their linked issues. Malformed approval, link, and label data fail closed. Luna completed two correction rounds. Lead-only review covered all five worker-changed files and reran every affected check at `fa4d303` with zero remaining findings; independent PR review is pending |
 | Clean distributable baseline | Root commit `283a5e9` in a separate local source copy; 133 audited files, no original history and no remote |
 
 The six delivery skills are before-and-after, code-structure,
@@ -164,8 +164,6 @@ There is no scheduled dispatcher or approved unattended operation yet.
 
 ## Known failures still open
 
-- Pipeline labels are mistaken for issue status, and gates are inferred rather
-  than read from actual approvals.
 - Live/Runtime omit Hermes runs; a failed run without a finish timestamp can
   appear working. Runtime joins by display name can conflate agents.
 - Memory integration, transition write-back, and per-run accounting are absent.
@@ -217,8 +215,10 @@ Task 04c changed issue state from native Paperclip status to one resolved
 factory label and replaced label-text gate guesses with linked pending approval
 records. The lead reran `pipeline-state`, `engine-contracts`, `task-create`,
 `auth-boundary`, `unconfigured-clients`, doctor, the production build,
-TypeScript, and diff checks at `fa4d303`; all passed. Before/after output is in
-the ignored `.artifacts/task04c-luna-0922/` directory. No live engine ran.
+TypeScript, and diff checks at `fa4d303`; all passed. The worker's first
+sandboxed auth check hit `EPERM`; the lead reran it with local-listener access
+and received PASS. Worker check output and before/after evidence remain in the
+ignored `.artifacts/task04c-luna-0922/` directory. No live engine ran.
 
 For a docs-only handoff, check links, consistency, doctor, and the diff.
 Do not repeat the full build unless application code or build inputs change.
