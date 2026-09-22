@@ -1,6 +1,6 @@
 # Project progress and agent handoff
 
-Updated September 20, 2026. Start here, then read `docs/spec-v0.4.md` and
+Updated September 22, 2026. Start here, then read `docs/spec-v0.4.md` and
 the code for the assigned task. This file records project work only. Do not
 add personal notes, credentials, or deployed host details.
 
@@ -9,11 +9,11 @@ add personal notes, credentials, or deployed host details.
 Phase 1 is in progress. Task 01, local repository preparation, is complete.
 Tasks 02 and 03 are merged. PRs #1 through #4 landed on `main` in order on
 September 20. OpenCodeReview delegation replaces the unavailable Greptile
-service for independent review. Task 04a is open as PR #5. Task 04b task
-creation is complete locally in `.worktrees/task04b-task-create-0920/` on
-`agent/task04b-task-create-0920`, stacked on Task 04a. Resume from the branch's
-current clean head. Task 04c is next. No UI redesign, dispatcher, or
-real-engine factory lap has been completed.
+service for independent review. Task 04a is open as PR #5 and Task 04b is open
+as PR #6. Task 04c pipeline state and approval gates are complete locally in
+`.worktrees/task04c-luna-0922/` on `agent/task04c-luna-0922`, stacked on Task
+04b at reviewed head `fa4d303`. Task 04d is next. No UI redesign, dispatcher,
+or real-engine factory lap has been completed.
 The bundled memory provider has been removed from code, API fields, UI, and
 documentation. The Memory page is now a generic unconfigured view. The Forge is published at https://github.com/Cyph3r48/forge as a private
 repository. Its initial source commit is `4c95cdf` and has no parent history.
@@ -67,6 +67,7 @@ pipeline rules are requirements, not implemented enforcement.
 | Reviewed PR stack | PRs #1 through #4 were retargeted and merged into `main` in dependency order. GitHub reported each exact head clean and mergeable before merge; final `main` is `29a5c39` |
 | Task 04a engine contracts | Pinned Paperclip `v2026.916.0` at `dffc2b3ca1b9e88fa21cb17493083e682dffd1ca` and Hermes `v2026.9.14` at `345cd2b057a452236de401d3534b8502a7465e8d`. Versioned fixtures record the approved requests, envelopes, statuses, and normalized output. The fixture check passes; no live engine was contacted |
 | Task 04b task creation | Resolves exactly one Foreman and `factory:intake` label before posting native priority, assignment, status, and label IDs. Malformed dependencies and created issues fail closed. Separate Tester and Reviewer passed head `3a012a6` with four of four files covered and zero findings |
+| Task 04c pipeline state and gates | Maps stages from one resolved factory label instead of native issue status. Gates come only from valid pending Paperclip approvals and their linked issues. Malformed approval, link, and label data fail closed. Luna completed two correction rounds; the lead reviewed all five changed files and reran every affected check at `fa4d303` with zero remaining findings |
 | Clean distributable baseline | Root commit `283a5e9` in a separate local source copy; 133 audited files, no original history and no remote |
 
 The six delivery skills are before-and-after, code-structure,
@@ -87,9 +88,9 @@ are still pending.
    Never modify another agent's worktree or uncommitted work.
 3. Read [WORK-PACKS.md](WORK-PACKS.md) for the per-phase assignments and exact
    worktree procedure. Read [ORCHESTRATOR-HANDOFF.md](ORCHESTRATOR-HANDOFF.md)
-   for the Sol/GLM-compatible takeover and worker limits. Publish Task 04b,
-   then create a unique Task 04c worktree from Task 04b's current reviewed PR
-   head while PRs #5 and #6 remain a recorded dependent stack.
+   for the Sol/GLM-compatible takeover and worker limits. Publish Task 04c as a
+   dependent PR on Task 04b, then create a unique Task 04d worktree from Task
+   04c's reviewed head while the Task 04 PRs remain a recorded dependent stack.
    [PILOT-02A.md](PILOT-02A.md) records the earlier reading trial.
 4. Use isolated fixtures for engine behavior. Do not connect live services or
    raise the autonomy dial. Engine access is not required for documentation
@@ -122,9 +123,8 @@ replace or force-push the published history. No deployment is authorized.
 ## Task 04: next action
 
 Use [ENGINE-CONTRACTS.md](ENGINE-CONTRACTS.md) and the versioned fixtures for
-the remaining tickets. Task 04c maps pipeline labels and linked approval
-records. Task 04d fixes terminal run classification and partial engine
-failures. Keep the tickets separate and do not contact personal engines.
+Task 04d. Fix terminal run classification and partial engine failures without
+changing the frozen runtime response shape. Do not contact personal engines.
 
 ## Phase checklist
 
@@ -212,6 +212,13 @@ The separate Tester passed every nonvisual outcome. The lead inspected the
 settled before/after PNGs in `.artifacts/task03-auth-0916/`; the public upload
 host was unavailable, so the images remain local. Independent security review
 ended with zero actionable findings. No live engine, merge, or deployment ran.
+
+Task 04c changed issue state from native Paperclip status to one resolved
+factory label and replaced label-text gate guesses with linked pending approval
+records. The lead reran `pipeline-state`, `engine-contracts`, `task-create`,
+`auth-boundary`, `unconfigured-clients`, doctor, the production build,
+TypeScript, and diff checks at `fa4d303`; all passed. Before/after output is in
+the ignored `.artifacts/task04c-luna-0922/` directory. No live engine ran.
 
 For a docs-only handoff, check links, consistency, doctor, and the diff.
 Do not repeat the full build unless application code or build inputs change.

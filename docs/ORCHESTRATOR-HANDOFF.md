@@ -60,14 +60,15 @@ Reviewer inspected all 14 files, including OCR-excluded Markdown, and reported
 
 ## Current task
 
-Tasks 04a and 04b are complete locally. Do not repeat the contract research,
-task-creation fix, route inventory, auth review, or completed tests.
+Tasks 04a, 04b, and 04c are complete locally. Do not repeat the contract
+research, task-creation fix, pipeline-state mapping, route inventory, auth
+review, or completed tests.
 
 - Use [ENGINE-CONTRACTS.md](ENGINE-CONTRACTS.md) and the two versioned fixtures.
-- Publish Task 04b, then create a unique dependent worktree for Task 04c.
-- Map factory labels independently of native issue status and derive gates only
-  from linked pending approval records.
-- Keep 04d runtime/failure reporting separate.
+- Publish Task 04c as a dependent PR on Task 04b, then create a unique
+  dependent worktree for Task 04d.
+- Fix terminal run classification and partial engine failures without changing
+  the frozen runtime response shape.
 - Add malformed JSON, empty data, non-JSON error, and one-engine-down cases to
   the runnable contract check. Do not use personal engines.
 - Preserve the frozen runtime response shape and the shared auth boundary.
