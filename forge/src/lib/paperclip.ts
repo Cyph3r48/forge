@@ -32,8 +32,9 @@ export interface PcApproval {
   id: string; status?: string; type?: string;
 }
 
-export function factoryStage(issue: PcIssue) {
-  const stages = (issue.labels ?? []).map((label) => label?.name).filter((name): name is string => Boolean(name && FACTORY_STAGES.has(name)));
+export function factoryStage(issue?: PcIssue | null) {
+  if (!issue || !Array.isArray(issue.labels)) return "";
+  const stages = issue.labels.map((label) => label?.name).filter((name): name is string => Boolean(name && FACTORY_STAGES.has(name)));
   return stages.length === 1 ? stages[0] : "";
 }
 
@@ -82,7 +83,8 @@ export async function listApprovals() {
     : [];
 }
 export function listApprovalIssues(approvalId: string) {
-  return UUID.test(approvalId) ? j<PcIssue[]>(`/approvals/${approvalId}/issues`, []) : Promise.resolve([]);
+  if (!UUID.test(approvalId)) return Promise.resolve([]);
+  return j<unknown>(`/approvals/${approvalId}/issues`, []).then((issues) => Array.isArray(issues) ? issues : []);
 }
 
 export async function createIssue(input: { title: string; description: string; priority: string }): Promise<{ ok: true; issue: PcIssue; assignee: string; state: string } | { ok: false; error: string }> {

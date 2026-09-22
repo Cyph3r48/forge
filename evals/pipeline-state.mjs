@@ -44,8 +44,16 @@ assert.deepEqual(requests.map(({ url }) => url), [
 ]);
 context.fetch = async () => Response.json({ malformed: true });
 assert.deepEqual(JSON.parse(JSON.stringify(await context.exports.listApprovals())), []);
+const malformedLinked = await context.exports.listApprovalIssues(fixture.approvals[0].id);
+assert.deepEqual(JSON.parse(JSON.stringify(malformedLinked)), []);
+assert.deepEqual(JSON.parse(JSON.stringify(context.exports.deriveApprovalGates(
+  fixture.approvals,
+  { [fixture.approvals[0].id]: malformedLinked },
+))), []);
 
 const stage = (issue) => context.exports.factoryStage(issue);
+assert.equal(stage(null), "");
+assert.equal(stage({ labels: {} }), "");
 assert.equal(stage({ status: "done", labels: [{ name: "factory:build" }] }), "factory:build");
 assert.equal(stage({ status: "in_review", labels: [] }), "");
 assert.equal(stage({ status: "done", labels: [{ name: "factory:review" }, { name: "factory:ship" }] }), "");
