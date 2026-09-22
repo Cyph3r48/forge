@@ -65,8 +65,8 @@ research, task-creation fix, pipeline-state mapping, route inventory, auth
 review, or completed tests.
 
 - Use [ENGINE-CONTRACTS.md](ENGINE-CONTRACTS.md) and the two versioned fixtures.
-- Publish Task 04c as a dependent PR on Task 04b, then create a unique
-  dependent worktree for Task 04d.
+- Task 04c is open as dependent PR #7 on Task 04b. Create a unique dependent
+  worktree for Task 04d from Task 04c's reviewed head.
 - Fix terminal run classification and partial engine failures without changing
   the frozen runtime response shape.
 - Add malformed JSON, empty data, non-JSON error, and one-engine-down cases to
