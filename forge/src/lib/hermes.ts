@@ -38,7 +38,7 @@ async function h<T>(path: string, fallback: T, timeoutMs = 8000): Promise<T> {
 
 export interface HermesHealth { status?: string; platform?: string; version?: string }
 export async function hermesHealth() {
-  return h<HermesHealth>("/health", {});
+  return (await read<HermesHealth>("/health", {}, isObject)).value;
 }
 export async function hermesStatus() {
   const [health, toolsets, skills] = await Promise.all([

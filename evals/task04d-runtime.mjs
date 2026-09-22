@@ -64,6 +64,8 @@ assert.equal(errorHealth.ok, false, "non-ok Hermes health is unhealthy");
 assert.equal(errorHealthHermes.hermesDetail(true, errorHealth.ok, errorHealth.health.version, "unreachable"), "unreachable");
 assert.equal(errorHealthHermes.hermesDetail(true, true, "good", "unreachable"), "vgood");
 assert.equal(errorHealthHermes.hermesDetail(false, false, "bad", "set HERMES_API_URL"), "set HERMES_API_URL");
+const malformedHealthHermes = load("hermes", env, async () => response(null));
+assert.deepEqual(JSON.parse(JSON.stringify(await malformedHealthHermes.hermesHealth())), {});
 const linkedApprovalFailure = load("paperclip", env, async (url) => {
   if (url.endsWith(`/companies/${env.PAPERCLIP_COMPANY}/approvals?status=pending`)) return response(paperclipFixture.approvals);
   if (url.endsWith(`/approvals/${paperclipFixture.approvals[0].id}/issues`)) throw new Error("linked approval offline");
