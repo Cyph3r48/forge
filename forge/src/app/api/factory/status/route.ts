@@ -1,16 +1,15 @@
 import { NextResponse } from "next/server";
-import { getCompany, listAgents, listIssues, listRuns, paperclipConfigured, type PcAgent, type PcIssue } from "@/lib/paperclip";
+import { deriveApprovalGates, factoryStage, getCompany, listAgents, listApprovalIssues, listApprovals, listIssues, listRuns, paperclipConfigured, type PcAgent, type PcIssue } from "@/lib/paperclip";
 import { deriveRuntime, seatOf } from "@/lib/runtime";
 import { hermesHealth, hermesConfigured } from "@/lib/hermes";
 
 export const dynamic = "force-dynamic";
 
-const WAITING_ON: Record<string, "human" | "reviewer"> = { "factory:review": "reviewer", "factory:ship": "human" };
-
 export async function GET() {
-  const [company, agents, issues, runs, health] = await Promise.all([
-    getCompany(), listAgents(), listIssues(), listRuns(40), hermesHealth(),
+  const [company, agents, issues, runs, approvals, health] = await Promise.all([
+    getCompany(), listAgents(), listIssues(), listRuns(40), listApprovals(), hermesHealth(),
   ]);
+  const linkedEntries = await Promise.all(approvals.map(async (approval) => [approval.id, await listApprovalIssues(approval.id)] as const));
   const runtime = await deriveRuntime(agents);
   const stateByName = new Map(runtime.map((r) => [r.name, r.state]));
   const configured = paperclipConfigured();
@@ -23,12 +22,10 @@ export async function GET() {
   }));
   const outIssues = issues.map((i: PcIssue) => ({
     id: i.id, identifier: i.identifier ?? i.id, title: i.title ?? "",
-    state: i.status ?? "", assignee: agents.find((a) => a.id === i.assigneeAgentId)?.name ?? null,
+    state: factoryStage(i), assignee: agents.find((a) => a.id === i.assigneeAgentId)?.name ?? null,
     priority: i.priority ?? "",
   }));
-  const gates = outIssues
-    .filter((i) => WAITING_ON[i.state])
-    .map((i, n) => ({ id: `gate-${n}`, issue: i.identifier, kind: i.state.replace("factory:", ""), waitingOn: WAITING_ON[i.state], reason: `issue in ${i.state}` }));
+  const gates = deriveApprovalGates(approvals, Object.fromEntries(linkedEntries));
 
   return NextResponse.json({
     source: "live",
