@@ -26,6 +26,8 @@ function classify(run: PcRun | null): { state: RuntimeEntry["state"]; source: Ru
   if (!run) return { state: "idle", source: "none", since: null, detail: "no run in flight" };
   const status = (run.status ?? "").toLowerCase();
   const since = run.startedAt ?? run.createdAt ?? null;
+  const terminal = new Set(["succeeded", "interrupted", "failed", "cancelled", "timed_out"]);
+  if (terminal.has(status)) return { state: "done", source: "paperclip-run", since: run.finishedAt ?? since, detail: excerpt(run) || `${status} run finished` };
   // ponytail: blocked detection is heuristic on run status/output; upgrade to
   // polling hermes run status (waiting_for_approval) once run ids are tracked per agent.
   const output = `${run.resultJson?.summary ?? ""} ${run.resultJson?.text ?? ""} ${run.stdoutExcerpt ?? ""}`.toLowerCase();

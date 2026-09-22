@@ -31,6 +31,11 @@ export interface PcLabel {
 export interface PcApproval {
   id: string; status?: string; type?: string;
 }
+type ReadResult<T> = { value: T; ok: boolean };
+type Validator<T> = (value: unknown) => value is T;
+
+const isObject: Validator<Record<string, unknown>> = (value): value is Record<string, unknown> =>
+  typeof value === "object" && value !== null && !Array.isArray(value);
 
 export function factoryStage(issue?: PcIssue | null) {
   if (!issue || !Array.isArray(issue.labels)) return "";
@@ -50,19 +55,28 @@ export function deriveApprovalGates(approvals: PcApproval[], linkedIssues: Recor
   });
 }
 
-async function j<T>(path: string, fallback: T, timeoutMs = 6000): Promise<T> {
-  if (!paperclipConfigured()) return fallback;
+async function read<T>(path: string, fallback: T, valid: Validator<T>, timeoutMs = 6000): Promise<ReadResult<T>> {
+  if (!paperclipConfigured()) return { value: fallback, ok: true };
   try {
     const r = await fetch(`${BASE}${path}`, { cache: "no-store", headers: AUTH, signal: AbortSignal.timeout(timeoutMs) });
-    if (!r.ok) return fallback;
-    return (await r.json()) as T;
+    if (!r.ok) return { value: fallback, ok: false };
+    const value = await r.json();
+    return valid(value) ? { value, ok: true } : { value: fallback, ok: false };
   } catch {
-    return fallback;
+    return { value: fallback, ok: false };
   }
+}
+
+const anyValue = <T>(_: unknown): _ is T => true;
+async function j<T>(path: string, fallback: T, timeoutMs = 6000): Promise<T> {
+  return (await read<T>(path, fallback, anyValue, timeoutMs)).value;
 }
 
 export function getCompany() {
   return j<Record<string, unknown>>(`/companies/${COMPANY}`, {});
+}
+export async function paperclipCompanyStatus() {
+  return read<Record<string, unknown>>(`/companies/${COMPANY}`, {}, isObject);
 }
 export function listAgents() {
   return j<PcAgent[]>(`/companies/${COMPANY}/agents`, []);
@@ -85,6 +99,21 @@ export async function listApprovals() {
 export function listApprovalIssues(approvalId: string) {
   if (!UUID.test(approvalId)) return Promise.resolve([]);
   return j<unknown>(`/approvals/${approvalId}/issues`, []).then((issues) => Array.isArray(issues) ? issues : []);
+}
+
+export async function paperclipStatus() {
+  const [company, agents, issues, runs, approvals] = await Promise.all([
+    read<Record<string, unknown>>(`/companies/${COMPANY}`, {}, isObject),
+    read<PcAgent[]>(`/companies/${COMPANY}/agents`, [], Array.isArray),
+    read<PcIssue[]>(`/companies/${COMPANY}/issues`, [], Array.isArray),
+    read<PcRun[]>(`/companies/${COMPANY}/heartbeat-runs?limit=40`, [], Array.isArray),
+    read<PcApproval[]>(`/companies/${COMPANY}/approvals?status=pending`, [], Array.isArray),
+  ]);
+  return {
+    company: company.value, agents: agents.value, issues: issues.value, runs: runs.value,
+    approvals: approvals.value.filter((approval) => approval?.status === "pending" && typeof approval.id === "string" && UUID.test(approval.id)),
+    ok: [company, agents, issues, runs, approvals].every(({ ok }) => ok),
+  };
 }
 
 export async function createIssue(input: { title: string; description: string; priority: string }): Promise<{ ok: true; issue: PcIssue; assignee: string; state: string } | { ok: false; error: string }> {

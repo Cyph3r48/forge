@@ -1,14 +1,13 @@
 import { NextResponse } from "next/server";
-import { deriveApprovalGates, factoryStage, getCompany, listAgents, listApprovalIssues, listApprovals, listIssues, listRuns, paperclipConfigured, type PcAgent, type PcIssue } from "@/lib/paperclip";
+import { deriveApprovalGates, factoryStage, listApprovalIssues, paperclipConfigured, paperclipStatus, type PcAgent, type PcIssue } from "@/lib/paperclip";
 import { deriveRuntime, seatOf } from "@/lib/runtime";
 import { hermesHealth, hermesConfigured } from "@/lib/hermes";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const [company, agents, issues, runs, approvals, health] = await Promise.all([
-    getCompany(), listAgents(), listIssues(), listRuns(40), listApprovals(), hermesHealth(),
-  ]);
+  const [paperclip, health] = await Promise.all([paperclipStatus(), hermesHealth()]);
+  const { company, agents, issues, runs, approvals } = paperclip;
   const linkedEntries = await Promise.all(approvals.map(async (approval) => [approval.id, await listApprovalIssues(approval.id)] as const));
   const runtime = await deriveRuntime(agents);
   const stateByName = new Map(runtime.map((r) => [r.name, r.state]));
@@ -41,7 +40,7 @@ export async function GET() {
     })),
     gates,
     engines: {
-      paperclip: { ok: configured && agents.length >= 0 && Boolean(company.id ?? agents.length), detail: configured ? "connected" : "set PAPERCLIP_TOKEN + PAPERCLIP_COMPANY" },
+      paperclip: { ok: configured && paperclip.ok && Boolean(company.id ?? agents.length), detail: configured ? "connected" : "set PAPERCLIP_TOKEN + PAPERCLIP_COMPANY" },
       hermes: { ok: hermesConfigured() && Boolean(health.status), detail: health.version ? `v${health.version}` : hermesConfigured() ? "unreachable" : "set HERMES_API_URL" },
     },
   });
