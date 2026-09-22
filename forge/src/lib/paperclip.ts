@@ -40,7 +40,7 @@ export function factoryStage(issue: PcIssue) {
 export function deriveApprovalGates(approvals: PcApproval[], linkedIssues: Record<string, PcIssue[]>) {
   return approvals.flatMap((approval) => {
     if (approval.status !== "pending" || typeof approval.id !== "string") return [];
-    const kind = typeof approval.type === "string" && approval.type.trim() ? approval.type : "approval";
+    const kind = typeof approval.type === "string" && approval.type.trim() ? approval.type.trim() : "approval";
     return (linkedIssues[approval.id] ?? []).flatMap((issue) =>
       typeof issue?.id === "string" && typeof issue.identifier === "string" && issue.identifier.trim()
         ? [{ id: `${approval.id}:${issue.id}`, issue: issue.identifier, kind, waitingOn: "human" as const, reason: `pending ${kind}` }]
@@ -75,11 +75,14 @@ export function listIssues() {
 export function listLabels() {
   return j<PcLabel[]>(`/companies/${COMPANY}/labels`, []);
 }
-export function listApprovals() {
-  return j<PcApproval[]>(`/companies/${COMPANY}/approvals?status=pending`, []);
+export async function listApprovals() {
+  const approvals = await j<unknown>(`/companies/${COMPANY}/approvals?status=pending`, []);
+  return Array.isArray(approvals)
+    ? approvals.filter((approval): approval is PcApproval => approval?.status === "pending" && typeof approval.id === "string" && UUID.test(approval.id))
+    : [];
 }
 export function listApprovalIssues(approvalId: string) {
-  return j<PcIssue[]>(`/approvals/${approvalId}/issues`, []);
+  return UUID.test(approvalId) ? j<PcIssue[]>(`/approvals/${approvalId}/issues`, []) : Promise.resolve([]);
 }
 
 export async function createIssue(input: { title: string; description: string; priority: string }): Promise<{ ok: true; issue: PcIssue; assignee: string; state: string } | { ok: false; error: string }> {
