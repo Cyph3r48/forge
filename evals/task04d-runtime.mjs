@@ -56,6 +56,15 @@ const healthyPaperclip = load("paperclip", env, async (url) => emptyPaperclip(ur
 const healthyHermes = load("hermes", env, async (url) => emptyHermes(url));
 assert.equal((await healthyPaperclip.paperclipStatus()).ok, true, "empty valid Paperclip collections stay healthy");
 assert.equal((await healthyHermes.hermesStatus()).ok, true, "empty valid Hermes collections stay healthy");
+const linkedApprovalFailure = load("paperclip", env, async (url) => {
+  if (url.endsWith(`/companies/${env.PAPERCLIP_COMPANY}/approvals?status=pending`)) return response(paperclipFixture.approvals);
+  if (url.endsWith(`/approvals/${paperclipFixture.approvals[0].id}/issues`)) throw new Error("linked approval offline");
+  return emptyPaperclip(url);
+});
+assert.equal((await linkedApprovalFailure.paperclipStatus()).ok, false, "linked approval failure makes Paperclip unhealthy");
+assert.equal(linkedApprovalFailure.paperclipDetail(true, false, "connected", "not configured"), "unreachable");
+assert.equal(linkedApprovalFailure.paperclipDetail(true, true, "connected", "not configured"), "connected");
+assert.equal(linkedApprovalFailure.paperclipDetail(false, false, "connected", "not configured"), "not configured");
 
 for (const [label, fetch] of [
   ["malformed JSON", async () => response([])],

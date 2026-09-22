@@ -10,6 +10,10 @@ export function paperclipConfigured() {
   return Boolean(COMPANY && TOKEN);
 }
 
+export function paperclipDetail(configured: boolean, healthy: boolean, connected: string, unconfigured: string) {
+  return !configured ? unconfigured : healthy ? connected : "unreachable";
+}
+
 export interface PcAgent {
   id: string; name: string; role?: string; title?: string; status?: string;
   adapterType?: string; adapterConfig?: { model?: string; provider?: string };
@@ -109,10 +113,16 @@ export async function paperclipStatus() {
     read<PcRun[]>(`/companies/${COMPANY}/heartbeat-runs?limit=40`, [], Array.isArray),
     read<PcApproval[]>(`/companies/${COMPANY}/approvals?status=pending`, [], Array.isArray),
   ]);
+  const validApprovals = approvals.value.filter((approval) => approval?.status === "pending" && typeof approval.id === "string" && UUID.test(approval.id));
+  const linked = await Promise.all(validApprovals.map(async (approval) => [
+    approval.id,
+    await read<PcIssue[]>(`/approvals/${approval.id}/issues`, [], Array.isArray),
+  ] as const));
   return {
     company: company.value, agents: agents.value, issues: issues.value, runs: runs.value,
-    approvals: approvals.value.filter((approval) => approval?.status === "pending" && typeof approval.id === "string" && UUID.test(approval.id)),
-    ok: [company, agents, issues, runs, approvals].every(({ ok }) => ok),
+    approvals: validApprovals,
+    approvalIssues: Object.fromEntries(linked.map(([id, result]) => [id, result.value])),
+    ok: [company, agents, issues, runs, approvals, ...linked.map(([, result]) => result)].every(({ ok }) => ok),
   };
 }
 
