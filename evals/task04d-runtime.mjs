@@ -76,6 +76,12 @@ assert.equal(linkedApprovalFailure.paperclipDetail(true, false, "connected", "no
 assert.equal(linkedApprovalFailure.paperclipDetail(true, true, "connected", "not configured"), "connected");
 assert.equal(linkedApprovalFailure.paperclipDetail(false, false, "connected", "not configured"), "not configured");
 
+for (const endpoint of ["/agents", "/issues", "/heartbeat-runs?limit=40", "/approvals?status=pending"]) {
+  const malformedCollection = load("paperclip", env, async (url) =>
+    url.endsWith(endpoint) ? response([null]) : emptyPaperclip(url));
+  assert.equal((await malformedCollection.paperclipStatus()).ok, false, `${endpoint} rejects malformed entries`);
+}
+
 for (const [label, fetch] of [
   ["malformed JSON", async () => response([])],
   ["non-JSON error", async () => new Response("bad", { status: 502 })],

@@ -40,6 +40,16 @@ type Validator<T> = (value: unknown) => value is T;
 
 const isObject: Validator<Record<string, unknown>> = (value): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);
+const isAgent: Validator<PcAgent> = (value): value is PcAgent =>
+  isObject(value) && typeof value.id === "string" && typeof value.name === "string";
+const isIssue: Validator<PcIssue> = (value): value is PcIssue =>
+  isObject(value) && typeof value.id === "string";
+const isRun: Validator<PcRun> = (value): value is PcRun =>
+  isObject(value) && typeof value.id === "string" && (value.status === undefined || typeof value.status === "string");
+const isApproval: Validator<PcApproval> = (value): value is PcApproval =>
+  isObject(value) && typeof value.id === "string" && (value.status === undefined || typeof value.status === "string");
+const arrayOf = <T>(valid: Validator<T>): Validator<T[]> =>
+  (value): value is T[] => Array.isArray(value) && value.every(valid);
 
 export function factoryStage(issue?: PcIssue | null) {
   if (!issue || !Array.isArray(issue.labels)) return "";
@@ -108,15 +118,15 @@ export function listApprovalIssues(approvalId: string) {
 export async function paperclipStatus() {
   const [company, agents, issues, runs, approvals] = await Promise.all([
     read<Record<string, unknown>>(`/companies/${COMPANY}`, {}, isObject),
-    read<PcAgent[]>(`/companies/${COMPANY}/agents`, [], Array.isArray),
-    read<PcIssue[]>(`/companies/${COMPANY}/issues`, [], Array.isArray),
-    read<PcRun[]>(`/companies/${COMPANY}/heartbeat-runs?limit=40`, [], Array.isArray),
-    read<PcApproval[]>(`/companies/${COMPANY}/approvals?status=pending`, [], Array.isArray),
+    read<PcAgent[]>(`/companies/${COMPANY}/agents`, [], arrayOf(isAgent)),
+    read<PcIssue[]>(`/companies/${COMPANY}/issues`, [], arrayOf(isIssue)),
+    read<PcRun[]>(`/companies/${COMPANY}/heartbeat-runs?limit=40`, [], arrayOf(isRun)),
+    read<PcApproval[]>(`/companies/${COMPANY}/approvals?status=pending`, [], arrayOf(isApproval)),
   ]);
   const validApprovals = approvals.value.filter((approval) => approval?.status === "pending" && typeof approval.id === "string" && UUID.test(approval.id));
   const linked = await Promise.all(validApprovals.map(async (approval) => [
     approval.id,
-    await read<PcIssue[]>(`/approvals/${approval.id}/issues`, [], Array.isArray),
+    await read<PcIssue[]>(`/approvals/${approval.id}/issues`, [], arrayOf(isIssue)),
   ] as const));
   return {
     company: company.value, agents: agents.value, issues: issues.value, runs: runs.value,
