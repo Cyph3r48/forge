@@ -56,6 +56,14 @@ const healthyPaperclip = load("paperclip", env, async (url) => emptyPaperclip(ur
 const healthyHermes = load("hermes", env, async (url) => emptyHermes(url));
 assert.equal((await healthyPaperclip.paperclipStatus()).ok, true, "empty valid Paperclip collections stay healthy");
 assert.equal((await healthyHermes.hermesStatus()).ok, true, "empty valid Hermes collections stay healthy");
+const errorHealthHermes = load("hermes", env, async (url) => url.endsWith("/health")
+  ? response({ status: "error", version: "bad" })
+  : emptyHermes(url));
+const errorHealth = await errorHealthHermes.hermesStatus();
+assert.equal(errorHealth.ok, false, "non-ok Hermes health is unhealthy");
+assert.equal(errorHealthHermes.hermesDetail(true, errorHealth.ok, errorHealth.health.version, "unreachable"), "unreachable");
+assert.equal(errorHealthHermes.hermesDetail(true, true, "good", "unreachable"), "vgood");
+assert.equal(errorHealthHermes.hermesDetail(false, false, "bad", "set HERMES_API_URL"), "set HERMES_API_URL");
 const linkedApprovalFailure = load("paperclip", env, async (url) => {
   if (url.endsWith(`/companies/${env.PAPERCLIP_COMPANY}/approvals?status=pending`)) return response(paperclipFixture.approvals);
   if (url.endsWith(`/approvals/${paperclipFixture.approvals[0].id}/issues`)) throw new Error("linked approval offline");

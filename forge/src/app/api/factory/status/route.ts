@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { deriveApprovalGates, factoryStage, paperclipConfigured, paperclipDetail, paperclipStatus, type PcAgent, type PcIssue } from "@/lib/paperclip";
 import { deriveRuntime, seatOf } from "@/lib/runtime";
-import { hermesHealth, hermesConfigured } from "@/lib/hermes";
+import { hermesHealth, hermesConfigured, hermesDetail } from "@/lib/hermes";
 
 export const dynamic = "force-dynamic";
 
@@ -25,6 +25,7 @@ export async function GET() {
   }));
   const gates = deriveApprovalGates(approvals, approvalIssues);
   const paperclipHealthy = paperclip.ok && Boolean(company.id ?? agents.length);
+  const hermesHealthy = hermesConfigured() && health.status === "ok";
 
   return NextResponse.json({
     source: "live",
@@ -41,7 +42,7 @@ export async function GET() {
     gates,
     engines: {
       paperclip: { ok: configured && paperclipHealthy, detail: paperclipDetail(configured, paperclipHealthy, "connected", "set PAPERCLIP_TOKEN + PAPERCLIP_COMPANY") },
-      hermes: { ok: hermesConfigured() && Boolean(health.status), detail: health.version ? `v${health.version}` : hermesConfigured() ? "unreachable" : "set HERMES_API_URL" },
+      hermes: { ok: hermesHealthy, detail: hermesDetail(hermesConfigured(), hermesHealthy, health.version, "set HERMES_API_URL") },
     },
   });
 }

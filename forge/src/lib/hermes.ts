@@ -12,6 +12,10 @@ export function hermesConfigured() {
   return Boolean(BASE);
 }
 
+export function hermesDetail(configured: boolean, healthy: boolean, version: string | undefined, unconfigured: string) {
+  return !configured ? unconfigured : healthy && version ? `v${version}` : "unreachable";
+}
+
 async function read<T>(path: string, fallback: T, valid: Validator<T>, timeoutMs = 8000): Promise<ReadResult<T>> {
   if (!BASE) return { value: fallback, ok: true };
   try {
@@ -46,7 +50,7 @@ export async function hermesStatus() {
     health: health.value,
     toolsets: toolsets.value.data,
     skills: skills.value.data,
-    ok: [health, toolsets, skills].every(({ ok }) => ok),
+    ok: health.value.status === "ok" && [health, toolsets, skills].every(({ ok }) => ok),
   };
 }
 
