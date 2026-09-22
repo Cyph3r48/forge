@@ -40,14 +40,32 @@ type Validator<T> = (value: unknown) => value is T;
 
 const isObject: Validator<Record<string, unknown>> = (value): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);
+const optionalString = (value: unknown) => value === undefined || typeof value === "string";
+const optionalNullableString = (value: unknown) => value === undefined || value === null || typeof value === "string";
+const optionalNumber = (value: unknown) => value === undefined || typeof value === "number";
+const isLabel = (value: unknown) => isObject(value) && optionalString(value.id) && optionalString(value.name);
 const isAgent: Validator<PcAgent> = (value): value is PcAgent =>
-  isObject(value) && typeof value.id === "string" && typeof value.name === "string";
+  isObject(value) && typeof value.id === "string" && typeof value.name === "string" &&
+  optionalString(value.role) && optionalString(value.title) && optionalString(value.status) &&
+  optionalString(value.adapterType) && optionalNumber(value.budgetMonthlyCents) &&
+  optionalNumber(value.spentMonthlyCents) && optionalNullableString(value.lastHeartbeatAt) &&
+  (value.adapterConfig === undefined || (isObject(value.adapterConfig) &&
+    optionalString(value.adapterConfig.model) && optionalString(value.adapterConfig.provider)));
 const isIssue: Validator<PcIssue> = (value): value is PcIssue =>
-  isObject(value) && typeof value.id === "string";
+  isObject(value) && typeof value.id === "string" && optionalString(value.title) &&
+  optionalString(value.status) && optionalString(value.identifier) && optionalString(value.priority) &&
+  optionalNullableString(value.assigneeAgentId) &&
+  (value.labelIds === undefined || (Array.isArray(value.labelIds) && value.labelIds.every((id) => typeof id === "string"))) &&
+  (value.labels === undefined || (Array.isArray(value.labels) && value.labels.every(isLabel)));
 const isRun: Validator<PcRun> = (value): value is PcRun =>
-  isObject(value) && typeof value.id === "string" && (value.status === undefined || typeof value.status === "string");
+  isObject(value) && typeof value.id === "string" && optionalString(value.agentId) &&
+  optionalString(value.status) && optionalNullableString(value.startedAt) &&
+  optionalNullableString(value.finishedAt) && optionalString(value.createdAt) &&
+  optionalString(value.stdoutExcerpt) && optionalString(value.error) &&
+  (value.resultJson === undefined || value.resultJson === null || (isObject(value.resultJson) &&
+    optionalString(value.resultJson.text) && optionalString(value.resultJson.summary)));
 const isApproval: Validator<PcApproval> = (value): value is PcApproval =>
-  isObject(value) && typeof value.id === "string" && (value.status === undefined || typeof value.status === "string");
+  isObject(value) && typeof value.id === "string" && optionalString(value.status) && optionalString(value.type);
 const arrayOf = <T>(valid: Validator<T>): Validator<T[]> =>
   (value): value is T[] => Array.isArray(value) && value.every(valid);
 

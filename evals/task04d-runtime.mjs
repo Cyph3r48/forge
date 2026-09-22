@@ -81,6 +81,16 @@ for (const endpoint of ["/agents", "/issues", "/heartbeat-runs?limit=40", "/appr
     url.endsWith(endpoint) ? response([null]) : emptyPaperclip(url));
   assert.equal((await malformedCollection.paperclipStatus()).ok, false, `${endpoint} rejects malformed entries`);
 }
+for (const [endpoint, entry] of [
+  ["/agents", { id: "agent", name: "Builder", role: 7 }],
+  ["/issues", { id: "issue", title: 7 }],
+  ["/heartbeat-runs?limit=40", { id: "run", stdoutExcerpt: 123 }],
+  ["/approvals?status=pending", { id: paperclipFixture.approvals[0].id, status: 7 }],
+]) {
+  const malformedFields = load("paperclip", env, async (url) =>
+    url.endsWith(endpoint) ? response([entry]) : emptyPaperclip(url));
+  assert.equal((await malformedFields.paperclipStatus()).ok, false, `${endpoint} rejects malformed fields`);
+}
 
 for (const [label, fetch] of [
   ["malformed JSON", async () => response([])],
