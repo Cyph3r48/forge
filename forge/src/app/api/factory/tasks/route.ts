@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createIssue, listIssues, listAgents, paperclipConfigured } from "@/lib/paperclip";
+import { createIssue, factoryStage, listIssues, listAgents, paperclipConfigured } from "@/lib/paperclip";
 
 export const dynamic = "force-dynamic";
 
@@ -8,7 +8,7 @@ export async function GET() {
   return NextResponse.json({
     source: "live",
     issues: issues.map((i) => ({
-      id: i.id, identifier: i.identifier ?? i.id, title: i.title ?? "", state: i.status ?? "",
+      id: i.id, identifier: i.identifier ?? i.id, title: i.title ?? "", state: factoryStage(i),
       assignee: agents.find((a) => a.id === i.assigneeAgentId)?.name ?? null, priority: i.priority ?? "",
     })),
   });
@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     ok: true,
     issue: {
       id: issue.id, identifier: issue.identifier ?? issue.id, title,
-      state: result.state, assignee: result.assignee, priority,
+      state: factoryStage(issue), assignee: result.assignee, priority,
     },
   });
 }

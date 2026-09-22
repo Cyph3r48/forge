@@ -4,6 +4,7 @@ const TOKEN = process.env.PAPERCLIP_TOKEN?.trim() || "";
 const COMPANY = process.env.PAPERCLIP_COMPANY?.trim() || "";
 const AUTH: Record<string, string> = TOKEN ? { Authorization: `Bearer ${TOKEN}` } : {};
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+const FACTORY_STAGES = new Set(["factory:intake", "factory:architect", "factory:context", "factory:build", "factory:cleanup", "factory:review", "factory:ship"]);
 
 export function paperclipConfigured() {
   return Boolean(COMPANY && TOKEN);
@@ -22,9 +23,31 @@ export interface PcRun {
 export interface PcIssue {
   id: string; title?: string; status?: string; identifier?: string;
   assigneeAgentId?: string | null; priority?: string; labelIds?: string[];
+  labels?: Array<{ id?: string; name?: string }>;
 }
 export interface PcLabel {
   id: string; name: string;
+}
+export interface PcApproval {
+  id: string; status?: string; type?: string;
+}
+
+export function factoryStage(issue?: PcIssue | null) {
+  if (!issue || !Array.isArray(issue.labels)) return "";
+  const stages = issue.labels.map((label) => label?.name).filter((name): name is string => Boolean(name && FACTORY_STAGES.has(name)));
+  return stages.length === 1 ? stages[0] : "";
+}
+
+export function deriveApprovalGates(approvals: PcApproval[], linkedIssues: Record<string, PcIssue[]>) {
+  return approvals.flatMap((approval) => {
+    if (approval.status !== "pending" || typeof approval.id !== "string") return [];
+    const kind = typeof approval.type === "string" && approval.type.trim() ? approval.type.trim() : "approval";
+    return (linkedIssues[approval.id] ?? []).flatMap((issue) =>
+      typeof issue?.id === "string" && typeof issue.identifier === "string" && issue.identifier.trim()
+        ? [{ id: `${approval.id}:${issue.id}`, issue: issue.identifier, kind, waitingOn: "human" as const, reason: `pending ${kind}` }]
+        : [],
+    );
+  });
 }
 
 async function j<T>(path: string, fallback: T, timeoutMs = 6000): Promise<T> {
@@ -52,6 +75,16 @@ export function listIssues() {
 }
 export function listLabels() {
   return j<PcLabel[]>(`/companies/${COMPANY}/labels`, []);
+}
+export async function listApprovals() {
+  const approvals = await j<unknown>(`/companies/${COMPANY}/approvals?status=pending`, []);
+  return Array.isArray(approvals)
+    ? approvals.filter((approval): approval is PcApproval => approval?.status === "pending" && typeof approval.id === "string" && UUID.test(approval.id))
+    : [];
+}
+export function listApprovalIssues(approvalId: string) {
+  if (!UUID.test(approvalId)) return Promise.resolve([]);
+  return j<unknown>(`/approvals/${approvalId}/issues`, []).then((issues) => Array.isArray(issues) ? issues : []);
 }
 
 export async function createIssue(input: { title: string; description: string; priority: string }): Promise<{ ok: true; issue: PcIssue; assignee: string; state: string } | { ok: false; error: string }> {
@@ -91,7 +124,7 @@ export async function createIssue(input: { title: string; description: string; p
         !Array.isArray(issue.labelIds) || !issue.labelIds.includes(intake.id)) {
       return { ok: false, error: "Paperclip returned a malformed created issue" };
     }
-    return { ok: true, issue, assignee: foreman.name, state: intake.name };
+    return { ok: true, issue, assignee: foreman.name, state: factoryStage(issue) };
   } catch (e) {
     return { ok: false, error: `Paperclip unreachable: ${e instanceof Error ? e.message : "unknown"}` };
   }
