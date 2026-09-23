@@ -253,7 +253,8 @@
       ],
       "governingFiles": {
         "FACTORY-LAW.md": "159be1d2e5ee77154bd5984f461966120cfe94a5f6095f97467d41bf965b554a",
-        "factory/roles/foreman.md": "e6862b0cd425bf10dd1ad75c0ddabdbea519aee5aa7f891670449c3471b4b4e2"
+        "factory/roles/foreman.md": "e6862b0cd425bf10dd1ad75c0ddabdbea519aee5aa7f891670449c3471b4b4e2",
+        "docs/TASK-02-ACCEPTANCE.md": "fe2ffbc978ffd85cad7050e014abd9ba8081f5b8f882b3321c8baeb732167646"
       }
     },
     "Builder": {
@@ -277,7 +278,8 @@
       ],
       "governingFiles": {
         "FACTORY-LAW.md": "159be1d2e5ee77154bd5984f461966120cfe94a5f6095f97467d41bf965b554a",
-        "factory/roles/builder.md": "3e65aa100ae96a59cd322d7b7542e323fa29abe26368c124eeac4e403a83d698"
+        "factory/roles/builder.md": "3e65aa100ae96a59cd322d7b7542e323fa29abe26368c124eeac4e403a83d698",
+        "docs/TASK-02-ACCEPTANCE.md": "fe2ffbc978ffd85cad7050e014abd9ba8081f5b8f882b3321c8baeb732167646"
       }
     },
     "Tester": {
@@ -299,7 +301,8 @@
       ],
       "governingFiles": {
         "FACTORY-LAW.md": "159be1d2e5ee77154bd5984f461966120cfe94a5f6095f97467d41bf965b554a",
-        "factory/roles/tester.md": "d3e45dbc54204ca8282a1ad7f644822fc2ab5ccbe5c7b80d64055eb44cabee69"
+        "factory/roles/tester.md": "d3e45dbc54204ca8282a1ad7f644822fc2ab5ccbe5c7b80d64055eb44cabee69",
+        "docs/TASK-02-ACCEPTANCE.md": "fe2ffbc978ffd85cad7050e014abd9ba8081f5b8f882b3321c8baeb732167646"
       }
     },
     "Reviewer": {
@@ -322,7 +325,8 @@
       ],
       "governingFiles": {
         "FACTORY-LAW.md": "159be1d2e5ee77154bd5984f461966120cfe94a5f6095f97467d41bf965b554a",
-        "factory/roles/reviewer.md": "1780061ac72a224be7bf0126eb63a991a1a13c6bfb8720f7de519cbcf35a898c"
+        "factory/roles/reviewer.md": "1780061ac72a224be7bf0126eb63a991a1a13c6bfb8720f7de519cbcf35a898c",
+        "docs/TASK-02-ACCEPTANCE.md": "fe2ffbc978ffd85cad7050e014abd9ba8081f5b8f882b3321c8baeb732167646"
       }
     }
   }
