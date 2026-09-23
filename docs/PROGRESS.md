@@ -10,12 +10,16 @@ Phase 1 is in progress. Task 01, local repository preparation, is complete.
 Tasks 02 and 03 are merged. PRs #1 through #4 landed on `main` in order on
 September 20. OpenCodeReview delegation replaces the unavailable Greptile
 service for independent review. Task 04a is open as PR #5, Task 04b is open as
-PR #6, and Task 04c is open as dependent PR #7. Task 04d is complete locally
-at reviewed head `cf880b4`; Task 05a is next.
+PR #6, Task 04c is open as dependent PR #7, and Task 04d is open as dependent
+PR #8. Task 04d's reviewed code head is `cf880b4`; later commits contain only
+the reviewed handoff. Task 05a is next.
 No UI redesign, dispatcher, or real-engine factory lap has been completed.
 The bundled memory provider has been removed from code, API fields, UI, and
-documentation. The Memory page is now a generic unconfigured view. The Forge is published at https://github.com/Cyph3r48/forge as a private
-repository. Its initial source commit is `4c95cdf` and has no parent history.
+documentation. The Memory page is now a generic unconfigured view. The Forge is
+published at https://github.com/Cyph3r48/forge. GitHub's PR API reported the
+repository as public when PR #8 opened on September 22, which conflicts with the
+earlier private-repository record. No visibility change was made in this task.
+Its initial source commit is `4c95cdf` and has no parent history.
 
 The Forge should both produce software and manage the agents that build it.
 Keep Next.js, React, and TypeScript. Paperclip owns company/work records;
@@ -90,8 +94,8 @@ are still pending.
    worktree procedure. Read [ORCHESTRATOR-HANDOFF.md](ORCHESTRATOR-HANDOFF.md)
    for the Sol/GLM-compatible takeover and worker limits. PR #7 is open for Task
    04c. Task 04d is complete on `agent/task04d-luna-0922`, based on Task 04c's
-   reviewed head. Keep the dependent stack explicit while PRs #5 through #7
-   remain open.
+   reviewed head. PR #8 is open on Task 04c. Keep the dependent stack explicit
+   while PRs #5 through #8 remain open.
    [PILOT-02A.md](PILOT-02A.md) records the earlier reading trial.
 4. Use isolated fixtures for engine behavior. Do not connect live services or
    raise the autonomy dial. Engine access is not required for documentation
@@ -238,7 +242,8 @@ Task 04 checks, auth, doctor, build, TypeScript, and diff checks at `cf880b4`;
 all passed. OpenCodeReview selected all six files with no exclusions. The
 independent Reviewer reported zero findings at the final head. Local before and
 after output remains in `.artifacts/task04d-luna-0922/`. No live engine, merge,
-or deployment ran.
+or deployment ran. PR #8 is open at https://github.com/Cyph3r48/forge/pull/8
+with base `agent/task04c-luna-0922`; it was not merged.
 
 For a docs-only handoff, check links, consistency, doctor, and the diff.
 Do not repeat the full build unless application code or build inputs change.

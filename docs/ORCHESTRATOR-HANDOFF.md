@@ -9,12 +9,14 @@ because of usage limits; do not start another task in that session.
 1. Read AGENTS.md, [PROGRESS.md](PROGRESS.md), [TASK-02-ACCEPTANCE.md](TASK-02-ACCEPTANCE.md),
    and the next section of [WORK-PACKS.md](WORK-PACKS.md). The latter is the
    existing phase-by-phase worker list; do not generate a second roadmap.
-2. The distributable repository is private `Cyph3r48/forge`. Never publish the
+2. The distributable repository is `Cyph3r48/forge`. GitHub's PR API reported
+   it as public when PR #8 opened, which conflicts with the earlier private
+   record. No visibility change was made during Task 04d. Never publish the
    original workspace history. Its clean publishing checkout is
    `.artifacts/forge-publish-0915/` in the original workspace.
 3. The current lead checkout is the Task 04d worktree, branch
-   `agent/task04d-luna-0922`, stacked on Task 04c PR #7. Resume from its reviewed
-   clean head and keep the dependent PR chain explicit.
+   `agent/task04d-luna-0922`, open as PR #8 and stacked on Task 04c PR #7. Resume
+   from its reviewed clean head and keep the dependent PR chain explicit.
 4. The owner authorized merging PRs #1 through #4. They landed on `main` in
    dependency order on September 20 after GitHub reported each exact head clean
    and mergeable. Do not merge later PRs or deploy without fresh authorization.
