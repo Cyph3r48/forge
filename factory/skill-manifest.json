@@ -203,11 +203,18 @@
     "open-code-review-delegate": {
       "source": "local integration for github.com/alibaba/open-code-review v1.10.0 (`a66240084b382ed97a47590bdec13a6a34df0743`)",
       "license": "local instructions; OCR is Apache-2.0",
-      "version": "1.10.0",
-      "revision": "a66240084b382ed97a47590bdec13a6a34df0743",
+      "version": "unknown",
+      "revision": "unknown",
       "files": {
         "skills/open-code-review-delegate/SKILL.md": "ddc33d02b0d532c17181ddbdb0c6301df6d297605a35015879fd83049dc4f972"
-      }
+      },
+      "dependencies": [
+        {
+          "name": "OpenCodeReview CLI",
+          "version": "1.10.0",
+          "revision": "a66240084b382ed97a47590bdec13a6a34df0743"
+        }
+      ]
     },
     "before-and-after": {
       "source": "github.com/michaelshimeles/skills",
@@ -243,7 +250,11 @@
           "requiredBy": "FACTORY-LAW.md",
           "status": "missing"
         }
-      ]
+      ],
+      "governingFiles": {
+        "FACTORY-LAW.md": "159be1d2e5ee77154bd5984f461966120cfe94a5f6095f97467d41bf965b554a",
+        "factory/roles/foreman.md": "e6862b0cd425bf10dd1ad75c0ddabdbea519aee5aa7f891670449c3471b4b4e2"
+      }
     },
     "Builder": {
       "skills": [
@@ -263,7 +274,11 @@
           "requiredBy": "FACTORY-LAW.md",
           "status": "missing"
         }
-      ]
+      ],
+      "governingFiles": {
+        "FACTORY-LAW.md": "159be1d2e5ee77154bd5984f461966120cfe94a5f6095f97467d41bf965b554a",
+        "factory/roles/builder.md": "3e65aa100ae96a59cd322d7b7542e323fa29abe26368c124eeac4e403a83d698"
+      }
     },
     "Tester": {
       "skills": [
@@ -281,7 +296,11 @@
           "requiredBy": "FACTORY-LAW.md",
           "status": "missing"
         }
-      ]
+      ],
+      "governingFiles": {
+        "FACTORY-LAW.md": "159be1d2e5ee77154bd5984f461966120cfe94a5f6095f97467d41bf965b554a",
+        "factory/roles/tester.md": "d3e45dbc54204ca8282a1ad7f644822fc2ab5ccbe5c7b80d64055eb44cabee69"
+      }
     },
     "Reviewer": {
       "skills": [
@@ -300,7 +319,11 @@
           "requiredBy": "FACTORY-LAW.md",
           "status": "missing"
         }
-      ]
+      ],
+      "governingFiles": {
+        "FACTORY-LAW.md": "159be1d2e5ee77154bd5984f461966120cfe94a5f6095f97467d41bf965b554a",
+        "factory/roles/reviewer.md": "1780061ac72a224be7bf0126eb63a991a1a13c6bfb8720f7de519cbcf35a898c"
+      }
     }
   }
 }
