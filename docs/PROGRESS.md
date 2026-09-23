@@ -88,8 +88,8 @@ are still pending.
    Never modify another agent's worktree or uncommitted work.
 3. Read [WORK-PACKS.md](WORK-PACKS.md) for the per-phase assignments and exact
    worktree procedure. Read [ORCHESTRATOR-HANDOFF.md](ORCHESTRATOR-HANDOFF.md)
-   for the Sol/GLM-compatible takeover and worker limits. PR #7 is open on Task
-   04b. Task 04d is complete on `agent/task04d-luna-0922`, based on Task 04c's
+   for the Sol/GLM-compatible takeover and worker limits. PR #7 is open for Task
+   04c. Task 04d is complete on `agent/task04d-luna-0922`, based on Task 04c's
    reviewed head. Keep the dependent stack explicit while PRs #5 through #7
    remain open.
    [PILOT-02A.md](PILOT-02A.md) records the earlier reading trial.
