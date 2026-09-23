@@ -182,7 +182,7 @@ Depends on 03. Start at `forge/src/lib/paperclip.ts`, `hermes.ts`, `runtime.ts`,
 Depends on 02 and 04. Read `skills/INDEX.md`, role charters, and current engine
 skill APIs. Use the vendored contents and licenses; no second skill catalog.
 
-- [ ] 05a, worker: produce an expected file/version manifest for each seat
+- [x] 05a, worker: produce an expected file/version manifest for each seat
   from approved assignments. Report absent files rather than inventing skills.
 - [ ] 05b, worker: implement local bundle assembly/verification at a lead-named
   script path. Verify installed contents, not just an installer exit code.
