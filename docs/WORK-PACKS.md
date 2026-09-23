@@ -172,7 +172,7 @@ Depends on 03. Start at `forge/src/lib/paperclip.ts`, `hermes.ts`, `runtime.ts`,
   against those fixtures. Keep task input validation at the server boundary.
 - [x] 04c, worker, separate ticket: map pipeline labels independently of issue
   status; derive pending gates from actual approval records, not text guesses.
-- [ ] 04d, worker, separate ticket: represent failed/cancelled runs and partial
+- [x] 04d, worker, separate ticket: represent failed/cancelled runs and partial
   engine outages correctly. A failed run without a finish time is not working.
 - Pass: runnable request/normalization checks cover malformed responses, empty
   data, non-JSON errors, and one engine failing. No frozen runtime shape changes.

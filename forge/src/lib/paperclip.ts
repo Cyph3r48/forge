@@ -10,6 +10,10 @@ export function paperclipConfigured() {
   return Boolean(COMPANY && TOKEN);
 }
 
+export function paperclipDetail(configured: boolean, healthy: boolean, connected: string, unconfigured: string) {
+  return !configured ? unconfigured : healthy ? connected : "unreachable";
+}
+
 export interface PcAgent {
   id: string; name: string; role?: string; title?: string; status?: string;
   adapterType?: string; adapterConfig?: { model?: string; provider?: string };
@@ -31,6 +35,39 @@ export interface PcLabel {
 export interface PcApproval {
   id: string; status?: string; type?: string;
 }
+type ReadResult<T> = { value: T; ok: boolean };
+type Validator<T> = (value: unknown) => value is T;
+
+const isObject: Validator<Record<string, unknown>> = (value): value is Record<string, unknown> =>
+  typeof value === "object" && value !== null && !Array.isArray(value);
+const optionalString = (value: unknown) => value === undefined || typeof value === "string";
+const optionalNullableString = (value: unknown) => value === undefined || value === null || typeof value === "string";
+const optionalNumber = (value: unknown) => value === undefined || typeof value === "number";
+const isLabel = (value: unknown) => isObject(value) && optionalString(value.id) && optionalString(value.name);
+const isAgent: Validator<PcAgent> = (value): value is PcAgent =>
+  isObject(value) && typeof value.id === "string" && typeof value.name === "string" &&
+  optionalString(value.role) && optionalString(value.title) && optionalString(value.status) &&
+  optionalString(value.adapterType) && optionalNumber(value.budgetMonthlyCents) &&
+  optionalNumber(value.spentMonthlyCents) && optionalNullableString(value.lastHeartbeatAt) &&
+  (value.adapterConfig === undefined || (isObject(value.adapterConfig) &&
+    optionalString(value.adapterConfig.model) && optionalString(value.adapterConfig.provider)));
+const isIssue: Validator<PcIssue> = (value): value is PcIssue =>
+  isObject(value) && typeof value.id === "string" && optionalString(value.title) &&
+  optionalString(value.status) && optionalString(value.identifier) && optionalString(value.priority) &&
+  optionalNullableString(value.assigneeAgentId) &&
+  (value.labelIds === undefined || (Array.isArray(value.labelIds) && value.labelIds.every((id) => typeof id === "string"))) &&
+  (value.labels === undefined || (Array.isArray(value.labels) && value.labels.every(isLabel)));
+const isRun: Validator<PcRun> = (value): value is PcRun =>
+  isObject(value) && typeof value.id === "string" && optionalString(value.agentId) &&
+  optionalString(value.status) && optionalNullableString(value.startedAt) &&
+  optionalNullableString(value.finishedAt) && optionalString(value.createdAt) &&
+  optionalString(value.stdoutExcerpt) && optionalString(value.error) &&
+  (value.resultJson === undefined || value.resultJson === null || (isObject(value.resultJson) &&
+    optionalString(value.resultJson.text) && optionalString(value.resultJson.summary)));
+const isApproval: Validator<PcApproval> = (value): value is PcApproval =>
+  isObject(value) && typeof value.id === "string" && optionalString(value.status) && optionalString(value.type);
+const arrayOf = <T>(valid: Validator<T>): Validator<T[]> =>
+  (value): value is T[] => Array.isArray(value) && value.every(valid);
 
 export function factoryStage(issue?: PcIssue | null) {
   if (!issue || !Array.isArray(issue.labels)) return "";
@@ -50,19 +87,28 @@ export function deriveApprovalGates(approvals: PcApproval[], linkedIssues: Recor
   });
 }
 
-async function j<T>(path: string, fallback: T, timeoutMs = 6000): Promise<T> {
-  if (!paperclipConfigured()) return fallback;
+async function read<T>(path: string, fallback: T, valid: Validator<T>, timeoutMs = 6000): Promise<ReadResult<T>> {
+  if (!paperclipConfigured()) return { value: fallback, ok: true };
   try {
     const r = await fetch(`${BASE}${path}`, { cache: "no-store", headers: AUTH, signal: AbortSignal.timeout(timeoutMs) });
-    if (!r.ok) return fallback;
-    return (await r.json()) as T;
+    if (!r.ok) return { value: fallback, ok: false };
+    const value = await r.json();
+    return valid(value) ? { value, ok: true } : { value: fallback, ok: false };
   } catch {
-    return fallback;
+    return { value: fallback, ok: false };
   }
+}
+
+const anyValue = <T>(_: unknown): _ is T => true;
+async function j<T>(path: string, fallback: T, timeoutMs = 6000): Promise<T> {
+  return (await read<T>(path, fallback, anyValue, timeoutMs)).value;
 }
 
 export function getCompany() {
   return j<Record<string, unknown>>(`/companies/${COMPANY}`, {});
+}
+export async function paperclipCompanyStatus() {
+  return read<Record<string, unknown>>(`/companies/${COMPANY}`, {}, isObject);
 }
 export function listAgents() {
   return j<PcAgent[]>(`/companies/${COMPANY}/agents`, []);
@@ -85,6 +131,27 @@ export async function listApprovals() {
 export function listApprovalIssues(approvalId: string) {
   if (!UUID.test(approvalId)) return Promise.resolve([]);
   return j<unknown>(`/approvals/${approvalId}/issues`, []).then((issues) => Array.isArray(issues) ? issues : []);
+}
+
+export async function paperclipStatus() {
+  const [company, agents, issues, runs, approvals] = await Promise.all([
+    read<Record<string, unknown>>(`/companies/${COMPANY}`, {}, isObject),
+    read<PcAgent[]>(`/companies/${COMPANY}/agents`, [], arrayOf(isAgent)),
+    read<PcIssue[]>(`/companies/${COMPANY}/issues`, [], arrayOf(isIssue)),
+    read<PcRun[]>(`/companies/${COMPANY}/heartbeat-runs?limit=40`, [], arrayOf(isRun)),
+    read<PcApproval[]>(`/companies/${COMPANY}/approvals?status=pending`, [], arrayOf(isApproval)),
+  ]);
+  const validApprovals = approvals.value.filter((approval) => approval?.status === "pending" && typeof approval.id === "string" && UUID.test(approval.id));
+  const linked = await Promise.all(validApprovals.map(async (approval) => [
+    approval.id,
+    await read<PcIssue[]>(`/approvals/${approval.id}/issues`, [], arrayOf(isIssue)),
+  ] as const));
+  return {
+    company: company.value, agents: agents.value, issues: issues.value, runs: runs.value,
+    approvals: validApprovals,
+    approvalIssues: Object.fromEntries(linked.map(([id, result]) => [id, result.value])),
+    ok: [company, agents, issues, runs, approvals, ...linked.map(([, result]) => result)].every(({ ok }) => ok),
+  };
 }
 
 export async function createIssue(input: { title: string; description: string; priority: string }): Promise<{ ok: true; issue: PcIssue; assignee: string; state: string } | { ok: false; error: string }> {

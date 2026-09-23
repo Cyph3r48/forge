@@ -9,12 +9,14 @@ because of usage limits; do not start another task in that session.
 1. Read AGENTS.md, [PROGRESS.md](PROGRESS.md), [TASK-02-ACCEPTANCE.md](TASK-02-ACCEPTANCE.md),
    and the next section of [WORK-PACKS.md](WORK-PACKS.md). The latter is the
    existing phase-by-phase worker list; do not generate a second roadmap.
-2. The distributable repository is private `Cyph3r48/forge`. Never publish the
+2. The distributable repository is `Cyph3r48/forge`. GitHub's PR API reported
+   it as public when PR #8 opened, which conflicts with the earlier private
+   record. No visibility change was made during Task 04d. Never publish the
    original workspace history. Its clean publishing checkout is
    `.artifacts/forge-publish-0915/` in the original workspace.
-3. The current lead checkout is `.worktrees/task04b-task-create-0920/`, branch
-   `agent/task04b-task-create-0920`, stacked on Task 04a PR #5. Resume from the
-   branch's current clean head.
+3. The current lead checkout is the Task 04d worktree, branch
+   `agent/task04d-luna-0922`, open as PR #8 and stacked on Task 04c PR #7. Resume
+   from its reviewed clean head and keep the dependent PR chain explicit.
 4. The owner authorized merging PRs #1 through #4. They landed on `main` in
    dependency order on September 20 after GitHub reported each exact head clean
    and mergeable. Do not merge later PRs or deploy without fresh authorization.
@@ -60,21 +62,16 @@ Reviewer inspected all 14 files, including OCR-excluded Markdown, and reported
 
 ## Current task
 
-Tasks 04a, 04b, and 04c are complete locally. Do not repeat the contract
-research, task-creation fix, pipeline-state mapping, route inventory, auth
-review, or completed tests.
+Tasks 04a through 04d are complete locally. Do not repeat the contract research,
+task-creation fix, pipeline-state mapping, runtime failure fix, route inventory,
+auth review, or completed tests.
 
-- Use [ENGINE-CONTRACTS.md](ENGINE-CONTRACTS.md) and the two versioned fixtures.
-- Task 04c is open as dependent PR #7 on Task 04b. Create a unique dependent
-  worktree for Task 04d from Task 04c's reviewed head.
-- Fix terminal run classification and partial engine failures without changing
-  the frozen runtime response shape.
-- Add malformed JSON, empty data, non-JSON error, and one-engine-down cases to
-  the runnable contract check. Do not use personal engines.
-- Preserve the frozen runtime response shape and the shared auth boundary.
-- Treat the inventory findings about hardcoded `source: "live"`, silent engine
-  fallbacks, and duplicate run reads as Task 04 inputs. Do not fix them without
-  authoritative contracts.
+- Start Task 05a only after the Task 04d handoff and dependent PR are recorded.
+- Read `skills/INDEX.md`, all four role charters, and current engine skill APIs.
+- Produce one expected local file/version manifest per seat. Report missing
+  files; do not invent replacements or create a second skill catalog.
+- Do not install remotely, contact personal engines, raise autonomy, merge, or
+  deploy without owner authorization.
 
 ## Assignment template
 
@@ -98,7 +95,7 @@ preserve focus, and never answer another agent's approval dialog without the
 required authorization. Without Herdr, the same ticket can be pasted manually.
 
 The previous environment had no `gh` binary; its GitHub connector could not see
-this private repository. Git fetch/push worked with existing credentials, and
+the Forge repository. Git fetch/push worked with existing credentials, and
 authenticated GitHub API calls worked. Recheck availability, use only authorized
 credentials, and never print them or copy them into handoffs.
 
