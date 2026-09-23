@@ -14,7 +14,7 @@ PR #6, Task 04c is open as dependent PR #7, and Task 04d is open as dependent
 PR #8. Task 04d's reviewed code head is `cf880b4`; later commits contain only
 the reviewed handoff. Task 05a is open as dependent PR #9 on
 `agent/task05a-lead-0922`, stacked on Task 04d. Task 05b is complete locally
-on `agent/task05b-lead-0923`, stacked on Task 05a. Task 05c is next.
+on `agent/task05b-lead-0923` as PR #10, stacked on Task 05a. Task 05c is next.
 No UI redesign, dispatcher, or real-engine factory lap has been completed.
 The bundled memory provider has been removed from code, API fields, UI, and
 documentation. The Memory page is now a generic unconfigured view. The Forge is
@@ -274,6 +274,10 @@ and `git diff --check 04f352c d4c9f8d` passed. The current manifest rejected
 missing Ponytail before creating an output directory. A complete fixture built
 twice with identical contents and verified hashes, file sets, symlinks, and
 execute bits. No remote installation or engine contact ran.
+PR #10 is open at https://github.com/Cyph3r48/forge/pull/10 with base
+`agent/task05a-lead-0922`; it was not merged. Luna separately reviewed the
+three lead-authored handoff files at `fa87ea1`: zero findings and 12 working
+local links.
 
 For a docs-only handoff, check links, consistency, doctor, and the diff.
 Do not repeat the full build unless application code or build inputs change.
