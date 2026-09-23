@@ -16,7 +16,7 @@ because of usage limits; do not start another task in that session.
    `.artifacts/forge-publish-0915/` in the original workspace.
 3. The current lead checkout is the Task 05a worktree, branch
    `agent/task05a-lead-0922`, based on reviewed Task 04d head `591f4eb`.
-   PRs #5 through #8 remain open in a dependent stack.
+   PR #9 is open on Task 04d PR #8; PRs #5 through #8 remain open below it.
 4. The owner authorized merging PRs #1 through #4. They landed on `main` in
    dependency order on September 20 after GitHub reported each exact head clean
    and mergeable. Do not merge later PRs or deploy without fresh authorization.

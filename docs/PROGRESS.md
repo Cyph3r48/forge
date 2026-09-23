@@ -12,8 +12,8 @@ September 20. OpenCodeReview delegation replaces the unavailable Greptile
 service for independent review. Task 04a is open as PR #5, Task 04b is open as
 PR #6, Task 04c is open as dependent PR #7, and Task 04d is open as dependent
 PR #8. Task 04d's reviewed code head is `cf880b4`; later commits contain only
-the reviewed handoff. Task 05a is complete locally on `agent/task05a-lead-0922`,
-stacked on Task 04d. Task 05b is next.
+the reviewed handoff. Task 05a is open as dependent PR #9 on
+`agent/task05a-lead-0922`, stacked on Task 04d. Task 05b is next.
 No UI redesign, dispatcher, or real-engine factory lap has been completed.
 The bundled memory provider has been removed from code, API fields, UI, and
 documentation. The Memory page is now a generic unconfigured view. The Forge is
@@ -97,7 +97,7 @@ are still pending.
 3. Read [WORK-PACKS.md](WORK-PACKS.md) for the per-phase assignments and exact
    worktree procedure. Read [ORCHESTRATOR-HANDOFF.md](ORCHESTRATOR-HANDOFF.md)
    for the takeover and worker limits. PRs #5 through #8 remain open in a
-   dependent stack. Task 05a branches from the reviewed Task 04d head at
+   dependent stack. Task 05a PR #9 branches from the reviewed Task 04d head at
    `591f4eb`; keep its dependency explicit.
    [PILOT-02A.md](PILOT-02A.md) records the earlier reading trial.
 4. Use isolated fixtures for engine behavior. Do not connect live services or
@@ -259,6 +259,8 @@ checks passed at `d987628`. OpenCodeReview selected the manifest with no
 exclusions; the lead found and Luna fixed two provenance and bundle-content
 issues in two correction rounds. Ponytail remains a declared missing file.
 No engine was contacted and no remote installation, merge, or deployment ran.
+PR #9 is open at https://github.com/Cyph3r48/forge/pull/9 with base
+`agent/task04d-luna-0922`; it was not merged.
 
 For a docs-only handoff, check links, consistency, doctor, and the diff.
 Do not repeat the full build unless application code or build inputs change.
