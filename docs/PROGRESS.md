@@ -12,13 +12,14 @@ September 20. OpenCodeReview delegation replaces the unavailable Greptile
 service for independent review. Task 04a is open as PR #5, Task 04b is open as
 PR #6, Task 04c is open as dependent PR #7, and Task 04d is open as dependent
 PR #8. Task 04d's reviewed code head is `cf880b4`; later commits contain only
-the reviewed handoff. Task 05a is next.
+the reviewed handoff. Task 05a is open as dependent PR #9 on
+`agent/task05a-lead-0922`, stacked on Task 04d. Task 05b is next.
 No UI redesign, dispatcher, or real-engine factory lap has been completed.
 The bundled memory provider has been removed from code, API fields, UI, and
 documentation. The Memory page is now a generic unconfigured view. The Forge is
-published at https://github.com/Cyph3r48/forge. GitHub's PR API reported the
-repository as public when PR #8 opened on September 22, which conflicts with the
-earlier private-repository record. No visibility change was made in this task.
+published at https://github.com/Cyph3r48/forge. GitHub's repository API
+confirmed public visibility on September 22, which conflicts with the earlier
+private-repository record. No visibility change was made in this task.
 Its initial source commit is `4c95cdf` and has no parent history.
 
 The Forge should both produce software and manage the agents that build it.
@@ -51,6 +52,8 @@ pipeline rules are requirements, not implemented enforcement.
 - The owner approved replacing Greptile with local OpenCodeReview delegation and
   stacking that protected-rule amendment on PR #3. Reviews use the local host
   agent; no separate OCR LLM endpoint or GitHub Action is configured.
+- The owner approved stacking Task 05a on the reviewed Task 04d head while PRs
+  #5 through #8 remain open. No merge or deployment was approved.
 
 ## Completed work
 
@@ -72,6 +75,7 @@ pipeline rules are requirements, not implemented enforcement.
 | Task 04b task creation | Resolves exactly one Foreman and `factory:intake` label before posting native priority, assignment, status, and label IDs. Malformed dependencies and created issues fail closed. Separate Tester and Reviewer passed head `3a012a6` with four of four files covered and zero findings |
 | Task 04c pipeline state and gates | Maps stages from one resolved factory label instead of native issue status. Gates come only from valid pending Paperclip approvals and their linked issues. Malformed approval, link, and label data fail closed. Luna completed two correction rounds. OpenCodeReview delegation and manual review covered all eight changed files with zero skipped files and zero remaining findings. The lead-authored handoff received separate read-only review |
 | Task 04d runtime failures | Terminal Paperclip runs stay terminal without `finishedAt`. Aggregate engine reads distinguish valid empty data from malformed, failed, and unreachable responses while preserving frozen response shapes. Luna completed two correction rounds; the lead closed the remaining trust-boundary gaps. An independent Reviewer covered all six files at `cf880b4` with zero skipped files and zero findings |
+| Task 05a local manifest | The four seat assignments map to 18 vendored skills and 78 tracked skill files, with source-commit hashes for the Law, acceptance table, and seat charters. Ponytail is required but absent and is marked missing for every seat. The lead checked all paths and hashes independently at `d987628` after two correction rounds |
 | Clean distributable baseline | Root commit `283a5e9` in a separate local source copy; 133 audited files, no original history and no remote |
 
 The six delivery skills are before-and-after, code-structure,
@@ -92,10 +96,9 @@ are still pending.
    Never modify another agent's worktree or uncommitted work.
 3. Read [WORK-PACKS.md](WORK-PACKS.md) for the per-phase assignments and exact
    worktree procedure. Read [ORCHESTRATOR-HANDOFF.md](ORCHESTRATOR-HANDOFF.md)
-   for the Sol/GLM-compatible takeover and worker limits. PR #7 is open for Task
-   04c. Task 04d is complete on `agent/task04d-luna-0922`, based on Task 04c's
-   reviewed head. PR #8 is open on Task 04c. Keep the dependent stack explicit
-   while PRs #5 through #8 remain open.
+   for the takeover and worker limits. PRs #5 through #8 remain open in a
+   dependent stack. Task 05a PR #9 branches from the reviewed Task 04d head at
+   `591f4eb`; keep its dependency explicit.
    [PILOT-02A.md](PILOT-02A.md) records the earlier reading trial.
 4. Use isolated fixtures for engine behavior. Do not connect live services or
    raise the autonomy dial. Engine access is not required for documentation
@@ -129,10 +132,10 @@ replace or force-push the published history. No deployment is authorized.
 
 ## Task 05: next action
 
-Start Task 05a from the reviewed Task 04d head. Read `skills/INDEX.md`, the four
-role charters, and current engine skill APIs. Produce the expected local
-file/version manifest for each seat. Report missing files instead of inventing
-skills. Do not install anything remotely or contact personal engines.
+Task 05b should assemble and verify local bundles from
+`factory/skill-manifest.json`. A complete bundle must fail while the required
+Ponytail skill is missing. Keep that gap explicit; do not invent or install a
+replacement. Remote installation and personal engine access remain unapproved.
 
 ## Phase checklist
 
@@ -246,6 +249,18 @@ independent Reviewer reported zero findings at the final head. Local before and
 after output remains in `.artifacts/task04d-luna-0922/`. No live engine, merge,
 or deployment ran. PR #8 is open at https://github.com/Cyph3r48/forge/pull/8
 with base `agent/task04c-luna-0922`; it was not merged.
+
+Task 05a added `factory/skill-manifest.json` where the reviewed Task 04d base
+had no seat manifest. It lists 18 assigned skills, hashes all 78 tracked files
+in those skill folders, and hashes the Law, acceptance table, and seat charter
+for each seat. The lead checked the hashes against the source commit and matched
+seat assignments to the charters. JSON parsing, doctor (five passes), and diff
+checks passed at `d987628`. OpenCodeReview selected the manifest with no
+exclusions; the lead found and Luna fixed two provenance and bundle-content
+issues in two correction rounds. Ponytail remains a declared missing file.
+No engine was contacted and no remote installation, merge, or deployment ran.
+PR #9 is open at https://github.com/Cyph3r48/forge/pull/9 with base
+`agent/task04d-luna-0922`; it was not merged.
 
 For a docs-only handoff, check links, consistency, doctor, and the diff.
 Do not repeat the full build unless application code or build inputs change.

@@ -9,14 +9,14 @@ because of usage limits; do not start another task in that session.
 1. Read AGENTS.md, [PROGRESS.md](PROGRESS.md), [TASK-02-ACCEPTANCE.md](TASK-02-ACCEPTANCE.md),
    and the next section of [WORK-PACKS.md](WORK-PACKS.md). The latter is the
    existing phase-by-phase worker list; do not generate a second roadmap.
-2. The distributable repository is `Cyph3r48/forge`. GitHub's PR API reported
-   it as public when PR #8 opened, which conflicts with the earlier private
-   record. No visibility change was made during Task 04d. Never publish the
+2. The distributable repository is `Cyph3r48/forge`. GitHub's repository API
+   confirmed public visibility on September 22, which conflicts with the earlier
+   private record. No visibility change was made during Task 05a. Never publish the
    original workspace history. Its clean publishing checkout is
    `.artifacts/forge-publish-0915/` in the original workspace.
-3. The current lead checkout is the Task 04d worktree, branch
-   `agent/task04d-luna-0922`, open as PR #8 and stacked on Task 04c PR #7. Resume
-   from its reviewed clean head and keep the dependent PR chain explicit.
+3. The current lead checkout is the Task 05a worktree, branch
+   `agent/task05a-lead-0922`, based on reviewed Task 04d head `591f4eb`.
+   PR #9 is open on Task 04d PR #8; PRs #5 through #8 remain open below it.
 4. The owner authorized merging PRs #1 through #4. They landed on `main` in
    dependency order on September 20 after GitHub reported each exact head clean
    and mergeable. Do not merge later PRs or deploy without fresh authorization.
@@ -62,14 +62,14 @@ Reviewer inspected all 14 files, including OCR-excluded Markdown, and reported
 
 ## Current task
 
-Tasks 04a through 04d are complete locally. Do not repeat the contract research,
-task-creation fix, pipeline-state mapping, runtime failure fix, route inventory,
-auth review, or completed tests.
+Tasks 04a through 05a are complete locally. Do not repeat the contract research,
+task-creation fix, pipeline-state mapping, runtime failure fix, or skill inventory.
 
-- Start Task 05a only after the Task 04d handoff and dependent PR are recorded.
-- Read `skills/INDEX.md`, all four role charters, and current engine skill APIs.
-- Produce one expected local file/version manifest per seat. Report missing
-  files; do not invent replacements or create a second skill catalog.
+- Task 05a records 18 assigned skills, 78 vendored skill files, and hashed
+  governing files for each seat in `factory/skill-manifest.json`.
+- Ponytail is required for every seat but is absent from the vendored skills.
+  Task 05b must reject incomplete bundles until that gap is resolved.
+- Implement Task 05b local bundle assembly and verification from the manifest.
 - Do not install remotely, contact personal engines, raise autonomy, merge, or
   deploy without owner authorization.
 
