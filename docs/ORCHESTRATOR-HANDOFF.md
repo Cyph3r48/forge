@@ -9,13 +9,12 @@ because of usage limits; do not start another task in that session.
 1. Read AGENTS.md, [PROGRESS.md](PROGRESS.md), [TASK-02-ACCEPTANCE.md](TASK-02-ACCEPTANCE.md),
    and the next section of [WORK-PACKS.md](WORK-PACKS.md). The latter is the
    existing phase-by-phase worker list; do not generate a second roadmap.
-2. The distributable repository is `Cyph3r48/forge`. GitHub's repository API
-   confirmed public visibility on September 22, which conflicts with the earlier
-   private record. No visibility change was made during Task 05a. Never publish the
-   original workspace history. Its clean publishing checkout is
+2. The distributable repository is `Cyph3r48/forge`. The owner confirmed making
+   it public on September 23. Never publish the original workspace history.
+   Its clean publishing checkout is
    `.artifacts/forge-publish-0915/` in the original workspace.
-3. The current lead checkout is the Task 05a worktree, branch
-   `agent/task05a-lead-0922`, based on reviewed Task 04d head `591f4eb`.
+3. The current lead checkout is the Task 05b worktree, branch
+   `agent/task05b-lead-0923`, based on Task 05a head `04f352c`.
    PR #9 is open on Task 04d PR #8; PRs #5 through #8 remain open below it.
 4. The owner authorized merging PRs #1 through #4. They landed on `main` in
    dependency order on September 20 after GitHub reported each exact head clean
@@ -62,14 +61,16 @@ Reviewer inspected all 14 files, including OCR-excluded Markdown, and reported
 
 ## Current task
 
-Tasks 04a through 05a are complete locally. Do not repeat the contract research,
+Tasks 04a through 05b are complete locally. Do not repeat the contract research,
 task-creation fix, pipeline-state mapping, runtime failure fix, or skill inventory.
 
 - Task 05a records 18 assigned skills, 78 vendored skill files, and hashed
   governing files for each seat in `factory/skill-manifest.json`.
-- Ponytail is required for every seat but is absent from the vendored skills.
-  Task 05b must reject incomplete bundles until that gap is resolved.
-- Implement Task 05b local bundle assembly and verification from the manifest.
+- Task 05b added `evals/skill_bundles.py` to build and verify exact local seat
+  bundles. The current manifest rejects bundle creation because Ponytail is
+  required for every seat and absent from the vendored skills.
+- Task 05c should verify effective instructions with fixture agents while
+  retaining the missing Ponytail finding.
 - Do not install remotely, contact personal engines, raise autonomy, merge, or
   deploy without owner authorization.
 
