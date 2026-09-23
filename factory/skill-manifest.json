@@ -1,0 +1,306 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "591f4eb5067bbace984e6a977fb0e356ed9ec8ee",
+  "skills": {
+    "build-dark-factory": {
+      "source": "github.com/coleam00/skills",
+      "license": "upstream repo license",
+      "version": "unknown",
+      "revision": "unknown",
+      "files": {
+        "skills/build-dark-factory/SKILL.md": "1bd692abc0d36bed6b545642fde02b69e5e1f2218fde1b127052d6d189ceba8a",
+        "skills/build-dark-factory/dark-factory-diagram.png": "3591ec15c82c9fda4dd0b137c52f6c7b449a54145eb721b907d4f644b5b7949b",
+        "skills/build-dark-factory/references/automation.md": "c331ef4213bf404906bf2466628623e588984b9b497aa26b252e488acf799c7e",
+        "skills/build-dark-factory/references/deployment.md": "26cbbf455cc53a9fa452f067de94a7d55fc2c4064a9df0dc3e3b088f095889d3",
+        "skills/build-dark-factory/references/guidance-layer.md": "223e020da35ad6c6c4f2f97f45003970115f05e43e02521777f713457e73fb1e",
+        "skills/build-dark-factory/references/interview.md": "5133236198b37b4617a0567d0a0126a83c2ce6c53b0a807c8da3e90ad3614b5a",
+        "skills/build-dark-factory/references/setup.md": "88edd3db7783504bdb9a7c3187997a7f9c7cdb23fef746267b29d352d165408f",
+        "skills/build-dark-factory/references/validation-harness.md": "94ae0c5cc13e8616e64be1b03706afbd13f76e0f964a06dfeb660f1472dfd4cd",
+        "skills/build-dark-factory/scripts/_audit_runner.py": "2a0d043defea45ca83cd8252a4084b56c719dd8130022240f6b178f195258985",
+        "skills/build-dark-factory/scripts/_test_audit_runner.py": "c699980a17aeb272b11ea6e43626948925e3ac9ca521fb9f9868179a6fcf5da2",
+        "skills/build-dark-factory/scripts/_test_factory_doctor.py": "31d867ee0560ef7be8c52a89c0618eb995864930de51a13d3a81f2bef9bdcbcf",
+        "skills/build-dark-factory/scripts/_test_runner.py": "168417290bf127f9b3ff7e29cf55273909a9d3602bee8482d34a9472bdcfcdb9",
+        "skills/build-dark-factory/scripts/factory_doctor.py": "9807007b49f5af14adb463838a6ed2a6f35637cb2a41bb0b9057ee3f9d8c39e3",
+        "skills/build-dark-factory/templates/CLAUDE.md": "8c56e4c7e54a2ade2333a864e01dad2d11fe297541a5aff381db03db6f872ade",
+        "skills/build-dark-factory/templates/FACTORY.md": "1fc607469a56c13e117c08d76e8e13a78ef64c4e8ecf624c0fcc7860ba83fac0",
+        "skills/build-dark-factory/templates/FACTORY_RULES.md": "cd8e223d5d14cb8c829df527c32ef7b0f0b4f1ce4d04c4b93d27a2cdb2edf8e4",
+        "skills/build-dark-factory/templates/MISSION.md": "7508a6019e4290c3e0179c20ce2cf4abfad4d0090924e05fa668f83e4c473617",
+        "skills/build-dark-factory/templates/harness/README.md": "3078e6b5d8b36d6b4e9abfab6ce1323c27fee16005b9175b9c5573aa9d271da5",
+        "skills/build-dark-factory/templates/harness/appproc.py": "802db8eb11eec46ae80a9feebbb288c15e0bb03a0ba37584895230918b95cedf",
+        "skills/build-dark-factory/templates/harness/ci.py": "2f2e86fdbef8c9a3ecf4afa7e38b152f164735e156f439d533b6e01c43f7a339",
+        "skills/build-dark-factory/templates/harness/e2e.py": "422bc63f3d63be1aeb802519e194ad9e04637fe66e6d4265d90b0add96c30b02",
+        "skills/build-dark-factory/templates/harness/harness.config.json": "9ece96ceb91b504c84847ec2cb964f268e1cd597777a8659554030d0889d34b0",
+        "skills/build-dark-factory/templates/harness/holdout/run.py": "a8f778f290b33b1dad4d224e5a19a0ffb778ce18a81f12fdcc247cd0b7dc5c64",
+        "skills/build-dark-factory/templates/harness/locks/floor.json": "e9850d715ca05a3c9c59e4ff725c15cba548c7466597ffda03f3e04764087c56",
+        "skills/build-dark-factory/templates/harness/mutations/defects.json": "bf28f65c4680b1e68c4b9eff7b65347093576840e0e29831190c9afaef1e4cf0",
+        "skills/build-dark-factory/templates/harness/mutations/run.py": "0fea79506acc24ea4998b91c953f02f154699108ed73fe647dc467b2abe7ed49",
+        "skills/build-dark-factory/templates/runner/.factory/decisions.md": "0734eee9fa8e8501aa1f5a520a75a43075c7238535b0c10a588e50f02c67d1b3",
+        "skills/build-dark-factory/templates/runner/.gitattributes": "906094f73299ddc9eb4c9a2d4e42c63cef4202e2e4ceae8015291856fb6f1b8e",
+        "skills/build-dark-factory/templates/runner/.gitignore": "03b021a188920d552c7a56348b9e1fe4ba41436e2db741266f78143700d6cf51",
+        "skills/build-dark-factory/templates/runner/README.md": "8bcacec85cea4745c7fac5e45de4c7a6373cf0775a6bf4a5aec1226b65ea6fd7",
+        "skills/build-dark-factory/templates/runner/factory/config.sh": "af67d8ecc208186bba0d201b7f25619d6b70c5e853d46211d8ae7d96e1f5d9fc",
+        "skills/build-dark-factory/templates/runner/factory/cost.py": "76229f01c21ead2c577069b3a426a8915d3ecd6b1540eaf2d55495ccc708a37a",
+        "skills/build-dark-factory/templates/runner/factory/deploy.sh": "10dea41d565175f43b7c7b66a10475802718441b9c993f140bc8a21f16855fe4",
+        "skills/build-dark-factory/templates/runner/factory/gate.sh": "a979cc7475b153f70fd739c0d5e8da15119cb9e502c2ebc1011aaee198dc01b6",
+        "skills/build-dark-factory/templates/runner/factory/gh_backend.py": "c9ddb262f8c8247fa3e8541f0e993410eaa3f3b31c4d01bd501cda8388f2cb12",
+        "skills/build-dark-factory/templates/runner/factory/guard.py": "a4613d3ad5089eb092c25aba6fb427ada9ae289c2fc18e23c3982e324ec19af4",
+        "skills/build-dark-factory/templates/runner/factory/init-labels.sh": "737200eba421b417b22f068b5b98494a3d09ada9faa7c63c50faccb41b6324c1",
+        "skills/build-dark-factory/templates/runner/factory/install-trigger.sh": "0ccc85731b122a5a5112fd62713a0b99d894590f221b86791ea66ee971a8b7da",
+        "skills/build-dark-factory/templates/runner/factory/merge.sh": "b80de3619a85c74b6b5b669234ee03081d3ca88d0cec2716e00321877c63fc22",
+        "skills/build-dark-factory/templates/runner/factory/node_failure.py": "73db51fb31d37bd22fdf2a85193ed35095ef16306250b182886813815651e579",
+        "skills/build-dark-factory/templates/runner/factory/orchestrator.sh": "f5825472e23c33f14f11256d6b7338fa428a22457b146d2b76d39c6fe13099d1",
+        "skills/build-dark-factory/templates/runner/factory/prompts/fix.md": "a2666edf9164977d420d7a33c77a9baff6ae6819b5dc85d56b809a3605abb379",
+        "skills/build-dark-factory/templates/runner/factory/prompts/implement.md": "b1bd9179d656a66c38c678499561c6502d1a0a60022082e4f6687e52847a96b2",
+        "skills/build-dark-factory/templates/runner/factory/prompts/judge.md": "2db9195e6409e50bc8deee21d256e3349b7d48c7d23332d25f6aad37170f7b17",
+        "skills/build-dark-factory/templates/runner/factory/prompts/plan.md": "af54df6f81a0337395c5ecb077e5fba20765fb0d255cb69d833fed490c0e92fa",
+        "skills/build-dark-factory/templates/runner/factory/prompts/prime.md": "dc9629f30c424ddabedd898b3e173264a1cef8b184c6cbb53ff3468d2866df57",
+        "skills/build-dark-factory/templates/runner/factory/prompts/review.md": "dd73fc37fc3aa8af5aa1ceeddf2e2a9467bf286397190eda281a1fd8397b51ca",
+        "skills/build-dark-factory/templates/runner/factory/prompts/triage.md": "1cd740d2d85ebc48d7552b2534846295b23ba15dbda5b1fccf407a2726f53d16",
+        "skills/build-dark-factory/templates/runner/factory/run-workflow.sh": "30c53b3857ad9ebc9b826536cab4d919054b07fd977b74f9f56fadf742be6afb",
+        "skills/build-dark-factory/templates/runner/factory/state.py": "79684ab48f2b9cdbe1415991e2bd64b1538851378d55d0a8f60f7aebf85262ce",
+        "skills/build-dark-factory/templates/runner/factory/tripwire.py": "6b81af556a11c5967fc12616b4d78da27e5adbbfa3b8af984ea7127fe497b2f8",
+        "skills/build-dark-factory/templates/runner/issues/0001-example.md": "23551965351e8000c60deb8823f06939f8c332bec8f8673355540a6f42e9d7ad"
+      }
+    },
+    "piv-slice-epic": {
+      "source": "github.com/coleam00/skills",
+      "license": "upstream repo license",
+      "version": "unknown",
+      "revision": "unknown",
+      "files": {
+        "skills/piv-slice-epic/SKILL.md": "38988f6117981b69e4b7c73dd7783eb735f2c76ca0334822d26803bbe93ac24f"
+      }
+    },
+    "worktree-create": {
+      "source": "github.com/coleam00/skills",
+      "license": "upstream repo license",
+      "version": "unknown",
+      "revision": "unknown",
+      "files": {
+        "skills/worktree-create/SKILL.md": "dd56bad857c05c2831ae44360efe84c1c7e5002ab5725f3b56d32bb99c4c6dd8",
+        "skills/worktree-create/references/worktree-setup.md": "80f8b5bb97bebde1ce43edbfb234d1134582a2409adad8f82be4ae40e92564ea"
+      }
+    },
+    "worktree-merge": {
+      "source": "github.com/coleam00/skills",
+      "license": "upstream repo license",
+      "version": "unknown",
+      "revision": "unknown",
+      "files": {
+        "skills/worktree-merge/SKILL.md": "35a892ea7f98bebea3118578b41031ffb9d4446c9abe8aec318da5f1bd551064"
+      }
+    },
+    "unslop": {
+      "source": "github.com/michaelshimeles/skills",
+      "license": "MIT",
+      "version": "unknown",
+      "revision": "513f8a24aae6383b00356fa285144b1bc3730dc1",
+      "files": {
+        "skills/unslop/LICENSE": "bc957ca6bee02792566a1a028d105e02e247c6e77cf057061674273da77b200e",
+        "skills/unslop/SKILL.md": "c861ee8c94debe24e28fe3f7d567883ed95ad9741fb8a4227fe217db8667fa78"
+      }
+    },
+    "system-execution-report": {
+      "source": "github.com/coleam00/skills",
+      "license": "upstream repo license",
+      "version": "unknown",
+      "revision": "unknown",
+      "files": {
+        "skills/system-execution-report/SKILL.md": "ca18e50c64130e33bb63afcbae5dfb3f8461a825ee62f0035b6b2154abb437d4"
+      }
+    },
+    "system-evolution-review": {
+      "source": "github.com/coleam00/skills",
+      "license": "upstream repo license",
+      "version": "unknown",
+      "revision": "unknown",
+      "files": {
+        "skills/system-evolution-review/SKILL.md": "98fe73ca5bf2fba446b9bcea4d974fd46237d746a0e89ae9df5aad4cce7fb562"
+      }
+    },
+    "new-feature": {
+      "source": "github.com/michaelshimeles/skills",
+      "license": "upstream repo license",
+      "version": "unknown",
+      "revision": "513f8a24aae6383b00356fa285144b1bc3730dc1",
+      "files": {
+        "skills/new-feature/SKILL.md": "8ec3b6ae1d9190458fe6503fe0ddc4af92277e19899176c85bbc5016e01f9c35"
+      }
+    },
+    "code-structure": {
+      "source": "github.com/michaelshimeles/skills",
+      "license": "upstream repo license",
+      "version": "unknown",
+      "revision": "513f8a24aae6383b00356fa285144b1bc3730dc1",
+      "files": {
+        "skills/code-structure/SKILL.md": "181ee2eab452ed87903b62709ea96ac65a674b5466823c1a107e9a19ebb0d0fa"
+      }
+    },
+    "source-code-context": {
+      "source": "github.com/pawel-cell/micky-podcast-agentic-engineering (older skill set by Micky/Michael Shimeles)",
+      "license": "upstream repo license",
+      "version": "1.0.0",
+      "revision": "unknown",
+      "files": {
+        "skills/source-code-context/SKILL.md": "b12c8bd52c2cbfad72bdc4a2ff72926f5da057b0f902828a71a8f9ff8e685e5b"
+      }
+    },
+    "piv-fix-review-findings": {
+      "source": "github.com/coleam00/skills",
+      "license": "upstream repo license",
+      "version": "unknown",
+      "revision": "unknown",
+      "files": {
+        "skills/piv-fix-review-findings/SKILL.md": "58baad5552747914541dc849973480271400c5cb6fa2deb325161562ff91436a"
+      }
+    },
+    "prime-codebase": {
+      "source": "github.com/coleam00/skills",
+      "license": "upstream repo license",
+      "version": "unknown",
+      "revision": "unknown",
+      "files": {
+        "skills/prime-codebase/SKILL.md": "ddb2abc82352b52bea535f2a84d6d65ef738209fb347d75413dca57c41da58a2"
+      }
+    },
+    "evidence-driven-testing": {
+      "source": "github.com/michaelshimeles/skills",
+      "license": "upstream repo license",
+      "version": "1.2",
+      "revision": "513f8a24aae6383b00356fa285144b1bc3730dc1",
+      "files": {
+        "skills/evidence-driven-testing/SKILL.md": "690ab930e34ecc16a499b090e93261ad66bd0ae7153c5d3354f15b29e2405ff5",
+        "skills/evidence-driven-testing/scripts/evidence.py": "d246b499991d495bf2f972f852d2dae0851b5bff2b5a64347f610242808ae8eb"
+      }
+    },
+    "piv-validate": {
+      "source": "github.com/coleam00/skills",
+      "license": "upstream repo license",
+      "version": "unknown",
+      "revision": "unknown",
+      "files": {
+        "skills/piv-validate/SKILL.md": "ddd06fb3c73c79787fef0a077453189a299c795e28c85a4e5fbe1b84b97173d4"
+      }
+    },
+    "piv-review-pr": {
+      "source": "github.com/coleam00/skills",
+      "license": "upstream repo license",
+      "version": "unknown",
+      "revision": "unknown",
+      "files": {
+        "skills/piv-review-pr/SKILL.md": "8fdf0a54503dc79c97b0e0247d3a6d3d25b12e9b95811afbae7b5d14f3e00144"
+      }
+    },
+    "rules-check-drift": {
+      "source": "github.com/coleam00/skills",
+      "license": "upstream repo license",
+      "version": "unknown",
+      "revision": "unknown",
+      "files": {
+        "skills/rules-check-drift/SKILL.md": "9017f6146f3a7dfb9c6df8e24c1ab2b6f0a684f665d2bb9b4e28b5a14d4ed91a"
+      }
+    },
+    "open-code-review-delegate": {
+      "source": "local integration for github.com/alibaba/open-code-review v1.10.0 (`a66240084b382ed97a47590bdec13a6a34df0743`)",
+      "license": "local instructions; OCR is Apache-2.0",
+      "version": "1.10.0",
+      "revision": "a66240084b382ed97a47590bdec13a6a34df0743",
+      "files": {
+        "skills/open-code-review-delegate/SKILL.md": "ddc33d02b0d532c17181ddbdb0c6301df6d297605a35015879fd83049dc4f972"
+      }
+    },
+    "before-and-after": {
+      "source": "github.com/michaelshimeles/skills",
+      "license": "PolyForm Shield License 1.0.0",
+      "version": "unknown",
+      "revision": "513f8a24aae6383b00356fa285144b1bc3730dc1",
+      "files": {
+        "skills/before-and-after/LICENSE": "e328fb0674dec4c1640fa17dbdb6834324dd53ec9ea43439e13e01e8b2598847",
+        "skills/before-and-after/SKILL.md": "41d60332de835850db0834070d0bfe939778b1f3aa273e708581dcd60394b8ee",
+        "skills/before-and-after/scripts/adapters/0x0st.sh": "41f7332528c8bed5aef244a852343e4ad74dba29438044e2a3cf0aaa00729a2b",
+        "skills/before-and-after/scripts/adapters/blob.sh": "2f1eb23d5ceefb12a997d68ccdb04ffa0deff77f31187cf3af5442caf91eb815",
+        "skills/before-and-after/scripts/adapters/gist.sh": "3b595606b308c625adbd16b95e72fd1999a1c2d42ad8e00fc7270bc5600bc374",
+        "skills/before-and-after/scripts/capture.sh": "d13c99cf25adfb6f761b8f8b994e3298a893a783e027d042bad724b01949cbf7",
+        "skills/before-and-after/scripts/upload-and-copy.sh": "e23be6b5b3ac2c6635f9cf702326382ac81b797e56687e3d473090567423e472"
+      }
+    }
+  },
+  "seats": {
+    "Foreman": {
+      "skills": [
+        "build-dark-factory",
+        "piv-slice-epic",
+        "worktree-create",
+        "worktree-merge",
+        "unslop",
+        "system-execution-report",
+        "system-evolution-review"
+      ],
+      "missingRequired": [
+        {
+          "name": "ponytail",
+          "expectedPath": "skills/ponytail/SKILL.md",
+          "requiredBy": "FACTORY-LAW.md",
+          "status": "missing"
+        }
+      ]
+    },
+    "Builder": {
+      "skills": [
+        "new-feature",
+        "code-structure",
+        "source-code-context",
+        "piv-fix-review-findings",
+        "prime-codebase",
+        "unslop",
+        "system-execution-report",
+        "system-evolution-review"
+      ],
+      "missingRequired": [
+        {
+          "name": "ponytail",
+          "expectedPath": "skills/ponytail/SKILL.md",
+          "requiredBy": "FACTORY-LAW.md",
+          "status": "missing"
+        }
+      ]
+    },
+    "Tester": {
+      "skills": [
+        "evidence-driven-testing",
+        "piv-validate",
+        "prime-codebase",
+        "unslop",
+        "system-execution-report",
+        "system-evolution-review"
+      ],
+      "missingRequired": [
+        {
+          "name": "ponytail",
+          "expectedPath": "skills/ponytail/SKILL.md",
+          "requiredBy": "FACTORY-LAW.md",
+          "status": "missing"
+        }
+      ]
+    },
+    "Reviewer": {
+      "skills": [
+        "piv-review-pr",
+        "rules-check-drift",
+        "open-code-review-delegate",
+        "before-and-after",
+        "unslop",
+        "system-execution-report",
+        "system-evolution-review"
+      ],
+      "missingRequired": [
+        {
+          "name": "ponytail",
+          "expectedPath": "skills/ponytail/SKILL.md",
+          "requiredBy": "FACTORY-LAW.md",
+          "status": "missing"
+        }
+      ]
+    }
+  }
+}
