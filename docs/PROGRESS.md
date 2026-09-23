@@ -10,8 +10,8 @@ Phase 1 is in progress. Task 01, local repository preparation, is complete.
 Tasks 02 and 03 are merged. PRs #1 through #4 landed on `main` in order on
 September 20. OpenCodeReview delegation replaces the unavailable Greptile
 service for independent review. Task 04a is open as PR #5, Task 04b is open as
-PR #6, and Task 04c is open as dependent PR #7. Task 04c's reviewed code head
-is `fa4d303`; later commits contain only the reviewed handoff. Task 04d is next.
+PR #6, and Task 04c is open as dependent PR #7. Task 04d is complete locally
+at reviewed head `cf880b4`; Task 05a is next.
 No UI redesign, dispatcher, or real-engine factory lap has been completed.
 The bundled memory provider has been removed from code, API fields, UI, and
 documentation. The Memory page is now a generic unconfigured view. The Forge is published at https://github.com/Cyph3r48/forge as a private
@@ -67,6 +67,7 @@ pipeline rules are requirements, not implemented enforcement.
 | Task 04a engine contracts | Pinned Paperclip `v2026.916.0` at `dffc2b3ca1b9e88fa21cb17493083e682dffd1ca` and Hermes `v2026.9.14` at `345cd2b057a452236de401d3534b8502a7465e8d`. Versioned fixtures record the approved requests, envelopes, statuses, and normalized output. The fixture check passes; no live engine was contacted |
 | Task 04b task creation | Resolves exactly one Foreman and `factory:intake` label before posting native priority, assignment, status, and label IDs. Malformed dependencies and created issues fail closed. Separate Tester and Reviewer passed head `3a012a6` with four of four files covered and zero findings |
 | Task 04c pipeline state and gates | Maps stages from one resolved factory label instead of native issue status. Gates come only from valid pending Paperclip approvals and their linked issues. Malformed approval, link, and label data fail closed. Luna completed two correction rounds. OpenCodeReview delegation and manual review covered all eight changed files with zero skipped files and zero remaining findings. The lead-authored handoff received separate read-only review |
+| Task 04d runtime failures | Terminal Paperclip runs stay terminal without `finishedAt`. Aggregate engine reads distinguish valid empty data from malformed, failed, and unreachable responses while preserving frozen response shapes. Luna completed two correction rounds; the lead closed the remaining trust-boundary gaps. An independent Reviewer covered all six files at `cf880b4` with zero skipped files and zero findings |
 | Clean distributable baseline | Root commit `283a5e9` in a separate local source copy; 133 audited files, no original history and no remote |
 
 The six delivery skills are before-and-after, code-structure,
@@ -88,8 +89,9 @@ are still pending.
 3. Read [WORK-PACKS.md](WORK-PACKS.md) for the per-phase assignments and exact
    worktree procedure. Read [ORCHESTRATOR-HANDOFF.md](ORCHESTRATOR-HANDOFF.md)
    for the Sol/GLM-compatible takeover and worker limits. PR #7 is open on Task
-   04b. Create a unique Task 04d worktree from Task 04c's reviewed head while
-   PRs #5 through #7 remain a recorded dependent stack.
+   04b. Task 04d is complete on `agent/task04d-luna-0922`, based on Task 04c's
+   reviewed head. Keep the dependent stack explicit while PRs #5 through #7
+   remain open.
    [PILOT-02A.md](PILOT-02A.md) records the earlier reading trial.
 4. Use isolated fixtures for engine behavior. Do not connect live services or
    raise the autonomy dial. Engine access is not required for documentation
@@ -119,11 +121,12 @@ created and its initial source pushed. No PR review or deployment was performed.
 Future work should use normal branches and PRs on that clean history. Do not
 replace or force-push the published history. No deployment is authorized.
 
-## Task 04: next action
+## Task 05: next action
 
-Use [ENGINE-CONTRACTS.md](ENGINE-CONTRACTS.md) and the versioned fixtures for
-Task 04d. Fix terminal run classification and partial engine failures without
-changing the frozen runtime response shape. Do not contact personal engines.
+Start Task 05a from the reviewed Task 04d head. Read `skills/INDEX.md`, the four
+role charters, and current engine skill APIs. Produce the expected local
+file/version manifest for each seat. Report missing files instead of inventing
+skills. Do not install anything remotely or contact personal engines.
 
 ## Phase checklist
 
@@ -132,7 +135,7 @@ changing the frozen runtime response shape. Do not contact personal engines.
 - [x] 01. Prepare isolated local commits and a source copy without private history.
 - [x] 02. Align spec, rules, role boundaries, and acceptance checks; merged in PR #2.
 - [x] 03. Add shared Forge authentication and safe memory access.
-- [ ] 04. Verify engine contracts; fix labels, priority, assignment, and failure reporting using versioned fixtures. Live verification needs separately authorized access.
+- [x] 04. Verify engine contracts; fix labels, priority, assignment, and failure reporting using versioned fixtures. Live deployment compatibility remains separately authorized work.
 - [ ] 05. Make law/skill bundle installation repeatable and verify effective versions. Remote installation needs separately authorized access.
 
 ### Phase 2: execution and accounting
@@ -163,8 +166,8 @@ There is no scheduled dispatcher or approved unattended operation yet.
 
 ## Known failures still open
 
-- Live/Runtime omit Hermes runs; a failed run without a finish timestamp can
-  appear working. Runtime joins by display name can conflate agents.
+- Live/Runtime omit Hermes runs, and runtime joins by display name can conflate
+  agents. Stable run retention and identity remain Task 07 work.
 - Memory integration, transition write-back, and per-run accounting are absent.
 - Failed task submission leaves Filing... disabled with no visible error.
 - The Work page measured 641px wide in a 390px viewport.
@@ -188,6 +191,10 @@ From the repository root after installing dependencies:
 python3 evals/doctor.py
 node evals/unconfigured-clients.mjs
 node evals/auth-boundary.mjs
+node evals/engine-contracts.mjs
+node evals/pipeline-state.mjs
+node evals/task-create.mjs
+node evals/task04d-runtime.mjs
 git diff --check
 ```
 
@@ -221,6 +228,17 @@ ignored `.artifacts/task04c-luna-0922/` directory. OpenCodeReview delegation
 selected four code files; the four excluded docs/fixture files were reviewed
 manually. Coverage was eight of eight files with zero findings. PR #7 is open;
 no live engine, merge, or deployment ran.
+
+Task 04d changed terminal heartbeat runs without finish times from `working` to
+`done` and added validated aggregate engine reads. Valid empty collections stay
+healthy; malformed data, non-JSON errors, unreachable engines, linked approval
+failures, and non-`ok` Hermes health report the affected engine unhealthy while
+the other engine stays available. The lead reran the focused eval, all earlier
+Task 04 checks, auth, doctor, build, TypeScript, and diff checks at `cf880b4`;
+all passed. OpenCodeReview selected all six files with no exclusions. The
+independent Reviewer reported zero findings at the final head. Local before and
+after output remains in `.artifacts/task04d-luna-0922/`. No live engine, merge,
+or deployment ran.
 
 For a docs-only handoff, check links, consistency, doctor, and the diff.
 Do not repeat the full build unless application code or build inputs change.
