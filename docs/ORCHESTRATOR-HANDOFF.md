@@ -95,7 +95,7 @@ preserve focus, and never answer another agent's approval dialog without the
 required authorization. Without Herdr, the same ticket can be pasted manually.
 
 The previous environment had no `gh` binary; its GitHub connector could not see
-this private repository. Git fetch/push worked with existing credentials, and
+the Forge repository. Git fetch/push worked with existing credentials, and
 authenticated GitHub API calls worked. Recheck availability, use only authorized
 credentials, and never print them or copy them into handoffs.
 

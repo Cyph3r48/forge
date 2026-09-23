@@ -111,7 +111,7 @@ The phase task packs do not grant authority beyond the owner's recorded choices.
 In the original workspace, the detailed review and screenshots are in
 `.artifacts/project-review-2026-09-14/`. They are optional local evidence,
 not required to resume from a clean clone. The publishing checkout is
-`.artifacts/forge-publish-0915/`, connected to the private GitHub repository.
+`.artifacts/forge-publish-0915/`, connected to the Forge GitHub repository.
 The older `.artifacts/forge-source-0914/` is superseded and must not be pushed.
 Do not push the original repository history: it contains old personal material.
 Use a fresh branch in the publishing checkout or a fresh GitHub clone for
@@ -120,8 +120,10 @@ future PRs; transfer only reviewed changes from the original workspace.
 The existing `agent/wave4-flash` branch adds only a company definition and
 first-lap runbook. It was read, not merged or changed. Do not mistake that
 runbook for an executed lap. GitHub lookup did not establish an accessible
-Forge repository before initialization. The private repository has now been
-created and its initial source pushed. No PR review or deployment was performed.
+Forge repository before initialization. The repository was created with private
+visibility recorded at initialization, and its initial source was pushed. The
+current visibility discrepancy is recorded above. No PR review or deployment
+was performed.
 Future work should use normal branches and PRs on that clean history. Do not
 replace or force-push the published history. No deployment is authorized.
 
