@@ -32,6 +32,7 @@ def write_manifest(source, mutate=None):
         target = source / path
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(content)
+    (source / "skills/sample/SKILL.md").chmod(0o755)
     manifest = {
         "schemaVersion": 1,
         "sourceCommit": "a" * 40,
@@ -110,6 +111,7 @@ def test_complete_and_verify(tmp):
     check(snapshot(first) == snapshot(second), "repeated builds differ")
     expected_path = "Foreman/skills/sample/SKILL.md"
     check(expected_path in snapshot(first), "manifest path not preserved under seat")
+    check((first / expected_path).stat().st_mode & 0o111 == 0o111, "execute bits were lost")
     linked = tmp / "bundle-link"
     linked.symlink_to(first, target_is_directory=True)
     check(run("verify", source, linked).returncode != 0, "verify accepted an output symlink")
@@ -124,6 +126,9 @@ def test_complete_and_verify(tmp):
     sample.unlink()
     check(run("verify", source, first).returncode != 0, "missing file passed")
     sample.write_bytes(original)
+    sample.chmod(0o644)
+    check(run("verify", source, first).returncode != 0, "lost execute bits passed")
+    sample.chmod(0o755)
     (first / "Foreman/extra.txt").write_text("extra\n")
     check(run("verify", source, first).returncode != 0, "extra file passed")
     (first / "Foreman/extra.txt").unlink()
@@ -131,6 +136,8 @@ def test_complete_and_verify(tmp):
 
 
 def test_invalid_sources(tmp):
+    valid = tmp / "valid"
+    write_manifest(valid)
     bad_hash = tmp / "bad-hash"
     write_manifest(bad_hash, lambda m: m["skills"]["sample"]["files"].__setitem__(
         "skills/sample/SKILL.md", "0" * 64
@@ -158,8 +165,13 @@ def test_invalid_sources(tmp):
 
     linked_output = tmp / "linked-output"
     linked_output.symlink_to(tmp / "not-created")
-    linked = run("build", bad_hash, linked_output)
-    check(linked.returncode != 0 and not (tmp / "not-created").exists(), "output symlink was followed")
+    linked = run("build", valid, linked_output)
+    check(
+        linked.returncode != 0
+        and "output already exists" in linked.stderr
+        and not (tmp / "not-created").exists(),
+        f"output symlink guard failed: {linked.stderr}",
+    )
     linked_output.unlink()
     print("PASS: build rejects bad hashes, traversal, malformed mappings, and symlink escape")
 

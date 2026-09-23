@@ -40,14 +40,14 @@ def source_bytes(root, relative):
         raise ValueError(f"source path escapes root: {relative}") from exc
     if not resolved.is_file():
         raise ValueError(f"source path is not a file: {relative}")
-    return resolved.read_bytes()
+    return resolved.read_bytes(), (resolved.stat().st_mode & 0o777)
 
 
 def prepare(source):
     root = Path(source).resolve(strict=True)
     if not root.is_dir():
         raise ValueError(f"source is not a directory: {root}")
-    raw = source_bytes(root, MANIFEST)
+    raw, _ = source_bytes(root, MANIFEST)
     try:
         manifest = json.loads(raw)
     except (UnicodeDecodeError, json.JSONDecodeError) as exc:
@@ -75,7 +75,7 @@ def prepare(source):
                 raise ValueError(f"invalid SHA-256 for {path!r}")
             if path not in cache:
                 cache[path] = source_bytes(root, path)
-            actual = hashlib.sha256(cache[path]).hexdigest()
+            actual = hashlib.sha256(cache[path][0]).hexdigest()
             if actual != expected:
                 raise ValueError(f"source hash mismatch: {path}")
             if path in target and target[path] != expected:
@@ -141,7 +141,9 @@ def build(source, output):
             for relative in files:
                 target = destination / seat / Path(*relative_parts(relative))
                 target.parent.mkdir(parents=True, exist_ok=True)
-                target.write_bytes(cache[relative])
+                data, mode = cache[relative]
+                target.write_bytes(data)
+                target.chmod(mode)
     except OSError:
         import shutil
 
@@ -152,7 +154,7 @@ def build(source, output):
 
 
 def verify(source, output):
-    _, bundles, _ = prepare(source)
+    _, bundles, cache = prepare(source)
     root = Path(output).expanduser()
     if root.is_symlink():
         raise ValueError(f"output is a symlink: {root}")
@@ -194,6 +196,8 @@ def verify(source, output):
             actual = hashlib.sha256(path.read_bytes()).hexdigest()
             if actual != expected:
                 raise ValueError(f"installed hash mismatch: {seat}/{relative}")
+            if path.stat().st_mode & 0o111 != cache[relative][1] & 0o111:
+                raise ValueError(f"installed execute bits mismatch: {seat}/{relative}")
             count += 1
     print(f"verified {len(bundles)} seat bundles ({count} files) at {root}")
 
