@@ -152,8 +152,9 @@ unmerged. Local acceptance is not deployment acceptance.
 
 Task 06a is next. The lead must define durable transition IDs, concurrency
 claims, inputs/results, and recovery before assigning implementation. Remote
-skill installation, live instruction delivery, and Paperclip compatibility
-against a running engine remain unchecked. Personal engine access is unapproved.
+skill installation, live instruction delivery, and Paperclip and Hermes
+compatibility against running engines remain unchecked. Personal engine access
+is unapproved.
 
 ## Phase checklist
 
