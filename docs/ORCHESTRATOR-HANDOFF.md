@@ -15,8 +15,8 @@ because of usage limits; do not start another task in that session.
    `.artifacts/forge-publish-0915/` in the original workspace.
 3. The current lead checkout is the Task 06a worktree, branch
    `agent/task06a-lead-0924`, based on Phase 1 exit head `93010d5`.
-   PR #12 records Phase 1 exit on Task 05c PR #11. PRs #5 through #11 remain
-   open below them in dependency order.
+   PR #12 records Phase 1 exit on Task 05c PR #11. PRs #5 through #12 remain
+   open in dependency order.
 4. The owner authorized merging PRs #1 through #4. They landed on `main` in
    dependency order on September 20 after GitHub reported each exact head clean
    and mergeable. Do not merge later PRs or deploy without fresh authorization.
