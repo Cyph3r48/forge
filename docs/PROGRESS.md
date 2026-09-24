@@ -1,6 +1,6 @@
 # Project progress and agent handoff
 
-Updated September 22, 2026. Start here, then read `docs/spec-v0.4.md` and
+Updated September 23, 2026. Start here, then read `docs/spec-v0.4.md` and
 the code for the assigned task. This file records project work only. Do not
 add personal notes, credentials, or deployed host details.
 
@@ -13,13 +13,13 @@ service for independent review. Task 04a is open as PR #5, Task 04b is open as
 PR #6, Task 04c is open as dependent PR #7, and Task 04d is open as dependent
 PR #8. Task 04d's reviewed code head is `cf880b4`; later commits contain only
 the reviewed handoff. Task 05a is open as dependent PR #9 on
-`agent/task05a-lead-0922`, stacked on Task 04d. Task 05b is next.
+`agent/task05a-lead-0922`, stacked on Task 04d. Task 05b is complete locally
+on `agent/task05b-lead-0923` as PR #10, stacked on Task 05a. Task 05c is next.
 No UI redesign, dispatcher, or real-engine factory lap has been completed.
 The bundled memory provider has been removed from code, API fields, UI, and
 documentation. The Memory page is now a generic unconfigured view. The Forge is
-published at https://github.com/Cyph3r48/forge. GitHub's repository API
-confirmed public visibility on September 22, which conflicts with the earlier
-private-repository record. No visibility change was made in this task.
+published at https://github.com/Cyph3r48/forge. The owner confirmed that they
+made the repository public on September 23.
 Its initial source commit is `4c95cdf` and has no parent history.
 
 The Forge should both produce software and manage the agents that build it.
@@ -54,6 +54,8 @@ pipeline rules are requirements, not implemented enforcement.
   agent; no separate OCR LLM endpoint or GitHub Action is configured.
 - The owner approved stacking Task 05a on the reviewed Task 04d head while PRs
   #5 through #8 remain open. No merge or deployment was approved.
+- The owner asked to continue the build after making the repository public.
+  Task 05b is stacked on Task 05a; PR merging and deployment remain unapproved.
 
 ## Completed work
 
@@ -65,7 +67,7 @@ pipeline rules are requirements, not implemented enforcement.
 | Local source cleanup | Commit `1b5f9cc` on `agent/repo-hygiene-0914`; removed `.env.example`, extended ignore rules, and documented offline startup |
 | Unconfigured client fix | Added shared Paperclip guards and `evals/unconfigured-clients.mjs`; requests went from five before the fix to zero afterward |
 | Memory provider removal | Commit `47f63c9` removed the provider client, configuration names, health badges, and provider-specific documentation; the generic route makes no external requests |
-| Private GitHub repository | Published `Cyph3r48/forge`, default branch main, from root commit `4c95cdf`; verified private visibility and no parent history |
+| GitHub repository | Published `Cyph3r48/forge`, default branch main, from root commit `4c95cdf` with no parent history; the owner later made it public |
 | Phase task packs and Luna pilot | Tasks 02-16 split into bounded assignments; 02a accepted after one correction round, then a separate high-reasoning handoff review. See [PILOT-02A.md](PILOT-02A.md); coding ability and quota savings remain unproven |
 | Task 02 alignment | Owner-approved acceptance table; law, spec, pipeline, four charters, and skill seat mapping aligned. Luna implemented the seven governing-file edits; lead reviewed and corrected remaining wording. Structural and consistency checks pass; runtime gates remain unproven |
 | Task 03 authentication | Shared Next.js proxy protects all seven factory methods with one bearer token; browser session storage supports refresh, cross-origin writes fail before routes, missing server auth fails closed, and unconfigured memory stays provider-neutral. Synthetic runtime checks, separate Tester, and independent security review passed with zero actionable findings |
@@ -76,6 +78,7 @@ pipeline rules are requirements, not implemented enforcement.
 | Task 04c pipeline state and gates | Maps stages from one resolved factory label instead of native issue status. Gates come only from valid pending Paperclip approvals and their linked issues. Malformed approval, link, and label data fail closed. Luna completed two correction rounds. OpenCodeReview delegation and manual review covered all eight changed files with zero skipped files and zero remaining findings. The lead-authored handoff received separate read-only review |
 | Task 04d runtime failures | Terminal Paperclip runs stay terminal without `finishedAt`. Aggregate engine reads distinguish valid empty data from malformed, failed, and unreachable responses while preserving frozen response shapes. Luna completed two correction rounds; the lead closed the remaining trust-boundary gaps. An independent Reviewer covered all six files at `cf880b4` with zero skipped files and zero findings |
 | Task 05a local manifest | The four seat assignments map to 18 vendored skills and 78 tracked skill files, with source-commit hashes for the Law, acceptance table, and seat charters. Ponytail is required but absent and is marked missing for every seat. The lead checked all paths and hashes independently at `d987628` after two correction rounds |
+| Task 05b local bundles | `evals/skill_bundles.py` builds and verifies exact per-seat files from the manifest, including hashes and executable bits. The current manifest fails before output creation because Ponytail is absent. A complete synthetic fixture builds twice identically and rejects tampered, missing, extra, unsafe, and malformed inputs. The lead reviewed and reran the checks at `d4c9f8d` |
 | Clean distributable baseline | Root commit `283a5e9` in a separate local source copy; 133 audited files, no original history and no remote |
 
 The six delivery skills are before-and-after, code-structure,
@@ -98,7 +101,8 @@ are still pending.
    worktree procedure. Read [ORCHESTRATOR-HANDOFF.md](ORCHESTRATOR-HANDOFF.md)
    for the takeover and worker limits. PRs #5 through #8 remain open in a
    dependent stack. Task 05a PR #9 branches from the reviewed Task 04d head at
-   `591f4eb`; keep its dependency explicit.
+   `591f4eb`; Task 05b branches from Task 05a head `04f352c`. Keep the
+   dependencies explicit.
    [PILOT-02A.md](PILOT-02A.md) records the earlier reading trial.
 4. Use isolated fixtures for engine behavior. Do not connect live services or
    raise the autonomy dial. Engine access is not required for documentation
@@ -125,16 +129,15 @@ first-lap runbook. It was read, not merged or changed. Do not mistake that
 runbook for an executed lap. GitHub lookup did not establish an accessible
 Forge repository before initialization. The repository was created with private
 visibility recorded at initialization, and its initial source was pushed. The
-current visibility discrepancy is recorded above. No PR review or deployment
-was performed.
+owner later made it public. No deployment was performed.
 Future work should use normal branches and PRs on that clean history. Do not
 replace or force-push the published history. No deployment is authorized.
 
 ## Task 05: next action
 
-Task 05b should assemble and verify local bundles from
-`factory/skill-manifest.json`. A complete bundle must fail while the required
-Ponytail skill is missing. Keep that gap explicit; do not invent or install a
+Task 05c should verify the effective instructions with fixture agents using the
+local bundle checks. The current manifest cannot produce complete bundles
+because Ponytail is missing. Keep that gap explicit; do not invent or install a
 replacement. Remote installation and personal engine access remain unapproved.
 
 ## Phase checklist
@@ -198,6 +201,7 @@ From the repository root after installing dependencies:
 
 ```bash
 python3 evals/doctor.py
+python3 evals/test_skill_bundles.py
 node evals/unconfigured-clients.mjs
 node evals/auth-boundary.mjs
 node evals/engine-contracts.mjs
@@ -261,6 +265,19 @@ issues in two correction rounds. Ponytail remains a declared missing file.
 No engine was contacted and no remote installation, merge, or deployment ran.
 PR #9 is open at https://github.com/Cyph3r48/forge/pull/9 with base
 `agent/task04d-luna-0922`; it was not merged.
+
+Task 05b added local `build` and `verify` commands for exact seat bundle files.
+The first worker commit dropped executable bits; the second preserved them and
+added a regression check. The lead reviewed both changed files at `d4c9f8d`.
+The focused bundle check passed, doctor reported five passes and zero failures,
+and `git diff --check 04f352c d4c9f8d` passed. The current manifest rejected
+missing Ponytail before creating an output directory. A complete fixture built
+twice with identical contents and verified hashes, file sets, symlinks, and
+execute bits. No remote installation or engine contact ran.
+PR #10 is open at https://github.com/Cyph3r48/forge/pull/10 with base
+`agent/task05a-lead-0922`; it was not merged. Luna separately reviewed the
+three lead-authored handoff files at `fa87ea1`: zero findings and 12 working
+local links.
 
 For a docs-only handoff, check links, consistency, doctor, and the diff.
 Do not repeat the full build unless application code or build inputs change.
