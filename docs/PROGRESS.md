@@ -7,8 +7,8 @@ add personal notes, credentials, or deployed host details.
 ## Current position
 
 Phase 1 is accepted locally. The lead authorized Phase 2 on September 24 after
-Luna's independent exit audit. Task 06a's transition and claim design is
-accepted locally; Task 06b is next. This does not authorize merging, deployment,
+Luna's independent exit audit. Tasks 06a and 06b are accepted locally; Task 06c
+is next. This does not authorize merging, deployment,
 remote skill installation, personal engine access, or unattended work.
 Task 01, local repository preparation, is complete.
 Tasks 02 and 03 are merged. PRs #1 through #4 landed on `main` in order on
@@ -20,6 +20,8 @@ the reviewed handoff. Task 05a is open as dependent PR #9 on
 `agent/task05a-lead-0922`, stacked on Task 04d. Task 05b is complete locally
 on `agent/task05b-lead-0923` as PR #10, stacked on Task 05a. Task 05c is
 complete locally on `agent/task05c-lead-0923` as PR #11, stacked on Task 05b.
+Phase 1 exit is open as PR #12 and Task 06a design as dependent PR #13. Task 06b
+is complete locally on `agent/task06b-lead-0924`, stacked on Task 06a.
 No UI redesign, dispatcher, or real-engine factory lap has been completed.
 The bundled memory provider has been removed from code, API fields, UI, and
 documentation. The Memory page is now a generic unconfigured view. The Forge is
@@ -148,15 +150,21 @@ The lead accepted Phase 1 locally on September 24 after an independent audit:
 Tasks 02-05 have local acceptance evidence, the Task 03 authentication boundary
 has an independent security review with zero findings, and outstanding live
 checks are listed below. Current-head fixture checks, the production build, and
-the auth boundary check passed. PRs #5-#12 remain open in dependency order and
+the auth boundary check passed. PRs #5-#13 remain open in dependency order and
 unmerged. Local acceptance is not deployment acceptance.
 
 Task 06a is accepted locally in [TASK-06A-TRANSITIONS.md](TASK-06A-TRANSITIONS.md).
 It uses a revision-checked Paperclip control document for transition IDs and
 claims, and a stable Hermes idempotency key for synthetic run recovery. Luna
 reviewed the lead's design, identified four gaps, and passed the correction
-with zero remaining findings. Task 06b is next: one transition operation with
-table-driven synthetic checks in lead-named service and eval files. Live writes
+with zero remaining findings. Task 06b adds one synthetic Intake-to-Architect
+transition service. Luna's final worker commit `65460e8` changes only
+`forge/src/lib/transition.ts` and `evals/transition.mjs`. The lead manually
+reviewed both OCR-selected files with no findings and reran the 17-case eval,
+TypeScript check, and diff check. Luna's production build and doctor also
+passed. The service records owner acceptance and a pending identity before
+memory confirmation, then projects the stage and commits. Task 06c is next:
+one manual dispatcher tick with synthetic adapters. Live writes
 remain blocked until caller identity, stage-label concurrency, memory-provider
 confirmation, and installed engine behavior are verified. Remote
 skill installation, live instruction delivery, and Paperclip and Hermes
@@ -175,7 +183,7 @@ is unapproved.
 
 ### Phase 2: execution and accounting
 
-- [ ] 06. Implement guarded transitions and a deterministic manual dispatcher, including repeat/restart safety and stall escalation. Task 06a design is accepted locally; 06b-c remain.
+- [ ] 06. Implement guarded transitions and a deterministic manual dispatcher, including repeat/restart safety and stall escalation. Tasks 06a-b are accepted locally; 06c remains.
 - [ ] 07. Correlate jobs, agents, and Hermes runs by stable IDs; preserve the frozen runtime response contract.
 - [ ] 08. Record transition memory and per-run tokens/cost with explicit retry and missing-data behavior.
 
