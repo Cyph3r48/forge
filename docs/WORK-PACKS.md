@@ -203,9 +203,10 @@ and concurrency claims. Implementation tickets remain blocked until then.
 
 ### 06. Transitions and manual dispatch
 
-- [ ] 06a, lead: turn the approved 02 table into transition inputs/results and
+- [x] 06a, lead: turn the approved 02 table into transition inputs/results and
   persistence semantics. Specify failure recovery and what prevents two workers
   claiming the same job. Do not introduce a database without a demonstrated need.
+  The reviewed local design is in [TASK-06A-TRANSITIONS.md](TASK-06A-TRANSITIONS.md).
 - [ ] 06b, worker: implement one transition operation and table-driven checks
   in lead-named service/eval files. All callers use that operation.
 - [ ] 06c, worker: implement one manual dispatcher tick using the approved
