@@ -7,7 +7,8 @@ add personal notes, credentials, or deployed host details.
 ## Current position
 
 Phase 1 is accepted locally. The lead authorized Phase 2 on September 24 after
-Luna's independent exit audit. This does not authorize merging, deployment,
+Luna's independent exit audit. Task 06a's transition and claim design is
+accepted locally; Task 06b is next. This does not authorize merging, deployment,
 remote skill installation, personal engine access, or unattended work.
 Task 01, local repository preparation, is complete.
 Tasks 02 and 03 are merged. PRs #1 through #4 landed on `main` in order on
@@ -119,8 +120,8 @@ factory agents and verification of their effective instructions remain pending.
 
 Worker assignments are one bounded subtask at a time. The coordinating lead
 updates this ledger after independent review; workers return their evidence
-and handoff without competing edits here. Phase 2 is open for Task 06a lead
-design; later phases remain blocked.
+and handoff without competing edits here. Phase 2 is open for Task 06b's bounded
+local implementation; later phases remain blocked.
 The phase task packs do not grant authority beyond the owner's recorded choices.
 
 In the original workspace, the detailed review and screenshots are in
@@ -147,11 +148,17 @@ The lead accepted Phase 1 locally on September 24 after an independent audit:
 Tasks 02-05 have local acceptance evidence, the Task 03 authentication boundary
 has an independent security review with zero findings, and outstanding live
 checks are listed below. Current-head fixture checks, the production build, and
-the auth boundary check passed. PRs #5-#11 remain open in dependency order and
+the auth boundary check passed. PRs #5-#12 remain open in dependency order and
 unmerged. Local acceptance is not deployment acceptance.
 
-Task 06a is next. The lead must define durable transition IDs, concurrency
-claims, inputs/results, and recovery before assigning implementation. Remote
+Task 06a is accepted locally in [TASK-06A-TRANSITIONS.md](TASK-06A-TRANSITIONS.md).
+It uses a revision-checked Paperclip control document for transition IDs and
+claims, and a stable Hermes idempotency key for synthetic run recovery. Luna
+reviewed the lead's design, identified four gaps, and passed the correction
+with zero remaining findings. Task 06b is next: one transition operation with
+table-driven synthetic checks in lead-named service and eval files. Live writes
+remain blocked until caller identity, stage-label concurrency, memory-provider
+confirmation, and installed engine behavior are verified. Remote
 skill installation, live instruction delivery, and Paperclip and Hermes
 compatibility against running engines remain unchecked. Personal engine access
 is unapproved.
@@ -168,7 +175,7 @@ is unapproved.
 
 ### Phase 2: execution and accounting
 
-- [ ] 06. Implement guarded transitions and a deterministic manual dispatcher, including repeat/restart safety and stall escalation.
+- [ ] 06. Implement guarded transitions and a deterministic manual dispatcher, including repeat/restart safety and stall escalation. Task 06a design is accepted locally; 06b-c remain.
 - [ ] 07. Correlate jobs, agents, and Hermes runs by stable IDs; preserve the frozen runtime response contract.
 - [ ] 08. Record transition memory and per-run tokens/cost with explicit retry and missing-data behavior.
 

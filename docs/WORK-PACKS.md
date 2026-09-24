@@ -197,15 +197,16 @@ explicitly listed. Lead authorizes Phase 2; no unattended work enabled.
 
 ## Phase 2: execution and accounting
 
-Phase 1 was accepted locally on September 24. Task 06a is ready for lead design.
-The lead must first choose how the existing engines store durable transition IDs
-and concurrency claims. Implementation tickets remain blocked until then.
+Phase 1 was accepted locally on September 24. Task 06a is accepted locally in
+[TASK-06A-TRANSITIONS.md](TASK-06A-TRANSITIONS.md). Task 06b is next; 06c waits
+for its transition operation and checks.
 
 ### 06. Transitions and manual dispatch
 
-- [ ] 06a, lead: turn the approved 02 table into transition inputs/results and
+- [x] 06a, lead: turn the approved 02 table into transition inputs/results and
   persistence semantics. Specify failure recovery and what prevents two workers
   claiming the same job. Do not introduce a database without a demonstrated need.
+  The reviewed local design is in [TASK-06A-TRANSITIONS.md](TASK-06A-TRANSITIONS.md).
 - [ ] 06b, worker: implement one transition operation and table-driven checks
   in lead-named service/eval files. All callers use that operation.
 - [ ] 06c, worker: implement one manual dispatcher tick using the approved

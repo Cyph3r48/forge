@@ -13,10 +13,10 @@ because of usage limits; do not start another task in that session.
    it public on September 23. Never publish the original workspace history.
    Its clean publishing checkout is
    `.artifacts/forge-publish-0915/` in the original workspace.
-3. The current lead checkout is the Phase 1 exit worktree, branch
-   `agent/phase1-exit-lead-0924`, based on Task 05c head `2461730`.
-   PR #11 is open on Task 05b PR #10, which sits on Task 05a PR #9 and Task
-   04d PR #8; PRs #5 through #8 remain open below them.
+3. The current lead checkout is the Task 06a worktree, branch
+   `agent/task06a-lead-0924`, based on Phase 1 exit head `93010d5`.
+   PR #12 records Phase 1 exit on Task 05c PR #11. PRs #5 through #12 remain
+   open in dependency order.
 4. The owner authorized merging PRs #1 through #4. They landed on `main` in
    dependency order on September 20 after GitHub reported each exact head clean
    and mergeable. Do not merge later PRs or deploy without fresh authorization.
@@ -75,8 +75,10 @@ task-creation fix, pipeline-state mapping, runtime failure fix, or skill invento
   resolved all four seat bundles, then four fixture agents read and applied
   their local instructions. See [TASK-05C-FIXTURE.md](TASK-05C-FIXTURE.md).
 - Phase 1 passed local exit review on September 24. Task 05 is accepted locally.
-  Open PRs #5-#11 remain unmerged. Task 06a lead design is next; it must settle
-  durable transition IDs, concurrency claims, and recovery before worker code.
+  PRs #5-#12 remain unmerged. Task 06a design is accepted locally in
+  [TASK-06A-TRANSITIONS.md](TASK-06A-TRANSITIONS.md). Task 06b is next: one
+  transition operation and table-driven synthetic checks. No live transition
+  route or engine write is authorized by this design.
 - Do not install remotely, contact personal engines, raise autonomy, merge, or
   deploy without owner authorization.
 
