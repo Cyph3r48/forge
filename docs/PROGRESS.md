@@ -148,7 +148,7 @@ The lead accepted Phase 1 locally on September 24 after an independent audit:
 Tasks 02-05 have local acceptance evidence, the Task 03 authentication boundary
 has an independent security review with zero findings, and outstanding live
 checks are listed below. Current-head fixture checks, the production build, and
-the auth boundary check passed. PRs #5-#11 remain open in dependency order and
+the auth boundary check passed. PRs #5-#12 remain open in dependency order and
 unmerged. Local acceptance is not deployment acceptance.
 
 Task 06a is accepted locally in [TASK-06A-TRANSITIONS.md](TASK-06A-TRANSITIONS.md).

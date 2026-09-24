@@ -197,9 +197,9 @@ explicitly listed. Lead authorizes Phase 2; no unattended work enabled.
 
 ## Phase 2: execution and accounting
 
-Phase 1 was accepted locally on September 24. Task 06a is ready for lead design.
-The lead must first choose how the existing engines store durable transition IDs
-and concurrency claims. Implementation tickets remain blocked until then.
+Phase 1 was accepted locally on September 24. Task 06a is accepted locally in
+[TASK-06A-TRANSITIONS.md](TASK-06A-TRANSITIONS.md). Task 06b is next; 06c waits
+for its transition operation and checks.
 
 ### 06. Transitions and manual dispatch
 
