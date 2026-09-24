@@ -120,8 +120,8 @@ factory agents and verification of their effective instructions remain pending.
 
 Worker assignments are one bounded subtask at a time. The coordinating lead
 updates this ledger after independent review; workers return their evidence
-and handoff without competing edits here. Phase 2 is open for Task 06a lead
-design; later phases remain blocked.
+and handoff without competing edits here. Phase 2 is open for Task 06b's bounded
+local implementation; later phases remain blocked.
 The phase task packs do not grant authority beyond the owner's recorded choices.
 
 In the original workspace, the detailed review and screenshots are in
