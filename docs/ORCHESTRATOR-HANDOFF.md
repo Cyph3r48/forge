@@ -13,8 +13,8 @@ because of usage limits; do not start another task in that session.
    it public on September 23. Never publish the original workspace history.
    Its clean publishing checkout is
    `.artifacts/forge-publish-0915/` in the original workspace.
-3. The current lead checkout is the Task 05c worktree, branch
-   `agent/task05c-lead-0923`, based on Task 05b head `e50eb84`.
+3. The current lead checkout is the Phase 1 exit worktree, branch
+   `agent/phase1-exit-lead-0924`, based on Task 05c head `2461730`.
    PR #11 is open on Task 05b PR #10, which sits on Task 05a PR #9 and Task
    04d PR #8; PRs #5 through #8 remain open below them.
 4. The owner authorized merging PRs #1 through #4. They landed on `main` in
@@ -58,7 +58,8 @@ Reviewer inspected all 14 files, including OCR-excluded Markdown, and reported
   and stacking that change on PR #3. Further protected-rule changes still require
   explicit owner authorization.
 - Keep four seats, seven stages, dial 1, provider-neutral memory, Next.js/React/
-  TypeScript, normal HTML controls, and the limited Three.js scope. No later phase yet.
+  TypeScript, normal HTML controls, and the limited Three.js scope. Phase 2 is
+  open only after the recorded local Phase 1 acceptance.
 
 ## Current task
 
@@ -73,8 +74,9 @@ task-creation fix, pipeline-state mapping, runtime failure fix, or skill invento
 - The owner approved vendoring Dietrich Gebert's Ponytail v4.10.0. Task 05c
   resolved all four seat bundles, then four fixture agents read and applied
   their local instructions. See [TASK-05C-FIXTURE.md](TASK-05C-FIXTURE.md).
-- Assess Phase 1 exit after Task 05c PR #11. Do not merge the open PR stack or
-  start Phase 2 without the required authorization and local acceptance.
+- Phase 1 passed local exit review on September 24. Task 05 is accepted locally.
+  Open PRs #5-#11 remain unmerged. Task 06a lead design is next; it must settle
+  durable transition IDs, concurrency claims, and recovery before worker code.
 - Do not install remotely, contact personal engines, raise autonomy, merge, or
   deploy without owner authorization.
 

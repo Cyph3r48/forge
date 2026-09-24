@@ -1,12 +1,15 @@
 # Project progress and agent handoff
 
-Updated September 23, 2026. Start here, then read `docs/spec-v0.4.md` and
+Updated September 24, 2026. Start here, then read `docs/spec-v0.4.md` and
 the code for the assigned task. This file records project work only. Do not
 add personal notes, credentials, or deployed host details.
 
 ## Current position
 
-Phase 1 is in progress. Task 01, local repository preparation, is complete.
+Phase 1 is accepted locally. The lead authorized Phase 2 on September 24 after
+Luna's independent exit audit. This does not authorize merging, deployment,
+remote skill installation, personal engine access, or unattended work.
+Task 01, local repository preparation, is complete.
 Tasks 02 and 03 are merged. PRs #1 through #4 landed on `main` in order on
 September 20. OpenCodeReview delegation replaces the unavailable Greptile
 service for independent review. Task 04a is open as PR #5, Task 04b is open as
@@ -116,7 +119,8 @@ factory agents and verification of their effective instructions remain pending.
 
 Worker assignments are one bounded subtask at a time. The coordinating lead
 updates this ledger after independent review; workers return their evidence
-and handoff without competing edits here. Phase 2 and later remain blocked.
+and handoff without competing edits here. Phase 2 is open for Task 06a lead
+design; later phases remain blocked.
 The phase task packs do not grant authority beyond the owner's recorded choices.
 
 In the original workspace, the detailed review and screenshots are in
@@ -137,13 +141,19 @@ owner later made it public. No deployment was performed.
 Future work should use normal branches and PRs on that clean history. Do not
 replace or force-push the published history. No deployment is authorized.
 
-## Task 05: next action
+## Phase 1 exit and next action
 
-Assess Phase 1 exit against the acceptance table and the open PR stack. The
-owner-approved Ponytail skill now permits
-complete local bundles. Remote installation, live instruction delivery, and
-personal engine access remain unapproved. Do not start Phase 2 before Phase 1
-is accepted.
+The lead accepted Phase 1 locally on September 24 after an independent audit:
+Tasks 02-05 have local acceptance evidence, the Task 03 authentication boundary
+has an independent security review with zero findings, and outstanding live
+checks are listed below. Current-head fixture checks, the production build, and
+the auth boundary check passed. PRs #5-#11 remain open in dependency order and
+unmerged. Local acceptance is not deployment acceptance.
+
+Task 06a is next. The lead must define durable transition IDs, concurrency
+claims, inputs/results, and recovery before assigning implementation. Remote
+skill installation, live instruction delivery, and Paperclip compatibility
+against a running engine remain unchecked. Personal engine access is unapproved.
 
 ## Phase checklist
 
@@ -153,7 +163,7 @@ is accepted.
 - [x] 02. Align spec, rules, role boundaries, and acceptance checks; merged in PR #2.
 - [x] 03. Add shared Forge authentication and safe memory access.
 - [x] 04. Verify engine contracts; fix labels, priority, assignment, and failure reporting using versioned fixtures. Live deployment compatibility remains separately authorized work.
-- [ ] 05. Make law/skill bundle installation repeatable and verify effective versions. Remote installation needs separately authorized access.
+- [x] 05. Make local law/skill bundles repeatable and verify effective versions. Remote installation needs separately authorized access.
 
 ### Phase 2: execution and accounting
 
