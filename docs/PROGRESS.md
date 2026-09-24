@@ -15,7 +15,7 @@ PR #8. Task 04d's reviewed code head is `cf880b4`; later commits contain only
 the reviewed handoff. Task 05a is open as dependent PR #9 on
 `agent/task05a-lead-0922`, stacked on Task 04d. Task 05b is complete locally
 on `agent/task05b-lead-0923` as PR #10, stacked on Task 05a. Task 05c is
-complete locally on `agent/task05c-lead-0923`; its PR is pending.
+complete locally on `agent/task05c-lead-0923` as PR #11, stacked on Task 05b.
 No UI redesign, dispatcher, or real-engine factory lap has been completed.
 The bundled memory provider has been removed from code, API fields, UI, and
 documentation. The Memory page is now a generic unconfigured view. The Forge is
@@ -139,8 +139,8 @@ replace or force-push the published history. No deployment is authorized.
 
 ## Task 05: next action
 
-Finish independent review and the PR for Task 05c, then assess Phase 1 exit
-against the acceptance table. The owner-approved Ponytail skill now permits
+Assess Phase 1 exit against the acceptance table and the open PR stack. The
+owner-approved Ponytail skill now permits
 complete local bundles. Remote installation, live instruction delivery, and
 personal engine access remain unapproved. Do not start Phase 2 before Phase 1
 is accepted.
@@ -293,6 +293,10 @@ across 111 files. Four fresh read-only fixture agents answered seat conflicts
 consistently after reading their local Law, charter, Ponytail, and assigned
 skill. [TASK-05C-FIXTURE.md](TASK-05C-FIXTURE.md) records the evidence and
 limits. No remote install, personal engine contact, merge, or deployment ran.
+PR #11 is open at https://github.com/Cyph3r48/forge/pull/11 with base
+`agent/task05b-lead-0923`; it was not merged. Luna independently reviewed the
+lead-authored source pin and four handoff files. She found two report wording
+errors, which the lead fixed; her final correction review had zero findings.
 
 For a docs-only handoff, check links, consistency, doctor, and the diff.
 Do not repeat the full build unless application code or build inputs change.

@@ -15,8 +15,8 @@ because of usage limits; do not start another task in that session.
    `.artifacts/forge-publish-0915/` in the original workspace.
 3. The current lead checkout is the Task 05c worktree, branch
    `agent/task05c-lead-0923`, based on Task 05b head `e50eb84`.
-   PR #10 is open on Task 05a PR #9, which sits on Task 04d PR #8; PRs #5
-   through #8 remain open below them.
+   PR #11 is open on Task 05b PR #10, which sits on Task 05a PR #9 and Task
+   04d PR #8; PRs #5 through #8 remain open below them.
 4. The owner authorized merging PRs #1 through #4. They landed on `main` in
    dependency order on September 20 after GitHub reported each exact head clean
    and mergeable. Do not merge later PRs or deploy without fresh authorization.
@@ -73,7 +73,8 @@ task-creation fix, pipeline-state mapping, runtime failure fix, or skill invento
 - The owner approved vendoring Dietrich Gebert's Ponytail v4.10.0. Task 05c
   resolved all four seat bundles, then four fixture agents read and applied
   their local instructions. See [TASK-05C-FIXTURE.md](TASK-05C-FIXTURE.md).
-- Finish independent review and the Task 05c PR, then assess Phase 1 exit.
+- Assess Phase 1 exit after Task 05c PR #11. Do not merge the open PR stack or
+  start Phase 2 without the required authorization and local acceptance.
 - Do not install remotely, contact personal engines, raise autonomy, merge, or
   deploy without owner authorization.
 
