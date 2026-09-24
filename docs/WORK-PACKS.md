@@ -3,7 +3,8 @@
 Read [PROGRESS.md](PROGRESS.md) first. These packs break its numbered tasks
 into assignments; they do not replace the spec. The owner-approved Task 02
 policy is recorded in [TASK-02-ACCEPTANCE.md](TASK-02-ACCEPTANCE.md).
-Only Phase 1 is open. Later packs are a backlog, not permission to start.
+Phase 1 is accepted locally. Phase 2 is open for bounded tasks in dependency
+order. Later packs are a backlog, not permission to start.
 
 ## Assignment rules
 
@@ -196,8 +197,9 @@ explicitly listed. Lead authorizes Phase 2; no unattended work enabled.
 
 ## Phase 2: execution and accounting
 
-All tickets are BLOCKED until Phase 1 acceptance. Lead must first choose how
-the existing engines store durable transition IDs and concurrency claims.
+Phase 1 was accepted locally on September 24. Task 06a is ready for lead design.
+The lead must first choose how the existing engines store durable transition IDs
+and concurrency claims. Implementation tickets remain blocked until then.
 
 ### 06. Transitions and manual dispatch
 
