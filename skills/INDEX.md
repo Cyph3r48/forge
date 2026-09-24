@@ -14,6 +14,7 @@
 | piv-review-pr | github.com/coleam00/skills | upstream repo license | Full PR review: fetch, run validation, review the diff with fresh eyes, categorize findings by severity, post results. | Reviewer |
 | piv-slice-epic | github.com/coleam00/skills | upstream repo license | Slice an epic into PIV-sized tickets with a dependency graph and create them in the tracker. | Foreman |
 | piv-validate | github.com/coleam00/skills | upstream repo license | Run the project's full validation suite (tests, type checks, lint) and report overall health. | Tester |
+| ponytail | github.com/DietrichGebert/ponytail v4.10.0 | MIT | Prefer the shortest working solution, existing tools, and one runnable check for non-trivial logic. | All |
 | prime-codebase | github.com/coleam00/skills | upstream repo license | Prime the agent with deep codebase understanding (structure, docs, key files) before starting work. | Builder, Tester |
 | rules-check-drift | github.com/coleam00/skills | upstream repo license | Check whether the rules file (CLAUDE.md/AGENTS.md) still matches the codebase after recent changes. | Reviewer |
 | source-code-context | github.com/pawel-cell/micky-podcast-agentic-engineering (older skill set by Micky/Michael Shimeles) | upstream repo license | Give the agent local source-code references so it stops guessing API/framework behavior from incomplete docs. | Builder |

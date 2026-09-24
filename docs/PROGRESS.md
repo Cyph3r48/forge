@@ -14,7 +14,8 @@ PR #6, Task 04c is open as dependent PR #7, and Task 04d is open as dependent
 PR #8. Task 04d's reviewed code head is `cf880b4`; later commits contain only
 the reviewed handoff. Task 05a is open as dependent PR #9 on
 `agent/task05a-lead-0922`, stacked on Task 04d. Task 05b is complete locally
-on `agent/task05b-lead-0923` as PR #10, stacked on Task 05a. Task 05c is next.
+on `agent/task05b-lead-0923` as PR #10, stacked on Task 05a. Task 05c is
+complete locally on `agent/task05c-lead-0923` as PR #11, stacked on Task 05b.
 No UI redesign, dispatcher, or real-engine factory lap has been completed.
 The bundled memory provider has been removed from code, API fields, UI, and
 documentation. The Memory page is now a generic unconfigured view. The Forge is
@@ -56,6 +57,9 @@ pipeline rules are requirements, not implemented enforcement.
   #5 through #8 remain open. No merge or deployment was approved.
 - The owner asked to continue the build after making the repository public.
   Task 05b is stacked on Task 05a; PR merging and deployment remain unapproved.
+- The owner approved vendoring the exact Ponytail skill by Dietrich Gebert for
+  Task 05c and running isolated fixture-agent probes. Remote factory installation
+  and personal engine access remain unapproved.
 
 ## Completed work
 
@@ -78,16 +82,16 @@ pipeline rules are requirements, not implemented enforcement.
 | Task 04c pipeline state and gates | Maps stages from one resolved factory label instead of native issue status. Gates come only from valid pending Paperclip approvals and their linked issues. Malformed approval, link, and label data fail closed. Luna completed two correction rounds. OpenCodeReview delegation and manual review covered all eight changed files with zero skipped files and zero remaining findings. The lead-authored handoff received separate read-only review |
 | Task 04d runtime failures | Terminal Paperclip runs stay terminal without `finishedAt`. Aggregate engine reads distinguish valid empty data from malformed, failed, and unreachable responses while preserving frozen response shapes. Luna completed two correction rounds; the lead closed the remaining trust-boundary gaps. An independent Reviewer covered all six files at `cf880b4` with zero skipped files and zero findings |
 | Task 05a local manifest | The four seat assignments map to 18 vendored skills and 78 tracked skill files, with source-commit hashes for the Law, acceptance table, and seat charters. Ponytail is required but absent and is marked missing for every seat. The lead checked all paths and hashes independently at `d987628` after two correction rounds |
-| Task 05b local bundles | `evals/skill_bundles.py` builds and verifies exact per-seat files from the manifest, including hashes and executable bits. The current manifest fails before output creation because Ponytail is absent. A complete synthetic fixture builds twice identically and rejects tampered, missing, extra, unsafe, and malformed inputs. The lead reviewed and reran the checks at `d4c9f8d` |
+| Task 05b local bundles | `evals/skill_bundles.py` builds and verifies exact per-seat files from the manifest, including hashes and executable bits. At the Task 05b handoff, the manifest failed before output creation because Ponytail was absent. A complete synthetic fixture built twice identically and rejected tampered, missing, extra, unsafe, and malformed inputs. The lead reviewed and reran the checks at `d4c9f8d` |
+| Task 05c local instructions | Vendored Dietrich Gebert's Ponytail v4.10.0 skill and MIT license byte for byte. The manifest now resolves all four seats. Two real local builds each produced 111 files total with identical contents and modes. Four isolated fixture agents read their Law, charter, Ponytail, and assigned skill and answered seat-rule conflicts consistently. See [TASK-05C-FIXTURE.md](TASK-05C-FIXTURE.md); no Paperclip or Hermes instruction delivery is claimed |
 | Clean distributable baseline | Root commit `283a5e9` in a separate local source copy; 133 audited files, no original history and no remote |
 
 The six delivery skills are before-and-after, code-structure,
 evidence-driven-testing, new-feature, open-code-review-delegate, and unslop.
-The repository contains 20 vendored skill folders in total. The two legacy
+The repository contains 21 vendored skill folders in total. The two legacy
 Greptile folders remain unassigned so their bulk deletion can be reviewed
-separately without breaking the 500-line PR cap. Installation
-into remote factory agents and verification of their effective instructions
-are still pending.
+separately without breaking the 500-line PR cap. Installation into remote
+factory agents and verification of their effective instructions remain pending.
 
 ## Resume procedure
 
@@ -101,8 +105,8 @@ are still pending.
    worktree procedure. Read [ORCHESTRATOR-HANDOFF.md](ORCHESTRATOR-HANDOFF.md)
    for the takeover and worker limits. PRs #5 through #8 remain open in a
    dependent stack. Task 05a PR #9 branches from the reviewed Task 04d head at
-   `591f4eb`; Task 05b branches from Task 05a head `04f352c`. Keep the
-   dependencies explicit.
+   `591f4eb`; Task 05b branches from Task 05a head `04f352c`, and Task 05c
+   branches from Task 05b head `e50eb84`. Keep the dependencies explicit.
    [PILOT-02A.md](PILOT-02A.md) records the earlier reading trial.
 4. Use isolated fixtures for engine behavior. Do not connect live services or
    raise the autonomy dial. Engine access is not required for documentation
@@ -135,10 +139,11 @@ replace or force-push the published history. No deployment is authorized.
 
 ## Task 05: next action
 
-Task 05c should verify the effective instructions with fixture agents using the
-local bundle checks. The current manifest cannot produce complete bundles
-because Ponytail is missing. Keep that gap explicit; do not invent or install a
-replacement. Remote installation and personal engine access remain unapproved.
+Assess Phase 1 exit against the acceptance table and the open PR stack. The
+owner-approved Ponytail skill now permits
+complete local bundles. Remote installation, live instruction delivery, and
+personal engine access remain unapproved. Do not start Phase 2 before Phase 1
+is accepted.
 
 ## Phase checklist
 
@@ -261,7 +266,7 @@ for each seat. The lead checked the hashes against the source commit and matched
 seat assignments to the charters. JSON parsing, doctor (five passes), and diff
 checks passed at `d987628`. OpenCodeReview selected the manifest with no
 exclusions; the lead found and Luna fixed two provenance and bundle-content
-issues in two correction rounds. Ponytail remains a declared missing file.
+issues in two correction rounds. Ponytail was declared missing at this handoff.
 No engine was contacted and no remote installation, merge, or deployment ran.
 PR #9 is open at https://github.com/Cyph3r48/forge/pull/9 with base
 `agent/task04d-luna-0922`; it was not merged.
@@ -270,7 +275,7 @@ Task 05b added local `build` and `verify` commands for exact seat bundle files.
 The first worker commit dropped executable bits; the second preserved them and
 added a regression check. The lead reviewed both changed files at `d4c9f8d`.
 The focused bundle check passed, doctor reported five passes and zero failures,
-and `git diff --check 04f352c d4c9f8d` passed. The current manifest rejected
+and `git diff --check 04f352c d4c9f8d` passed. The manifest then rejected
 missing Ponytail before creating an output directory. A complete fixture built
 twice with identical contents and verified hashes, file sets, symlinks, and
 execute bits. No remote installation or engine contact ran.
@@ -278,6 +283,20 @@ PR #10 is open at https://github.com/Cyph3r48/forge/pull/10 with base
 `agent/task05a-lead-0922`; it was not merged. Luna separately reviewed the
 three lead-authored handoff files at `fa87ea1`: zero findings and 12 working
 local links.
+
+Task 05c copied Ponytail v4.10.0 from Dietrich Gebert's tagged upstream
+commit with its MIT license. The lead checked that the manifest's source commit
+is reachable and all 86 distinct paths match their hashes. The focused check
+passed with a synthetic missing-required regression, doctor reported 5 passes
+and 0 failures, and two real builds verified with identical contents and modes
+across 111 files. Four fresh read-only fixture agents answered seat conflicts
+consistently after reading their local Law, charter, Ponytail, and assigned
+skill. [TASK-05C-FIXTURE.md](TASK-05C-FIXTURE.md) records the evidence and
+limits. No remote install, personal engine contact, merge, or deployment ran.
+PR #11 is open at https://github.com/Cyph3r48/forge/pull/11 with base
+`agent/task05b-lead-0923`; it was not merged. Luna independently reviewed the
+lead-authored source pin and four handoff files. She found two report wording
+errors, which the lead fixed; her final correction review had zero findings.
 
 For a docs-only handoff, check links, consistency, doctor, and the diff.
 Do not repeat the full build unless application code or build inputs change.

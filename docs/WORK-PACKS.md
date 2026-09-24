@@ -186,7 +186,7 @@ skill APIs. Use the vendored contents and licenses; no second skill catalog.
   from approved assignments. Report absent files rather than inventing skills.
 - [x] 05b, worker: implement local bundle assembly/verification at a lead-named
   script path. Verify installed contents, not just an installer exit code.
-- [ ] 05c, lead: verify effective instructions with fixture agents; remote
+- [x] 05c, lead: verify effective instructions with fixture agents; remote
   installation remains blocked until owner-authorized access is supplied.
 - Pass: two local runs produce identical bundles; tampered/missing skills fail;
   provenance and licenses remain intact. No runtime enforcement is claimed yet.

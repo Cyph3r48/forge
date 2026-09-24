@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceCommit": "591f4eb5067bbace984e6a977fb0e356ed9ec8ee",
+  "sourceCommit": "a19caeb10aa95c8dd2271269c9b002446d2015c9",
   "skills": {
     "build-dark-factory": {
       "source": "github.com/coleam00/skills",
@@ -230,6 +230,16 @@
         "skills/before-and-after/scripts/capture.sh": "d13c99cf25adfb6f761b8f8b994e3298a893a783e027d042bad724b01949cbf7",
         "skills/before-and-after/scripts/upload-and-copy.sh": "e23be6b5b3ac2c6635f9cf702326382ac81b797e56687e3d473090567423e472"
       }
+    },
+    "ponytail": {
+      "source": "github.com/DietrichGebert/ponytail",
+      "license": "MIT",
+      "version": "4.10.0",
+      "revision": "1d95ff7d39de12d87014ea40d4e22201bddc501b",
+      "files": {
+        "skills/ponytail/LICENSE": "fb1bc6909ac3ef82d5c22106e32ef682b0cff66788fa915fb9b53b15c9d2f3ab",
+        "skills/ponytail/SKILL.md": "1316a2f3f95741d2300b116fe0c2d81ce4a9568656ed0a62643f54aaf09957f2"
+      }
     }
   },
   "seats": {
@@ -241,16 +251,10 @@
         "worktree-merge",
         "unslop",
         "system-execution-report",
-        "system-evolution-review"
+        "system-evolution-review",
+        "ponytail"
       ],
-      "missingRequired": [
-        {
-          "name": "ponytail",
-          "expectedPath": "skills/ponytail/SKILL.md",
-          "requiredBy": "FACTORY-LAW.md",
-          "status": "missing"
-        }
-      ],
+      "missingRequired": [],
       "governingFiles": {
         "FACTORY-LAW.md": "159be1d2e5ee77154bd5984f461966120cfe94a5f6095f97467d41bf965b554a",
         "factory/roles/foreman.md": "e6862b0cd425bf10dd1ad75c0ddabdbea519aee5aa7f891670449c3471b4b4e2",
@@ -266,16 +270,10 @@
         "prime-codebase",
         "unslop",
         "system-execution-report",
-        "system-evolution-review"
+        "system-evolution-review",
+        "ponytail"
       ],
-      "missingRequired": [
-        {
-          "name": "ponytail",
-          "expectedPath": "skills/ponytail/SKILL.md",
-          "requiredBy": "FACTORY-LAW.md",
-          "status": "missing"
-        }
-      ],
+      "missingRequired": [],
       "governingFiles": {
         "FACTORY-LAW.md": "159be1d2e5ee77154bd5984f461966120cfe94a5f6095f97467d41bf965b554a",
         "factory/roles/builder.md": "3e65aa100ae96a59cd322d7b7542e323fa29abe26368c124eeac4e403a83d698",
@@ -289,16 +287,10 @@
         "prime-codebase",
         "unslop",
         "system-execution-report",
-        "system-evolution-review"
+        "system-evolution-review",
+        "ponytail"
       ],
-      "missingRequired": [
-        {
-          "name": "ponytail",
-          "expectedPath": "skills/ponytail/SKILL.md",
-          "requiredBy": "FACTORY-LAW.md",
-          "status": "missing"
-        }
-      ],
+      "missingRequired": [],
       "governingFiles": {
         "FACTORY-LAW.md": "159be1d2e5ee77154bd5984f461966120cfe94a5f6095f97467d41bf965b554a",
         "factory/roles/tester.md": "d3e45dbc54204ca8282a1ad7f644822fc2ab5ccbe5c7b80d64055eb44cabee69",
@@ -313,16 +305,10 @@
         "before-and-after",
         "unslop",
         "system-execution-report",
-        "system-evolution-review"
+        "system-evolution-review",
+        "ponytail"
       ],
-      "missingRequired": [
-        {
-          "name": "ponytail",
-          "expectedPath": "skills/ponytail/SKILL.md",
-          "requiredBy": "FACTORY-LAW.md",
-          "status": "missing"
-        }
-      ],
+      "missingRequired": [],
       "governingFiles": {
         "FACTORY-LAW.md": "159be1d2e5ee77154bd5984f461966120cfe94a5f6095f97467d41bf965b554a",
         "factory/roles/reviewer.md": "1780061ac72a224be7bf0126eb63a991a1a13c6bfb8720f7de519cbcf35a898c",
