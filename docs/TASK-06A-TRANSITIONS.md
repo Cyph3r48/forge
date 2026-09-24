@@ -27,17 +27,24 @@ The record for a transition contains `transitionId`, `issueId`, `outcomeId`,
 `evidenceRefs`, `memoryStatus`, `projectionStatus`, and the time and reason for
 each change. `outcomeId` is supplied once by the caller and reused on retry.
 The pair `(issueId, outcomeId)` maps to one durable `transitionId`; the same
-pair with different inputs is a conflict. A new outcome for an issue with a
+pair with a different input fingerprint is a conflict. A new outcome for an issue with a
 pending transition is rejected. Keep enough history in the document to reject
 old outcome IDs; do not silently forget them.
 
 ## Transition operation
 
-Input: the issue and outcome IDs, actor and seat, expected stage, requested
-stage, outcome and evidence, current commit when applicable, and an optional
-existing transition ID. Return one structured result:
+Input: the issue and outcome IDs, a trusted principal, expected stage,
+requested stage, outcome and evidence, current commit when applicable, and an
+optional existing transition ID. Return one structured result:
 `committed`, `pending-memory`, `pending-projection`, `rejected`, `conflict`, or
 `needs-human`, always with the transition ID when one exists and a reason.
+The service derives actor ID and seat from the trusted principal, never from
+the submitted outcome. Owner acceptance requires an authenticated owner
+principal; seat outcomes require a verified agent ID mapped to exactly one of
+the four company seats. The current shared Forge token does not establish
+either identity, so Task 06b exposes no live transition route. Its synthetic
+checks supply explicit trusted principals; live use waits for an identity
+boundary that can make these checks.
 
 1. Read the control document and Paperclip issue. Confirm one factory label,
    matching expected stage, no other pending transition, and the applicable
@@ -49,8 +56,10 @@ existing transition ID. Return one structured result:
    Until confirmed, keep `pending-memory`; do not change the issue label or
    dispatch the next seat. An unconfigured provider leaves this state visible.
 4. Persist `memoryStatus: confirmed`, then replace only the factory stage label
-   in Paperclip. Preserve unrelated labels and native issue status. Do not
-   change the assignee or invoke a heartbeat as part of this write.
+   in the synthetic Paperclip adapter. Preserve unrelated labels and native
+   issue status. Do not change the assignee or invoke a heartbeat as part of
+   this write. Recheck the expected old label immediately before writing; a
+   mismatch blocks projection and needs human repair.
 5. Persist `projectionStatus: confirmed` and mark the transition committed.
    Only committed transitions enter the manual dispatch queue. If the label
    write or final record write fails, retry from the saved state after reading
@@ -62,6 +71,11 @@ provider and production stage advancement stays disabled. A timeout is unknown,
 not success or failure; read/retry with the same ID. If Paperclip's label
 disagrees with a committed record, stop dispatch for that issue and surface a
 repair request. Do not infer permission from a label alone.
+Paperclip's issue PATCH has no conditional label precondition. A read before
+PATCH cannot prevent a concurrent board edit from being overwritten. Live
+projection stays disabled until an exclusive factory stage writer is enforced
+or a conditional update is available and tested. The control document's
+revision check does not protect the separate issue-label write.
 
 ## Manual claim and run recovery
 
@@ -76,8 +90,11 @@ and deployment remain manual at dial 1. A second tick rereads after a failed
 claim and cannot submit the same action.
 
 For a Hermes run, derive `Idempotency-Key` from the durable `actionId` and send
-the exact same request on retry. Require Hermes capabilities to report durable
-idempotency before submission. Persist the returned `run_id`, then poll it by
+the exact same request on retry. The pinned source implements replay, but the
+current `/v1/capabilities` fixture advertises only run submission; it does not
+prove durable idempotency for an installed engine. Task 06c uses a synthetic
+run adapter. Live submission stays disabled until that installed guarantee is
+verified. Persist the returned `run_id`, then poll it by
 ID. If the response is lost, replay the same key and payload to recover that
 ID. A payload conflict, expired idempotency window, missing run, or unknown
 execution state leaves the claim held and needs human review; never start a
@@ -114,4 +131,4 @@ it insufficient.
 - [Paperclip issue document route](https://github.com/paperclipai/paperclip/blob/dffc2b3ca1b9e88fa21cb17493083e682dffd1ca/server/src/routes/issues.ts#L9648-L9695) passes `baseRevisionId` to the document service.
 - [Paperclip document service](https://github.com/paperclipai/paperclip/blob/dffc2b3ca1b9e88fa21cb17493083e682dffd1ca/server/src/services/documents.ts#L200-L423) checks that revision in a database transaction.
 - [Paperclip revision schema](https://github.com/paperclipai/paperclip/blob/dffc2b3ca1b9e88fa21cb17493083e682dffd1ca/packages/db/src/schema/document_revisions.ts) makes `(documentId, revisionNumber)` unique.
-- [Hermes run admission](https://github.com/NousResearch/hermes-agent/blob/345cd2b057a452236de401d3534b8502a7465e8d/gateway/platforms/api_server_runs.py#L352-L479) reserves a stable idempotency key before launching a run and replays the original ID.
+- [Hermes run admission](https://github.com/NousResearch/hermes-agent/blob/345cd2b057a452236de401d3534b8502a7465e8d/gateway/platforms/api_server_runs.py#L271-L479) reserves a stable idempotency key before launching a run and replays the original ID.
