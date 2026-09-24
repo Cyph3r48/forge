@@ -91,12 +91,14 @@ def expect_build_failure(source, output, contains=None):
         check(contains in result.stderr, f"expected {contains!r}: {result.stderr}")
 
 
-def test_current_missing_skill(tmp):
+def test_current_manifest(tmp):
     output = tmp / "current-manifest"
     result = run("build", REPO, output, include_source=False)
-    check(result.returncode != 0 and "ponytail" in result.stderr.lower(), result.stderr)
-    check(not output.exists(), "incomplete manifest created output")
-    print("PASS: current manifest rejects missing Ponytail before output creation")
+    check(result.returncode == 0, result.stderr)
+    check("4 seat bundles" in result.stdout, result.stdout)
+    verified = run("verify", REPO, output, include_source=False)
+    check(verified.returncode == 0, verified.stderr)
+    print("PASS: current manifest builds and verifies all four seats")
 
 
 def test_complete_and_verify(tmp):
@@ -179,7 +181,7 @@ def test_invalid_sources(tmp):
 def main():
     with tempfile.TemporaryDirectory(prefix="skill-bundles-") as directory:
         tmp = Path(directory)
-        test_current_missing_skill(tmp)
+        test_current_manifest(tmp)
         test_complete_and_verify(tmp)
         test_invalid_sources(tmp)
     print("PASS: all skill bundle checks")
