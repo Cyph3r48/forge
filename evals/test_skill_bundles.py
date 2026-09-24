@@ -140,6 +140,12 @@ def test_complete_and_verify(tmp):
 def test_invalid_sources(tmp):
     valid = tmp / "valid"
     write_manifest(valid)
+    missing = tmp / "missing-required"
+    write_manifest(missing, lambda m: m["seats"]["Foreman"].__setitem__(
+        "missingRequired", [{"name": "ponytail", "expectedPath": "skills/ponytail/SKILL.md"}]
+    ))
+    expect_build_failure(missing, tmp / "out-missing-required", "missing required skill ponytail")
+
     bad_hash = tmp / "bad-hash"
     write_manifest(bad_hash, lambda m: m["skills"]["sample"]["files"].__setitem__(
         "skills/sample/SKILL.md", "0" * 64
